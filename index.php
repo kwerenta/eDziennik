@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $query = mysqli_query($conn, $sql);
   $user = mysqli_fetch_array($query);
   if ($_POST['email'] !== $user['email'] || md5($_POST['password']) !== $user['password']) {
-    die('Błędny login lub hasło!');
+    $error = 'Błędny login lub hasło!';
   } else {
     $_SESSION['user'] = $user;
     switch ($user['rank']) {
