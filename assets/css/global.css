@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@400;700;900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --primary-bg-color: #f0e0bc;
+  --secondary-bg-color: #ccebfb;
+  --bg-color: var(--primary-bg-color);
+  --font-color: #2d2d2d;
+  --accent-color: #3e9bd3;
+  font-size: 16px;
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  font-family: "Prompt", sans-serif;
+  transition: background 1s;
+}
+main {
+  margin-left: 5rem;
+  padding: 1rem;
+}

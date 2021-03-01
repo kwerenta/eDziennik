@@ -26,15 +26,15 @@ tl.to([".signInForm", ".changeFormText"], { opacity: 0, duration: 0.25 })
 
 changeForm.addEventListener("click", () => {
   let color;
-  if (cssVariables.style.getPropertyValue("--background-color") == "var(--secondary-background-color)") {
-    color = "--primary-background-color";
+  if (cssVariables.style.getPropertyValue("--bg-color") == "var(--secondary-bg-color)") {
+    color = "--primary-bg-color";
     tl.reverse();
   } else {
-    color = "--secondary-background-color";
+    color = "--secondary-bg-color";
     tl.play();
   }
   setTimeout(() => changeText(), 750);
-  cssVariables.style.setProperty("--background-color", `var(${color})`);
+  cssVariables.style.setProperty("--bg-color", `var(${color})`);
 });
 
 const timeline = gsap.timeline({ paused: true });

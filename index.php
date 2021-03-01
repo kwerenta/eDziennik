@@ -17,23 +17,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = "SELECT `rank` FROM ranks WHERE user_id = {$user['id']}";
     $query = mysqli_query($conn, $sql);
     $rank = mysqli_fetch_array($query);
-    if ($rank !== null) $user += $rank;
-    $_SESSION['user'] = $user;
-    switch ($user['rank']) {
+    switch ($rank) {
       case 1:
-        die('admin');
+        $rank = "admin";
         break;
       case 2:
-        die('nauczyciel');
+        $rank = "teacher";
         break;
       default:
-        die('Uczeń!');
+        $rank = "student";
         break;
     }
+
+    $sql = "SELECT * FROM {$rank}s WHERE user_id = {$user['id']}";
+    $query = mysqli_query($conn, $sql);
+    $data = mysqli_fetch_array($query);
+    $_SESSION['user'] = $data;
+    header("Location: /{$rank}");
   }
 }
 
 
 include 'includes/header.php';
-include 'includes/login.php';
+include 'includes/forms.php';
 include 'includes/footer.php';
