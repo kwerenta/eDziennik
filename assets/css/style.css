@@ -32,7 +32,8 @@ body {
   font-size: 2.5rem;
   color: var(--accent-color);
 }
-.form {
+.form,
+.formTab {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,7 +54,8 @@ body {
 .form input::placeholder {
   color: var(--font-color);
 }
-.signUpForm {
+.signUpForm,
+.loginData {
   display: none;
   opacity: 0;
 }
@@ -70,10 +72,26 @@ body {
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-.signButton:hover {
+.signup {
+  margin: 0;
+}
+.next,
+.prev {
+  background-color: transparent;
+  border: 3px solid #fff;
+}
+.signButton:hover:enabled {
   background-color: var(--accent-color);
   color: #fff;
   box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+}
+.signButton:disabled {
+  cursor: not-allowed;
+}
+.next:hover:enabled,
+.prev:hover:enabled {
+  background-color: #fff;
+  color: #000;
 }
 
 .changeFormText {

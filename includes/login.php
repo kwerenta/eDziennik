@@ -10,10 +10,19 @@
   </form>
 
   <form class="form signUpForm" method="post">
-    <input type="text" name="email" autocomplete="email" placeholder="E-mail">
-    <input type="password" name="password" autocomplete="new-password" placeholder="Hasło">
-    <input type="password" name="confirmPassword" autocomplete="confirm-password" placeholder="Potwierdź hasło">
-    <button type="submit" class="signButton signup">Zarejestruj się</button>
+    <div class="formTab personalData">
+      <input type="text" name="firstName" autocomplete="given-name" placeholder="Imię" required>
+      <input type="text" name="lastName" autocomplete="family-name" placeholder="Nazwisko" required>
+      <input type="tel" name="phone" autocomplete="tel" pattern="[0-9]{9}" placeholder="Telefon" required>
+      <button class="signButton next" onclick="event.preventDefault();">Przejdź dalej</button>
+    </div>
+    <div class="formTab loginData">
+      <input type="text" name="email" autocomplete="email" placeholder="E-mail">
+      <input type="password" name="password" autocomplete="new-password" placeholder="Hasło">
+      <input type="password" name="confirmPassword" autocomplete="new-password" placeholder="Potwierdź hasło">
+      <button class="signButton prev" onclick="event.preventDefault();">Wróć</button>
+      <button type="submit" disabled class="signButton signup">Zarejestruj się</button>
+    </div>
   </form>
 
   <div class="changeFormText">
