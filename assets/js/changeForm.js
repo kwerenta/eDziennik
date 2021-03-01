@@ -53,6 +53,5 @@ nextTab.addEventListener("click", () => {
 });
 
 prevTab.addEventListener("click", () => {
-  let isEmpty = false;
   timeline.reverse();
 });

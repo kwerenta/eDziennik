@@ -80,16 +80,14 @@ body {
   background-color: transparent;
   border: 3px solid #fff;
 }
-.signButton:hover:enabled {
+.signButton:hover {
   background-color: var(--accent-color);
   color: #fff;
   box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
 }
-.signButton:disabled {
-  cursor: not-allowed;
-}
-.next:hover:enabled,
-.prev:hover:enabled {
+
+.next:hover,
+.prev:hover {
   background-color: #fff;
   color: #000;
 }

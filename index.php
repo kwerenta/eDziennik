@@ -14,20 +14,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($_POST['email'] !== $user['email'] || md5($_POST['password']) !== $user['password']) {
     $error = 'Błędny login lub hasło!';
   } else {
+    $sql = "SELECT `rank` FROM ranks WHERE user_id = {$user['id']}";
+    $query = mysqli_query($conn, $sql);
+    $rank = mysqli_fetch_array($query);
+    if ($rank !== null) $user += $rank;
     $_SESSION['user'] = $user;
     switch ($user['rank']) {
       case 1:
-        die('uczeń');
+        die('admin');
         break;
       case 2:
         die('nauczyciel');
         break;
-      case 3:
-        die('admin');
-        break;
-
       default:
-        die('Błąd! Niepoprawnie założone konto!');
+        die('Uczeń!');
         break;
     }
   }
