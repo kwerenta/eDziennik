@@ -4,8 +4,8 @@ window.onload = async () => {
   if (clock) {
     setInterval(() => {
       response++;
-      const date = new Date((response + 3600) * 1000).toISOString().substr(11, 8);
-      clock.innerHTML = `${date}`;
+      const time = new Date((response + 3600) * 1000).toISOString().substr(11, 8);
+      clock.innerHTML = `${time}`;
     }, 1000);
   }
 };

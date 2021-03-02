@@ -1,14 +1,65 @@
+body {
+  overflow-y: hidden;
+}
 .dashboardContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
-  gap: 1rem;
+  display: flex;
+  height: 100%;
 }
-.dashboardContainer .dashboardTile:not(:first-child) {
-  grid-column: span 1;
+.leftPanel {
+  flex: 2;
+  margin-right: 1rem;
 }
-.dashboardTile {
+.rightPanel {
+  padding-left: 1rem;
+  flex: 1;
+}
+.dashboardTile,
+.shortTimetable,
+.latestGrades,
+.latestNote {
   background: #eee;
   padding: 1rem;
   border-radius: 1rem;
+}
+.simpleInfo {
+  width: 100%;
+  display: flex;
+}
+.dashboardTile {
+  flex: 1;
   min-height: 8rem;
+  margin-right: 1rem;
+}
+.dashboardTile:last-child {
+  margin-right: 0;
+}
+.latestGrades {
+  width: 100%;
+  margin-top: 1rem;
+}
+.latestGrades > h2 {
+  margin-bottom: 0.5rem;
+}
+.latestGradesItem {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ccc;
+}
+.latestGradesItem > * {
+  width: 25%;
+}
+.latestNote {
+  height: 33%;
+  margin-bottom: 1rem;
+}
+.latestNoteRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.shortTimetableList {
+  margin-left: 2rem;
 }

@@ -17,6 +17,7 @@ body {
   color: var(--font-color);
   font-family: "Prompt", sans-serif;
   transition: background 1s;
+  height: 100vh;
 }
 main {
   margin-left: 5rem;
