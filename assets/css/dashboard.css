@@ -1,0 +1,12 @@
+.dashboardContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.dashboardContainer .dashboardTile:not(:first-child) {
+  grid-column: span 1;
+}
+.dashboardTile {
+  background: #fff;
+  padding: 1rem;
+}

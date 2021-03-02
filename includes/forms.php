@@ -32,5 +32,3 @@
   <div id="leftImage"><img src="/assets/img/start_image1.svg" alt="School image" class="startImage"></div>
   <div id="rightImage"><img src="/assets/img/start_image2.svg" alt="School image" class="startImage"></div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
-<script src="/assets/js/changeForm.js"></script>
