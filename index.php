@@ -37,7 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 
-
-include 'includes/header.php';
-include 'includes/forms.php';
-include 'includes/footer.php';
+require 'render.php';
+$header = new View('header');
+$header->allocate('styles', ['global', 'forms']);
+$header->render();
+$forms = new View("forms");
+$forms->render();
+$footer = new View('footer');
