@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = "SELECT `rank` FROM ranks WHERE user_id = {$user['id']}";
     $query = mysqli_query($conn, $sql);
     $rank = mysqli_fetch_array($query);
-    switch ($rank) {
-      case 1:
+    switch ($rank[0]) {
+      case "1":
         $rank = "admin";
         break;
-      case 2:
+      case "2":
         $rank = "teacher";
         break;
       default:

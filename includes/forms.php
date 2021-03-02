@@ -9,7 +9,7 @@
     <p class="noPassword">Nie pamiętam hasła</p>
   </form>
 
-  <form class="form signUpForm" action="/register.php" method="post">
+  <form class="form signUpForm" action="../functions/register.php" method="post">
     <div class="formTab personalData">
       <input type="text" name="firstName" autocomplete="given-name" placeholder="Imię" required>
       <input type="text" name="lastName" autocomplete="family-name" placeholder="Nazwisko" required>

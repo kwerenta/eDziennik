@@ -1,12 +1,14 @@
 .dashboardContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
   gap: 1rem;
 }
 .dashboardContainer .dashboardTile:not(:first-child) {
   grid-column: span 1;
 }
 .dashboardTile {
-  background: #fff;
+  background: #eee;
   padding: 1rem;
+  border-radius: 1rem;
+  min-height: 8rem;
 }

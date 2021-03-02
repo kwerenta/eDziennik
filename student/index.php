@@ -1,9 +1,6 @@
 <?php
 session_start();
-
-if (!isset($_SESSION["user"])) {
-  header('Location: /');
-}
+require '../functions/isLoggedIn.php';
 require '../view.php';
 $header = new View('header');
 $header->allocate('styles', ['navbar', 'dashboard']);
@@ -27,12 +24,15 @@ $navbar->render();
     </div>
     <div class="dashboardTile">
       <h2>Twoi nauczyciele: </h2>
+      <p>Jacek śmieć</p>
     </div>
     <div class="dashboardTile">
       <h2>Twoje najnowsze oceny: </h2>
+      <p>6,6,6,6,6,6</p>
     </div>
     <div class="dashboardTile">
       <h2>Twoje najnowsze uwagi: </h2>
+      <p>+150 na chęci do życia</p>
     </div>
   </div>
 </main>
