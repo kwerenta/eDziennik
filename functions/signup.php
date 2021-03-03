@@ -18,7 +18,7 @@ if (!$isEmpty) {
   // mysqli_stmt_bind_param();
 
   if ($emailExist) {
-    header("Location: http://{$_SERVER['HTTP_HOST']}/index.php");
+    header("Location: http://{$_SERVER['HTTP_HOST']}/");
   }
 
   $pass = md5($_POST['password']);
@@ -35,6 +35,6 @@ if (!$isEmpty) {
     "{$_POST['class']}");
   SQL;
     mysqli_query($conn, $sql);
-    header("Location: http://{$_SERVER['HTTP_HOST']}/index.php");
+    header("Location: http://{$_SERVER['HTTP_HOST']}/");
   }
 }
