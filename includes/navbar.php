@@ -50,5 +50,16 @@
     else echo "Pulpit";
     ?>
   </h1>
-  <h1 class="clock">00:00:00</h1>
+  <h1 class="clock">
+    <?php
+    $date = getDate();
+    if (strlen($date["hours"]) === 1) $hours = "0" . $date["hours"];
+    else $hours = $date["hours"];
+    if (strlen($date["minutes"]) === 1) $minutes = "0" . $date["minutes"];
+    else $minutes = $date["minutes"];
+    if (strlen($date["seconds"]) === 1) $seconds = "0" . $date["seconds"];
+    else $seconds = $date["seconds"];
+    echo $hours . ":" . $minutes . ":" . $seconds;
+    ?>
+  </h1>
 </div>
