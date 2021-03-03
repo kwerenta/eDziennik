@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $query = mysqli_query($conn, $sql);
   $user = mysqli_fetch_array($query);
 
-  if ($_POST['email'] !== $user['email'] || md5($_POST['password']) !== $user['password']) {
+  if (md5($_POST['password']) !== $user['password']) {
     $error = 'Błędny login lub hasło!';
   } else {
     $sql = "SELECT `rank` FROM ranks WHERE user_id = {$user['id']}";

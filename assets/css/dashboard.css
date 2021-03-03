@@ -1,25 +1,25 @@
-body {
-  overflow-y: hidden;
-}
 .dashboardContainer {
   display: flex;
-  height: 100%;
+  height: calc(100% - 5rem);
 }
 .leftPanel {
   flex: 2;
   margin-right: 1rem;
+  height: calc(100% - 9.5rem);
 }
 .rightPanel {
   padding-left: 1rem;
   flex: 1;
+  height: calc(100% - 1rem);
 }
 .dashboardTile,
 .shortTimetable,
 .latestGrades,
 .latestNote {
-  background: #eee;
+  background: #fff;
   padding: 1rem;
   border-radius: 1rem;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 15%);
 }
 .simpleInfo {
   width: 100%;
@@ -35,6 +35,7 @@ body {
 }
 .latestGrades {
   width: 100%;
+  height: 100%;
   margin-top: 1rem;
 }
 .latestGrades > h2 {
@@ -52,13 +53,16 @@ body {
   width: 25%;
 }
 .latestNote {
-  height: 33%;
+  height: 50%;
   margin-bottom: 1rem;
 }
 .latestNoteRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.shortTimetable {
+  height: 50%;
 }
 .shortTimetableList {
   margin-left: 2rem;
