@@ -66,5 +66,5 @@
   background: #1b8acd;
   height: 5rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }

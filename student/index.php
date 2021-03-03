@@ -3,7 +3,7 @@ session_start();
 require '../functions/isLoggedIn.php';
 require '../view.php';
 $header = new View('header');
-$header->allocate('styles', ['navbar', 'dashboard']);
+$header->allocate('styles', ['navbar', 'studentDashboard']);
 $header->allocate('scripts', ['clock']);
 $header->render();
 
@@ -76,14 +76,4 @@ $navbar->render();
       </ol>
     </div>
   </div>
-  <!-- <div class="dashboardTile">
-      
-    <div class="dashboardTile">
-      <h2>Najnowsze uwagi</h2>
-      <p>+150 na chęci do życia</p>
-    </div>
-    <div class="dashboardTile">
-      <h2>Ostatnie oceny</h2>
-      <p>wszystkie przedmioty: 6,6,6,6,6,6</p>
-    </div> -->
 </main>

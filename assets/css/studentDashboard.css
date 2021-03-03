@@ -10,7 +10,7 @@
 .rightPanel {
   padding-left: 1rem;
   flex: 1;
-  height: calc(100% - 1rem);
+  height: calc(100% - 1.5rem);
 }
 .dashboardTile,
 .shortTimetable,

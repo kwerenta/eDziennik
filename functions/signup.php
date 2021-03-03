@@ -1,12 +1,30 @@
 <?php
-require 'db.php';
+require '../db.php';
 
 $conn = connectToDB();
+$isEmpty = false;
 
-if ($_POST['firstName'] !== null && $_POST['lastName'] !== null && $_POST['email'] !== null && $_POST['password'] !== null && $_POST['confirmPassword'] !== null && $_POST['class'] !== null) {
+foreach ($_POST as $input => $value) {
+  if ($value === null) {
+    $isEmpty = true;
+  }
+}
+
+if (!$isEmpty) {
+  $sql = "SELECT `email` FROM users WHERE `email`='{$_POST['email']}'";
+  $emailExist = mysqli_query($conn, $sql);
+
+  // mysqli_prepare();
+  // mysqli_stmt_bind_param();
+
+  if ($emailExist) {
+    header("Location: http://{$_SERVER['HTTP_HOST']}/index.php");
+  }
+
   $pass = md5($_POST['password']);
   $sql = "INSERT INTO users(`email`,`password`) VALUES ('{$_POST['email']}','{$pass}')";
   $newUser = mysqli_query($conn, $sql);
+
   if ($newUser) {
     $id = mysqli_insert_id($conn);
     $sql = <<<SQL
@@ -17,6 +35,6 @@ if ($_POST['firstName'] !== null && $_POST['lastName'] !== null && $_POST['email
     "{$_POST['class']}");
   SQL;
     mysqli_query($conn, $sql);
-    header('Location: index.php');
+    header("Location: http://{$_SERVER['HTTP_HOST']}/index.php");
   }
 }
