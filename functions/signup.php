@@ -21,7 +21,7 @@ if (!$isEmpty) {
     header("Location: http://{$_SERVER['HTTP_HOST']}/");
   }
 
-  $pass = md5($_POST['password']);
+  $pass = password_hash($_POST['password'], PASSWORD_BCRYPT);
   $sql = "INSERT INTO users(`email`,`password`) VALUES ('{$_POST['email']}','{$pass}')";
   $newUser = mysqli_query($conn, $sql);
 

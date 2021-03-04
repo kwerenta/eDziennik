@@ -9,7 +9,7 @@ $query = mysqli_query($conn, $sql);
 $user = mysqli_fetch_array($query);
 
 if ($user) {
-  if (md5($_POST['password']) !== $user['password']) {
+  if (!password_verify($_POST['password'], $user['password'])) {
     $_SESSION['signinErrors'] = 'Błędny login lub hasło!';
     header("Location: http://{$_SERVER['HTTP_HOST']}/");
   } else {
