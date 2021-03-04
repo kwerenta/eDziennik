@@ -10,7 +10,7 @@ $user = mysqli_fetch_array($query);
 
 if ($user) {
   if (md5($_POST['password']) !== $user['password']) {
-    $error = 'Błędny login lub hasło!';
+    $_SESSION['signinErrors'] = 'Błędny login lub hasło!';
     header("Location: http://{$_SERVER['HTTP_HOST']}/");
   } else {
     $sql = "SELECT `rank` FROM ranks WHERE user_id = {$user['id']}";
@@ -29,5 +29,6 @@ if ($user) {
     header("Location: /{$rank}");
   }
 } else {
+  $_SESSION['signinErrors'] = 'Błędny login lub hasło!';
   header("Location: http://{$_SERVER['HTTP_HOST']}/");
 }

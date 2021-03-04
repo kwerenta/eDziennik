@@ -28,6 +28,7 @@
 }
 .navLink:hover {
   background: var(--secondary-bg-color);
+  box-shadow: var(--shadow);
 }
 .linkText {
   display: none;

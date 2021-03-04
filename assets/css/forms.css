@@ -26,7 +26,7 @@
   padding: 1rem 2rem;
   border: 1px solid var(--font-color);
   border-radius: 100px;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 15%);
+  box-shadow: var(--shadow);
   font-size: 1.5rem;
   margin-bottom: 1rem;
   outline: none;
@@ -64,7 +64,7 @@
 .signButton:hover {
   background-color: var(--accent-color);
   color: #fff;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+  box-shadow: var(--shadow);
 }
 
 .next:hover,
@@ -81,15 +81,15 @@
 .startImage {
   width: 300px;
 }
-#leftImage,
-#rightImage {
+.rightFormImage,
+.leftFormImage {
   position: absolute;
   bottom: 40px;
 }
-#leftImage {
+.leftFormImage {
   left: 0;
 }
-#rightImage {
+.rightFormImage {
   right: 0;
 }
 .changeFormButton,
@@ -97,4 +97,15 @@
   font-weight: 700;
   color: var(--font-color);
   cursor: pointer;
+}
+.formError {
+  color: #fff;
+  background-color: #f44336;
+  padding: 1rem 2rem;
+  margin: -4.75rem 0 1rem;
+  border-radius: 100px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 500;
 }

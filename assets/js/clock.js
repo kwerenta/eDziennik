@@ -14,9 +14,9 @@ window.onload = () => {
 
   if (clock) {
     setInterval(() => {
+      time++;
       const displayTime = new Date((time + 3600) * 1000).toISOString().substr(11, 8);
       clock.innerHTML = `${displayTime}`;
-      time++;
     }, 1000);
   }
 };

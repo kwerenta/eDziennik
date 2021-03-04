@@ -3,6 +3,12 @@
     <h1>eDziennik</h1>
   </div>
   <form class="form signInForm" action="../functions/signin.php" method="post">
+    <?php if (isset($_SESSION['signinErrors'])) {
+      echo <<<HTML
+      <div class="formError">{$_SESSION['signinErrors']}</div>
+      HTML;
+      unset($_SESSION['signinErrors']);
+    } ?>
     <input type="text" name="email" autocomplete="email" placeholder="E-mail" required>
     <input type="password" name="password" autocomplete="current-password" placeholder="Hasło" required>
     <button type="submit" class="signButton signin">Zaloguj się</button>
@@ -29,6 +35,7 @@
     <p>Nie masz konta?</p>
     <p class="changeFormButton">Zarejestruj się!</p>
   </div>
-  <div id="leftImage"><img src="/assets/img/start_image1.svg" alt="School image" class="startImage"></div>
-  <div id="rightImage"><img src="/assets/img/start_image2.svg" alt="School image" class="startImage"></div>
+  <div class="leftFormImage"><img src="/assets/img/start_image1.svg" alt="School image" class="startImage"></div>
+  <div class="rightFormImage"><img src="/assets/img/start_image2.svg" alt="School image" class="startImage"></div>
+
 </div>
