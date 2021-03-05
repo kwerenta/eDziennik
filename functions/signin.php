@@ -8,26 +8,21 @@ $sql = "SELECT * FROM users WHERE `email` = \"{$_POST['email']}\"";
 $query = mysqli_query($conn, $sql);
 $user = mysqli_fetch_array($query);
 
-if ($user) {
-  if (!password_verify($_POST['password'], $user['password'])) {
-    $_SESSION['signinErrors'] = 'Błędny login lub hasło!';
-    header("Location: http://{$_SERVER['HTTP_HOST']}/");
-  } else {
-    $sql = "SELECT `rank` FROM ranks WHERE user_id = {$user['id']}";
-    $query = mysqli_query($conn, $sql);
-    $rank = mysqli_fetch_array($query);
+if ($user && password_verify($_POST['password'], $user['password'])) {
+  $sql = "SELECT `rank` FROM ranks WHERE user_id = {$user['id']}";
+  $query = mysqli_query($conn, $sql);
+  $rank = mysqli_fetch_array($query);
 
-    if (!isset($rank[0])) $rank = "student";
-    elseif ($rank[0] == "1") $rank = "admin";
-    elseif ($rank[0] == "2") $rank = "teacher";
+  if (!isset($rank[0])) $rank = "student";
+  elseif ($rank[0] == "1") $rank = "admin";
+  elseif ($rank[0] == "2") $rank = "teacher";
 
-    $sql = "SELECT * FROM {$rank}s WHERE user_id = {$user['id']}";
-    $query = mysqli_query($conn, $sql);
-    $data = mysqli_fetch_array($query);
-    $data['rank'] = $rank;
-    $_SESSION['user'] = $data;
-    header("Location: /{$rank}");
-  }
+  $sql = "SELECT * FROM {$rank}s WHERE user_id = {$user['id']}";
+  $query = mysqli_query($conn, $sql);
+  if ($query) $data = mysqli_fetch_array($query);
+  $data['rank'] = $rank;
+  $_SESSION['user'] = $data;
+  header("Location: /{$rank}");
 } else {
   $_SESSION['signinErrors'] = 'Błędny login lub hasło!';
   header("Location: http://{$_SERVER['HTTP_HOST']}/");

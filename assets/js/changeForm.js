@@ -19,10 +19,10 @@ const changeText = () => {
 };
 
 const tl = gsap.timeline({ paused: true });
-tl.to([".signInForm", ".changeFormText"], { opacity: 0, duration: 0.25 })
-  .set(".signInForm", { display: "none" }, "+=0.25")
+tl.to([".signInForm", ".changeFormText"], { clipPath: "inset(0% 100%)", duration: 0.25 })
+  .set(".signInForm", { display: "none" }, ">")
   .set(".signUpForm", { display: "flex" })
-  .to([".signUpForm", ".changeFormText"], { opacity: 1, duration: 0.25 }, "+=0.25");
+  .to([".signUpForm", ".changeFormText"], { clipPath: "inset(0% 0%)", duration: 0.25 });
 
 changeForm.addEventListener("click", () => {
   let color;
@@ -33,16 +33,16 @@ changeForm.addEventListener("click", () => {
     color = "--secondary-bg-color";
     tl.play();
   }
-  setTimeout(() => changeText(), 750);
+  setTimeout(() => changeText(), 500);
   cssVariables.style.setProperty("--bg-color", `var(${color})`);
 });
 
 const timeline = gsap.timeline({ paused: true });
 timeline
-  .to(".personalData", { opacity: 0, duration: 0.25 })
-  .set(".personalData", { display: "none" }, "+=0.25")
+  .to(".personalData", { clipPath: "inset(0% 100%)", duration: 0.25 })
+  .set(".personalData", { display: "none" }, ">")
   .set(".loginData", { display: "flex" })
-  .to(".loginData", { opacity: 1, duration: 0.25 }, "+=0.25");
+  .to(".loginData", { clipPath: "inset(0% 0%)", duration: 0.25 });
 
 nextTab.addEventListener("click", () => {
   let isEmpty = false;

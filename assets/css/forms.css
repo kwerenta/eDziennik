@@ -20,6 +20,7 @@
   align-items: center;
   flex-direction: column;
   transition: opacity 0.5s;
+  clip-path: inset(0% 0%);
 }
 .form input {
   background-color: var(--background-color);
@@ -38,7 +39,7 @@
 .signUpForm,
 .loginData {
   display: none;
-  opacity: 0;
+  clip-path: inset(0% 100%);
 }
 .signButton {
   margin: 3rem 0 1rem;
