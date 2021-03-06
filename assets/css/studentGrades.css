@@ -1,0 +1,50 @@
+.gradesContainer {
+  background-color: var(--tile-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 1rem 1rem 6rem;
+  border-radius: 1rem;
+}
+.gradesTabs {
+  position: relative;
+  display: flex;
+  width: 50%;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+.tabHeader {
+  text-align: center;
+  width: 33.3%;
+  cursor: pointer;
+}
+.active {
+  color: var(--accent-color);
+}
+.activeBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(33%);
+  height: 0.5rem;
+  background: var(--accent-color);
+  border-radius: 1rem;
+}
+.gradesList {
+  width: 80%;
+}
+.gradesList .gradeItem:first-child {
+  margin-bottom: 1.5rem;
+}
+.gradeItem {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ccc;
+}
+.gradeItem > * {
+  width: 25%;
+}

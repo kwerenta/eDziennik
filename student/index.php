@@ -17,7 +17,7 @@ $navbar->render();
   <div class="leftPanel">
     <div class="simpleInfo">
       <div class="dashboardTile">
-        <h2>Witaj, <?php echo $_SESSION["user"]["first_name"] . " " . $_SESSION["user"]["last_name"] . "!" ?></h2>
+        <h2>Witaj, <?php echo "{$_SESSION['user']['first_name']} {$_SESSION['user']['last_name']}!" ?></h2>
         <p>Jesteś w klasie <?php echo $_SESSION["user"]["class"] ?>.</p>
       </div>
       <div class="dashboardTile">

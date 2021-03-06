@@ -15,7 +15,7 @@
 .shortTimetable,
 .latestGrades,
 .latestNote {
-  background: #fff;
+  background: var(--tile-color);
   padding: 1rem;
   border-radius: 1rem;
   box-shadow: var(--shadow);
