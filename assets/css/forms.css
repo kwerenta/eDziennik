@@ -20,7 +20,7 @@
   align-items: center;
   flex-direction: column;
   transition: opacity 0.5s;
-  clip-path: inset(0% 0%);
+  clip-path: inset(-30% 0%);
 }
 .form input {
   background-color: var(--background-color);

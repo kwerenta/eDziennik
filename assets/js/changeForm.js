@@ -25,7 +25,9 @@ tl.to([".signInForm", ".changeFormText"], { clipPath: "inset(0% 100%)", duration
   .to([".signUpForm", ".changeFormText"], { clipPath: "inset(0% 0%)", duration: 0.25 });
 
 changeForm.addEventListener("click", () => {
-  let color;
+  let color = "";
+  const formError = document.querySelector(".formError");
+
   if (cssVariables.style.getPropertyValue("--bg-color") == "var(--secondary-bg-color)") {
     color = "--primary-bg-color";
     tl.reverse();
@@ -33,7 +35,11 @@ changeForm.addEventListener("click", () => {
     color = "--secondary-bg-color";
     tl.play();
   }
-  setTimeout(() => changeText(), 500);
+
+  setTimeout(() => {
+    changeText();
+    formError && formError.remove();
+  }, 300);
   cssVariables.style.setProperty("--bg-color", `var(${color})`);
 });
 

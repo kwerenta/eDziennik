@@ -22,8 +22,9 @@ if ($user && password_verify($_POST['password'], $user['password'])) {
   if ($query) $data = mysqli_fetch_array($query);
   $data['rank'] = $rank;
   $_SESSION['user'] = $data;
-  header("Location: /{$rank}");
+  header("Location: http://{$_SERVER['HTTP_HOST']}/{$rank}");
 } else {
   $_SESSION['signinErrors'] = 'Błędny login lub hasło!';
+
   header("Location: http://{$_SERVER['HTTP_HOST']}/");
 }
