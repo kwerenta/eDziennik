@@ -17,11 +17,10 @@ $grades = [];
 
 $sql = "SELECT * FROM grades WHERE `student_id` = {$_SESSION['user']['id']}";
 $query = mysqli_query($conn, $sql);
-var_dump($_SESSION['user']['id']);
-while (($row = mysqli_fetch_array($query)) !== null) {
-  $grades[] = $row;
-}
 
+while (($row = mysqli_fetch_array($query)) !== null) {
+  $grades[$row['subject_id']][] = $row;
+}
 ?>
 
 <main clas="gradesContainer">
@@ -33,85 +32,56 @@ while (($row = mysqli_fetch_array($query)) !== null) {
       <div class="activeBar"></div>
     </div>
     <div class="gradesList">
-      <div class="gradeItem">
-        <h2>Przedmiot</h2>
-        <h2>Ocena</h2>
-        <h2>Kategoria</h2>
-        <h2>Data</h2>
-      </div>
       <?php
-      foreach ($grades as $grade)
-        echo <<<HTML
-        <div class="gradeItem">
-          <h4>{$grade['subject_id']}</h4>
-          <h3>{$grade['grade']}</h3>
-          <p>{$grade['category_id']}</p>
-          <p>{$grade['date']}</p>
-        </div>
-        HTML;
+      foreach ($_SESSION['subjects'] as $subject) {
+
+        if (isset($grades[$subject['id']])) {
+          echo "<div class='subjectItem'><h2>{$subject['name']}</h2><p>";
+
+          foreach ($grades[$subject['id']] as $index => $grade) {
+            echo $grade['grade'];
+            if ($index !== array_key_last($grades[$subject['id']])) echo ',';
+          }
+
+          echo "</p></div>";
+        }
+      }
       ?>
     </div>
     <div class="detailedGradesList">
-      <div class="subjectItem">
-        <h2>Język Polski</h2>
-        <div class="detailedGradeItem">
-          <div class="grade">
-            <p>Ocena</p>
-            <p>5</p>
+      <?php
+      foreach ($_SESSION['subjects'] as $subject) {
+
+        if (isset($grades[$subject['id']])) {
+          echo "<div class='detailedSubjectItem'><h2>{$subject['name']}</h2>";
+
+          foreach ($grades[$subject['id']] as $grade) {
+            $category = $_SESSION['categories'][$grade['category_id'] - 1];
+            echo <<<HTML
+          <div class="detailedGradeItem">
+            <div class="grade">
+              <p>Ocena</p>
+              <p>{$grade['grade']}</p>
+            </div>
+            <div class="description">
+              <p>Opis</p>
+              <p>{$grade['description']}</p>
+            </div>
+            <div class="category">
+              <p>Kategoria (waga)</p>
+              <p>{$category['name']} ({$category['weight']})</p>
+            </div>
+            <div class="created">
+              <p>Wystawiona</p>
+              <p>{$grade['teacher_id']}, {$grade['date']}</p>
+            </div>
           </div>
-          <div class="description">
-            <p>Opis</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, ad quod nobis cum rem eaque repudiandae, iste provident alias architecto consectetur natus eligendi maiores commodi assumenda, laborum quae non exercitationem.</p>
-          </div>
-          <div class="category">
-            <p>Kategoria (waga)</p>
-            <p>Praca klasowa (3)</p>
-          </div>
-          <div class="created">
-            <p>Wystawiona</p>
-            <p>Fajny Nauczyciel, 08.03.2021</p>
-          </div>
-        </div>
-        <div class="detailedGradeItem">
-          <div class="grade">
-            <p>Ocena</p>
-            <p>5</p>
-          </div>
-          <div class="description">
-            <p>Opis</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, ad quod nobis cum rem eaque repudiandae, iste provident alias architecto consectetur natus eligendi maiores commodi assumenda, laborum quae non exercitationem.</p>
-          </div>
-          <div class="category">
-            <p>Kategoria (waga)</p>
-            <p>Praca klasowa (3)</p>
-          </div>
-          <div class="created">
-            <p>Wystawiona</p>
-            <p>Fajny Nauczyciel, 08.03.2021</p>
-          </div>
-        </div>
-      </div>
-      <div class="subjectItem">
-        <h2>Matematyka</h2>
-        <div class="detailedGradeItem">
-          <div class="grade">
-            <p>Ocena</p>
-            <p>5</p>
-          </div>
-          <div class="description">
-            <p>Opis</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, ad quod nobis cum rem eaque repudiandae, iste provident alias architecto consectetur natus eligendi maiores commodi assumenda, laborum quae non exercitationem.</p>
-          </div>
-          <div class="category">
-            <p>Kategoria (waga)</p>
-            <p>Praca klasowa (3)</p>
-          </div>
-          <div class="created">
-            <p>Wystawiona</p>
-            <p>Fajny Nauczyciel, 08.03.2021</p>
-          </div>
-        </div>
-      </div>
+          HTML;
+          }
+          echo "</div>";
+        }
+      }
+      ?>
     </div>
   </div>
 </main>

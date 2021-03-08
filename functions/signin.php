@@ -24,10 +24,22 @@ if ($user && password_verify($_POST['password'], $user['password'])) {
     $data['rank'] = $rank;
     $data['id'] = intval($data['id']);
     $_SESSION['user'] = $data;
+
+    $sql = "SELECT * FROM subjects";
+    $query = mysqli_query($conn, $sql);
+    while (($row = mysqli_fetch_array($query)) !== null) {
+      $_SESSION['subjects'][] = $row;
+    }
+
+    $sql = "SELECT `name`,`weight` FROM categories";
+    $query = mysqli_query($conn, $sql);
+    while (($row = mysqli_fetch_array($query)) !== null) {
+      $_SESSION['categories'][] = $row;
+    }
   }
+
   header("Location: http://{$_SERVER['HTTP_HOST']}/{$rank}");
 } else {
   $_SESSION['signinErrors'] = 'Błędny login lub hasło!';
-
   header("Location: http://{$_SERVER['HTTP_HOST']}/");
 }

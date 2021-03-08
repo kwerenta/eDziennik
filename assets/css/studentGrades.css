@@ -38,29 +38,27 @@
 .gradesList {
   width: 100%;
 }
-.gradesList .gradeItem:first-child {
-  margin-bottom: 1.5rem;
-  border-bottom: 3px solid #ccc;
+.subjectItem > h2 {
+  flex: 1;
 }
-.gradesList .gradeItem:nth-child(2) {
-  border: none;
+.subjectItem > p {
+  flex: 3;
 }
-.gradeItem {
+.subjectItem {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  text-align: center;
+  align-items: center;
   padding: 0.5rem 0;
+  margin-bottom: 1.5rem;
   border-bottom: 1px solid #ccc;
-}
-.gradeItem > * {
-  width: 25%;
 }
 .detailedGradesList {
   display: none;
+  width: 100%;
 }
-.subjectItem {
+.detailedSubjectItem {
   margin-bottom: 3rem;
+  width: 100%;
 }
 .detailedGradeItem {
   margin: 0 1rem 1rem;
