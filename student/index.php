@@ -33,6 +33,12 @@ $navbar->render();
     <div class="latestGrades">
       <h2>Ostatnie oceny</h2>
       <div class="latestGradesItem">
+        <h2>Przedmiot</h2>
+        <h2>Ocena</h2>
+        <h2>Kategoria</h2>
+        <h2>Data</h2>
+      </div>
+      <div class="latestGradesItem">
         <h4>Matematyka</h4>
         <h3>5</h3>
         <p>Kartkówka</p>

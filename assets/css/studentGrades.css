@@ -1,15 +1,17 @@
-.gradesContainer {
+.gradesPanel {
   background-color: var(--tile-color);
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1rem 1rem 1rem 6rem;
   border-radius: 1rem;
+  padding-top: 1rem;
+  margin: 0 auto;
+  width: 70%;
 }
 .gradesTabs {
   position: relative;
   display: flex;
-  width: 50%;
+  width: 75%;
   border-bottom: 1px solid #ccc;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
@@ -21,6 +23,7 @@
 }
 .active {
   color: var(--accent-color);
+  transition: color 1s;
 }
 .activeBar {
   position: absolute;
@@ -32,10 +35,14 @@
   border-radius: 1rem;
 }
 .gradesList {
-  width: 80%;
+  width: 100%;
 }
 .gradesList .gradeItem:first-child {
   margin-bottom: 1.5rem;
+  border-bottom: 2px solid #ccc;
+}
+.gradesList .gradeItem:nth-child(2) {
+  border: none;
 }
 .gradeItem {
   width: 100%;
