@@ -19,9 +19,12 @@ if ($user && password_verify($_POST['password'], $user['password'])) {
 
   $sql = "SELECT * FROM {$rank}s WHERE user_id = {$user['id']}";
   $query = mysqli_query($conn, $sql);
-  if ($query) $data = mysqli_fetch_array($query);
-  $data['rank'] = $rank;
-  $_SESSION['user'] = $data;
+  if ($query) {
+    $data = mysqli_fetch_array($query);
+    $data['rank'] = $rank;
+    $data['id'] = intval($data['id']);
+    $_SESSION['user'] = $data;
+  }
   header("Location: http://{$_SERVER['HTTP_HOST']}/{$rank}");
 } else {
   $_SESSION['signinErrors'] = 'Błędny login lub hasło!';

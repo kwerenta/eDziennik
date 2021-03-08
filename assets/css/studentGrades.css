@@ -4,9 +4,10 @@
   flex-direction: column;
   align-items: center;
   border-radius: 1rem;
-  padding-top: 1rem;
+  padding: 1rem 2rem;
   margin: 0 auto;
   width: 70%;
+  box-shadow: var(--shadow);
 }
 .gradesTabs {
   position: relative;
@@ -39,7 +40,7 @@
 }
 .gradesList .gradeItem:first-child {
   margin-bottom: 1.5rem;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 3px solid #ccc;
 }
 .gradesList .gradeItem:nth-child(2) {
   border: none;
@@ -54,4 +55,27 @@
 }
 .gradeItem > * {
   width: 25%;
+}
+.detailedGradesList {
+  display: none;
+}
+.subjectItem {
+  margin-bottom: 3rem;
+}
+.detailedGradeItem {
+  margin: 0 1rem 1rem;
+}
+.detailedGradeItem > div:last-child {
+  border-bottom: 3px solid #ccc;
+}
+.detailedGradeItem > div {
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+.detailedGradeItem > div > p:first-child {
+  flex: 1;
+}
+.detailedGradeItem > div > p:last-child {
+  flex: 3;
 }
