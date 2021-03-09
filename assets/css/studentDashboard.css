@@ -4,12 +4,16 @@
 }
 .leftPanel {
   flex: 2;
-  height: calc(100% - 20rem);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-right: 2rem;
 }
 .rightPanel {
-  padding-left: 2rem;
   flex: 1;
-  height: calc(100% - 2rem);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .dashboardTile,
 .shortTimetable,
@@ -54,7 +58,7 @@
 }
 .latestGrades .latestGradesItem:nth-child(2) {
   margin-bottom: 1.5rem;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 3px solid #ccc;
 }
 .latestGradesItem > * {
   width: 25%;
