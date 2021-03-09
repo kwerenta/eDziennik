@@ -38,11 +38,20 @@
 .gradesList {
   width: 100%;
 }
-.subjectItem > h2 {
+
+.subjectItem > h2,
+.subjectItem > .header:first-child {
   flex: 1;
+  padding-right: 2rem;
 }
-.subjectItem > p {
+.subjectItem > p,
+.subjectItem > .header:last-child {
   flex: 3;
+}
+.subjectItem:first-child,
+.summaryItem:first-child {
+  border-bottom: 3px solid #ccc;
+  margin-bottom: 2rem;
 }
 .subjectItem,
 .summaryItem {
@@ -62,7 +71,7 @@
   width: 100%;
 }
 .detailedSubjectItem {
-  margin-bottom: 3rem;
+  margin: 0.5rem 0 3rem 0;
   width: 100%;
 }
 .detailedGradeItem {
@@ -76,9 +85,9 @@
   padding: 1rem;
   border-bottom: 1px solid #ccc;
 }
-.detailedGradeItem > div > p:first-child {
+.detailedGradeItem > div > h4 {
   flex: 1;
 }
-.detailedGradeItem > div > p:last-child {
+.detailedGradeItem > div > p {
   flex: 3;
 }

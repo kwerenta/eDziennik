@@ -33,68 +33,71 @@ while (($row = mysqli_fetch_array($query)) !== null) {
       <div class="activeBar"></div>
     </div>
     <div class="gradesList">
+      <div class="subjectItem">
+        <h2 class="header">Przedmiot</h2>
+        <h2 class="header">Oceny</h2>
+      </div>
       <?php
-      foreach ($_SESSION['subjects'] as $subject) {
+      foreach ($grades as $index => $subjects) {
+        $subject = $_SESSION['subjects'][$index - 1];
+        echo "<div class='subjectItem'><h2>{$subject['name']}</h2><p>";
 
-        if (isset($grades[$subject['id']])) {
-          echo "<div class='subjectItem'><h2>{$subject['name']}</h2><p>";
-
-          foreach ($grades[$subject['id']] as $index => $grade) {
-            echo $grade['grade'];
-            if ($index !== array_key_last($grades[$subject['id']])) echo ',';
-          }
-
-          echo "</p></div>";
+        foreach ($subjects as $index => $grade) {
+          echo $grade['grade'];
+          if ($index !== array_key_last($grades[$subject['id']])) echo ',';
         }
+
+        echo "</p></div>";
       }
       ?>
     </div>
     <div class="detailedGradesList">
       <?php
-      foreach ($_SESSION['subjects'] as $subject) {
+      foreach ($grades as $index => $subjects) {
+        $subject = $_SESSION['subjects'][$index - 1];
+        echo "<div class='detailedSubjectItem'><h2>{$subject['name']}</h2>";
 
-        if (isset($grades[$subject['id']])) {
-          echo "<div class='detailedSubjectItem'><h2>{$subject['name']}</h2>";
-
-          foreach ($grades[$subject['id']] as $grade) {
-            $category = $_SESSION['categories'][$grade['category_id'] - 1];
-            echo <<<HTML
+        foreach ($subjects as $grade) {
+          $category = $_SESSION['categories'][$grade['category_id'] - 1];
+          echo <<<HTML
           <div class="detailedGradeItem">
             <div class="grade">
-              <p>Ocena</p>
+              <h4>Ocena</h4>
               <p>{$grade['grade']}</p>
             </div>
             <div class="description">
-              <p>Opis</p>
+              <h4>Opis</h4>
               <p>{$grade['description']}</p>
             </div>
             <div class="category">
-              <p>Kategoria (waga)</p>
+              <h4>Kategoria (waga)</h4>
               <p>{$category['name']} ({$category['weight']})</p>
             </div>
             <div class="created">
-              <p>Wystawiona</p>
+              <h4>Wystawiona</h4>
               <p>{$grade['teacher_id']}, {$grade['date']}</p>
             </div>
           </div>
           HTML;
-          }
-          echo "</div>";
         }
+        echo "</div>";
       }
       ?>
     </div>
     <div class="gradesSummary">
+      <div class="summaryItem">
+        <h2>Przedmiot</h2>
+        <h2>Średnia</h2>
+      </div>
       <?php
-      foreach ($_SESSION['subjects'] as $subject) {
-        if (isset($grades[$subject['id']])) {
-          $sum = 0;
-          foreach ($grades[$subject['id']] as $grade) {
-            $sum += $grade['grade'];
-          }
-          $average = $sum / count($grades[$subject['id']]);
-          echo "<div class='summaryItem'><h2>{$subject['name']}</h2><p>{$average}</p></div>";
+      foreach ($grades as $index => $subjects) {
+        $subject = $_SESSION['subjects'][$index - 1];
+        $sum = 0;
+        foreach ($subjects as $grade) {
+          $sum += $grade['grade'];
         }
+        $average = $sum / count($subjects);
+        echo "<div class='summaryItem'><h2>{$subject['name']}</h2><p>{$average}</p></div>";
       }
       ?>
     </div>
