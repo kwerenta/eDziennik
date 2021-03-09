@@ -10,7 +10,7 @@ const changeHeader = index => {
   tabHeaders[index].classList.add("active");
 
   panelChildren.forEach(child => (child.style.display = "none"));
-  gradesPanel.querySelector(`div:nth-child(${index + 2})`).style.display = "block";
+  gradesPanel.querySelector(`:scope > div:nth-child(${index + 2})`).style.display = "block";
 };
 
 tabHeaders.forEach((header, index) => {

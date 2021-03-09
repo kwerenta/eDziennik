@@ -21,6 +21,7 @@ $query = mysqli_query($conn, $sql);
 while (($row = mysqli_fetch_array($query)) !== null) {
   $grades[$row['subject_id']][] = $row;
 }
+
 ?>
 
 <main clas="gradesContainer">
@@ -79,6 +80,20 @@ while (($row = mysqli_fetch_array($query)) !== null) {
           HTML;
           }
           echo "</div>";
+        }
+      }
+      ?>
+    </div>
+    <div class="gradesSummary">
+      <?php
+      foreach ($_SESSION['subjects'] as $subject) {
+        if (isset($grades[$subject['id']])) {
+          $sum = 0;
+          foreach ($grades[$subject['id']] as $grade) {
+            $sum += $grade['grade'];
+          }
+          $average = $sum / count($grades[$subject['id']]);
+          echo "<div class='summaryItem'><h2>{$subject['name']}</h2><p>{$average}</p></div>";
         }
       }
       ?>

@@ -44,7 +44,8 @@
 .subjectItem > p {
   flex: 3;
 }
-.subjectItem {
+.subjectItem,
+.summaryItem {
   width: 100%;
   display: flex;
   align-items: center;
@@ -52,7 +53,11 @@
   margin-bottom: 1.5rem;
   border-bottom: 1px solid #ccc;
 }
-.detailedGradesList {
+.summaryItem > * {
+  flex: 1;
+}
+.detailedGradesList,
+.gradesSummary {
   display: none;
   width: 100%;
 }
