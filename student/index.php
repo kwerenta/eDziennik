@@ -15,7 +15,7 @@ $conn = connectToDB();
 
 $latestGrades = [];
 
-$sql = "SELECT * FROM grades WHERE `student_id` = {$_SESSION['user']['id']} ORDER BY `date` DESC LIMIT 10";
+$sql = "SELECT * FROM grades WHERE `student_id` = {$_SESSION['user']['id']} ORDER BY `date` DESC LIMIT 8";
 $query = mysqli_query($conn, $sql);
 
 while (($row = mysqli_fetch_array($query)) !== null) {
@@ -33,7 +33,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
         <p>Jesteś w klasie <?php echo $_SESSION["user"]["class"] ?>.</p>
       </div>
       <div class="dashboardTile">
-        <h2>Najbliższe dni wolne</h2>
+        <h2>Najbliższy dzień wolny</h2>
         <p>Wielkanoc</p>
       </div>
       <div class="dashboardTile">

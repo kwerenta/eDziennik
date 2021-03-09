@@ -4,12 +4,12 @@
 }
 .leftPanel {
   flex: 2;
-  height: calc(100% - 9.5rem);
+  height: calc(100% - 20rem);
 }
 .rightPanel {
-  padding-left: 1rem;
+  padding-left: 2rem;
   flex: 1;
-  height: calc(100% - 1.5rem);
+  height: calc(100% - 2rem);
 }
 .dashboardTile,
 .shortTimetable,
@@ -23,19 +23,23 @@
 .simpleInfo {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
+}
+.dashboardTile:first-child {
+  flex: 100%;
+  margin-bottom: 2rem;
 }
 .dashboardTile {
   flex: 1;
-  min-height: 8rem;
-  margin-right: 1rem;
+  height: 8rem;
 }
 .dashboardTile:last-child {
-  margin-right: 0;
+  margin-left: 2rem;
 }
 .latestGrades {
   width: 100%;
   height: 100%;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 .latestGrades > h2 {
   margin-bottom: 0.5rem;
@@ -57,7 +61,7 @@
 }
 .latestNote {
   height: 50%;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 .latestNoteRow {
   display: flex;
