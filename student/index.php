@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '../functions/isLoggedIn.php';
+require '../db.php';
 require '../view.php';
 $header = new View('header');
 $header->allocate('styles', ['navbar', 'studentDashboard']);
@@ -9,6 +10,17 @@ $header->render();
 
 $navbar = new View('navbar');
 $navbar->render();
+
+$conn = connectToDB();
+
+$latestGrades = [];
+
+$sql = "SELECT * FROM grades WHERE `student_id` = {$_SESSION['user']['id']} ORDER BY `date` DESC LIMIT 10";
+$query = mysqli_query($conn, $sql);
+
+while (($row = mysqli_fetch_array($query)) !== null) {
+  $latestGrades[] = $row;
+}
 
 ?>
 
@@ -38,24 +50,20 @@ $navbar->render();
         <h2>Kategoria</h2>
         <h2>Data</h2>
       </div>
-      <div class="latestGradesItem">
-        <h4>Matematyka</h4>
-        <h3>5</h3>
-        <p>Kartkówka</p>
-        <p>02.03.2021</p>
-      </div>
-      <div class="latestGradesItem">
-        <h4>Polski</h4>
-        <h3>6</h3>
-        <p>Praca klasowa</p>
-        <p>02.03.2021</p>
-      </div>
-      <div class="latestGradesItem">
-        <h4>PrPZ</h4>
-        <h3>6</h3>
-        <p>Praca klasowa</p>
-        <p>19.03.2021</p>
-      </div>
+      <?php
+      foreach ($latestGrades as $grade) {
+        $subject = $_SESSION['subjects'][$grade['subject_id'] - 1];
+        $category = $_SESSION['categories'][$grade['category_id'] - 1];
+        echo <<<HTML
+          <div class="latestGradesItem">
+            <h4>{$subject['name']}</h4>
+            <h3>{$grade['grade']}</h3>
+            <p>{$category['name']}</p>
+            <p>{$grade['date']}</p>
+          </div>
+          HTML;
+      }
+      ?>
     </div>
   </div>
 
