@@ -1,0 +1,36 @@
+.notesPanel {
+  background-color: var(--tile-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  margin: 0 auto;
+  width: 70%;
+  min-width: 1000px;
+  box-shadow: var(--shadow);
+}
+.notesList {
+  width: 100%;
+}
+.notesItem {
+  margin: 0 1rem 2rem;
+}
+.notesRowTitle {
+  display: flex;
+  justify-content: space-between;
+}
+.notesData > div:last-child {
+  border-bottom: 3px solid #ccc;
+}
+.notesData > div {
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+.notesData > div > h4 {
+  flex: 1;
+}
+.notesData > div > p {
+  flex: 3;
+}

@@ -7,13 +7,14 @@
   padding: 1rem 2rem;
   margin: 0 auto;
   width: 70%;
-  min-width: 750px;
+  min-width: 1000px;
   box-shadow: var(--shadow);
 }
 .gradesTabs {
   position: relative;
   display: flex;
   width: 75%;
+  min-width: 750px;
   border-bottom: 1px solid #ccc;
   margin-bottom: 2rem;
   padding-bottom: 1rem;

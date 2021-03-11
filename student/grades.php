@@ -24,7 +24,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
 
 ?>
 
-<main clas="gradesContainer">
+<main>
   <div class="gradesPanel">
     <div class="gradesTabs">
       <h2 class="tabHeader active">Oceny częściowe</h2>

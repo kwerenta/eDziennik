@@ -15,12 +15,16 @@ $conn = connectToDB();
 
 $latestGrades = [];
 
-$sql = "SELECT * FROM grades WHERE `student_id` = {$_SESSION['user']['id']} ORDER BY `date` DESC LIMIT 8";
+$sql = "SELECT `grade`,`subject_id`,`category_id`,`date` FROM grades WHERE `student_id` = {$_SESSION['user']['id']} ORDER BY `date` DESC LIMIT 8";
 $query = mysqli_query($conn, $sql);
 
 while (($row = mysqli_fetch_array($query)) !== null) {
   $latestGrades[] = $row;
 }
+
+$sql = "SELECT `date`,`teacher_id`,`description`,`points` FROM notes WHERE `student_id` = {$_SESSION['user']['id']} ORDER BY `date` DESC LIMIT 1";
+$query = mysqli_query($conn, $sql);
+if ($query) $latestNote = mysqli_fetch_array($query);
 
 ?>
 
@@ -54,12 +58,13 @@ while (($row = mysqli_fetch_array($query)) !== null) {
       foreach ($latestGrades as $grade) {
         $subject = $_SESSION['subjects'][$grade['subject_id'] - 1];
         $category = $_SESSION['categories'][$grade['category_id'] - 1];
+        $date = date('d.m.Y', strtotime($grade['date']));
         echo <<<HTML
           <div class="latestGradesItem">
             <h4>{$subject['name']}</h4>
             <h3>{$grade['grade']}</h3>
             <p>{$category['name']}</p>
-            <p>{$grade['date']}</p>
+            <p>{$date}</p>
           </div>
           HTML;
       }
@@ -69,15 +74,30 @@ while (($row = mysqli_fetch_array($query)) !== null) {
 
   <div class="rightPanel">
     <div class="latestNote">
-      <div class="latestNoteRow">
-        <h2>Ostatnia uwaga</h2>
-        <p>02.03.2021</p>
-      </div>
-      <div class="latestNoteRow">
-        <h3>Fajny Nauczyciel</h3>
-        <h2>+150</h2>
-      </div>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis tempore doloremque fugiat laborum accusantium? Dicta, vitae. Excepturi dolorum debitis aut aperiam accusamus tempore. Molestiae quae earum eos nihil nostrum. Excepturi?</p>
+      <?php
+      if (isset($latestNote)) {
+        if ($latestNote['points'] <= 0) $sign = "";
+        else $sign = "+";
+        $date = date('d.m.Y', strtotime($latestNote['date']));
+        echo <<<HTML
+        <div class="latestNoteRow">
+          <h2>Ostatnia uwaga</h2>
+          <p>{$date}</p>
+        </div>
+        <div class="latestNoteRow">
+          <h3>{$latestNote['teacher_id']}</h3>
+          <h2>{$sign}{$latestNote['points']}</h2>
+        </div>
+        <p>{$latestNote['description']}</p>
+        HTML;
+      } else {
+        echo <<<HTML
+        <div class="latestNoteRow">
+          <h2>Brak uwag</h2>
+        </div>
+        HTML;
+      }
+      ?>
     </div>
     <div class="shortTimetable">
       <h2>Plan lekcji</h2>
