@@ -16,7 +16,9 @@ $conn = connectToDB();
 $sql = "SELECT * FROM notes WHERE `student_id` = {$_SESSION['user']['id']}";
 $query = mysqli_query($conn, $sql);
 
+$sum = 0;
 while (($row = mysqli_fetch_array($query)) !== null) {
+  $sum += $row['points'];
   $notes[] = $row;
 }
 
@@ -24,6 +26,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
 
 <main>
   <div class="notesPanel">
+    <h1>Suma punktów: <?php echo $sum ?></h1>
     <div class="notesList">
       <?php
       foreach ($notes as $note) {
@@ -31,23 +34,23 @@ while (($row = mysqli_fetch_array($query)) !== null) {
         else $sign = "+";
 
         echo <<<HTML
-      <div class="notesItem">
-        <div class="notesRowTitle">
-          <h2>{$sign}{$note['points']}</h2>
-          <h3>{$note['date']}</h3>
-        </div>
-        <div class="notesData">
-          <div class="grade">
-            <h4>Nauczyciel</h4>
-            <p>{$note['teacher_id']}</p>
+        <div class="notesItem">
+          <div class="notesRowTitle">
+            <h2>{$sign}{$note['points']}</h2>
+            <h3>{$note['date']}</h3>
           </div>
-          <div class="description">
-            <h4>Opis</h4>
-            <p>{$note['description']}</p>
+          <div class="notesData">
+            <div class="grade">
+              <h4>Nauczyciel</h4>
+              <p>{$note['teacher_id']}</p>
+            </div>
+            <div class="description">
+              <h4>Opis</h4>
+              <p>{$note['description']}</p>
+            </div>
           </div>
         </div>
-      </div>
-      HTML;
+        HTML;
       }
       ?>
     </div>

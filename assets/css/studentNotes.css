@@ -16,6 +16,10 @@
 .notesItem {
   margin: 0 1rem 2rem;
 }
+.notesItem:first-child {
+  padding-top: 2rem;
+  border-top: 3px solid #ccc;
+}
 .notesRowTitle {
   display: flex;
   justify-content: space-between;
