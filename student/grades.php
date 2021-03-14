@@ -25,22 +25,22 @@ while (($row = mysqli_fetch_array($query)) !== null) {
 ?>
 
 <main>
-  <div class="gradesPanel">
-    <div class="gradesTabs">
-      <h2 class="tabHeader active">Oceny częściowe</h2>
-      <h2 class="tabHeader">Oceny szczgółowo</h2>
-      <h2 class="tabHeader">Podsumowanie Ocen</h2>
-      <div class="activeBar"></div>
+  <div class="studentContainer studentContainer--grades">
+    <div class="studentContainer__tabs">
+      <h2 class="studentContainer__tabHeader studentContainer__tabHeader--active">Oceny częściowe</h2>
+      <h2 class="studentContainer__tabHeader">Oceny szczgółowo</h2>
+      <h2 class="studentContainer__tabHeader">Podsumowanie Ocen</h2>
+      <div class="studentContainer__activeBar"></div>
     </div>
-    <div class="gradesList">
-      <div class="subjectItem">
-        <h2 class="header">Przedmiot</h2>
-        <h2 class="header">Oceny</h2>
+    <div class="studentContainer__gradesList">
+      <div class="studentContainer__item studentContainer__item--subject">
+        <h2 class="studentContainer__header">Przedmiot</h2>
+        <h2 class="studentContainer__header">Oceny</h2>
       </div>
       <?php
       foreach ($grades as $index => $subjects) {
         $subject = $_SESSION['subjects'][$index - 1];
-        echo "<div class='subjectItem'><h2>{$subject['name']}</h2><p>";
+        echo "<div class='studentContainer__item studentContainer__item--subject'><h2>{$subject['name']}</h2><p>";
 
         foreach ($subjects as $index => $grade) {
           echo $grade['grade'];
@@ -51,29 +51,29 @@ while (($row = mysqli_fetch_array($query)) !== null) {
       }
       ?>
     </div>
-    <div class="detailedGradesList">
+    <div class="studentContainer__detailedGradesList">
       <?php
       foreach ($grades as $index => $subjects) {
         $subject = $_SESSION['subjects'][$index - 1];
-        echo "<div class='detailedSubjectItem'><h2>{$subject['name']}</h2>";
+        echo "<div class='studentContainer__item--detailedSubject'><h2>{$subject['name']}</h2>";
 
         foreach ($subjects as $grade) {
           $category = $_SESSION['categories'][$grade['category_id'] - 1];
           echo <<<HTML
-          <div class="detailedGradeItem">
-            <div class="grade">
+          <div class="studentContainer__item--detailedGrade">
+            <div>
               <h4>Ocena</h4>
               <p>{$grade['grade']}</p>
             </div>
-            <div class="description">
+            <div>
               <h4>Opis</h4>
               <p>{$grade['description']}</p>
             </div>
-            <div class="category">
+            <div>
               <h4>Kategoria (waga)</h4>
               <p>{$category['name']} ({$category['weight']})</p>
             </div>
-            <div class="created">
+            <div>
               <h4>Wystawiona</h4>
               <p>{$grade['teacher_id']}, {$grade['date']}</p>
             </div>
@@ -84,8 +84,8 @@ while (($row = mysqli_fetch_array($query)) !== null) {
       }
       ?>
     </div>
-    <div class="gradesSummary">
-      <div class="summaryItem">
+    <div class="studentContainer__gradesSummary">
+      <div class="studentContainer__item--summary">
         <h2>Przedmiot</h2>
         <h2>Średnia</h2>
       </div>
@@ -97,7 +97,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
           $sum += $grade['grade'];
         }
         $average = $sum / count($subjects);
-        echo "<div class='summaryItem'><h2>{$subject['name']}</h2><p>{$average}</p></div>";
+        echo "<div class='studentContainer__item--summary'><h2>{$subject['name']}</h2><p>{$average}</p></div>";
       }
       ?>
     </div>

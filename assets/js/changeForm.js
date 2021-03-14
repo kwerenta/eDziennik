@@ -1,11 +1,10 @@
-const changeForm = document.querySelector(".changeFormButton");
-const nextTab = document.querySelector(".signButton.next");
-const prevTab = document.querySelector(".signButton.prev");
+const nextTab = document.querySelector(".form__button--next");
+const prevTab = document.querySelector(".form__button--prev");
 
-const personalInputs = document.querySelectorAll(".personalData > input");
+const personalInputs = document.querySelectorAll(".form__tab--personal > input");
 
-const changeFormText = document.querySelector(".changeFormText > p");
-const changeFormButton = document.querySelector(".changeFormButton");
+const changeFormText = document.querySelector(".form__changeForm > p");
+const changeFormButton = document.querySelector(".form__textButton--changeForm");
 const cssVariables = document.documentElement;
 
 const changeText = () => {
@@ -19,14 +18,14 @@ const changeText = () => {
 };
 
 const tl = gsap.timeline({ paused: true });
-tl.to([".signInForm", ".changeFormText"], { clipPath: "inset(0% 100%)", duration: 0.25 })
-  .set(".signInForm", { display: "none" }, ">")
-  .set(".signUpForm", { display: "flex" })
-  .to([".signUpForm", ".changeFormText"], { clipPath: "inset(0% 0%)", duration: 0.25 });
+tl.to([".form--signin", ".form__changeForm"], { clipPath: "inset(0% 100%)", duration: 0.25 })
+  .set(".form--signin", { display: "none" }, ">")
+  .set(".form--signup", { display: "flex" })
+  .to([".form--signup", ".form__changeForm"], { clipPath: "inset(0% 0%)", duration: 0.25 });
 
-changeForm.addEventListener("click", () => {
+changeFormButton.addEventListener("click", () => {
   let color = "";
-  const formError = document.querySelector(".formError");
+  const formError = document.querySelector(".form__error");
 
   if (cssVariables.style.getPropertyValue("--bg-color") == "var(--secondary-bg-color)") {
     color = "--primary-bg-color";
@@ -38,17 +37,17 @@ changeForm.addEventListener("click", () => {
 
   setTimeout(() => {
     changeText();
-    formError && formError.remove();
+    formError?.remove();
   }, 300);
   cssVariables.style.setProperty("--bg-color", `var(${color})`);
 });
 
 const timeline = gsap.timeline({ paused: true });
 timeline
-  .to(".personalData", { clipPath: "inset(0% 100%)", duration: 0.25 })
-  .set(".personalData", { display: "none" }, ">")
-  .set(".loginData", { display: "flex" })
-  .to(".loginData", { clipPath: "inset(0% 0%)", duration: 0.25 });
+  .to(".form__tab--personal", { clipPath: "inset(0% 100%)", duration: 0.25 })
+  .set(".form__tab--personal", { display: "none" }, ">")
+  .set(".form__tab--login", { display: "flex" })
+  .to(".form__tab--login", { clipPath: "inset(0% 0%)", duration: 0.25 });
 
 nextTab.addEventListener("click", () => {
   let isEmpty = false;

@@ -8,13 +8,13 @@
   width: 1000px;
   margin: 0 auto;
 }
-.logo {
+.startContainer__logo {
   margin-top: 5rem;
   font-size: 2.5rem;
   color: var(--accent-color);
 }
 .form,
-.formTab {
+.form__tab {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,12 +36,13 @@
 .form input::placeholder {
   color: var(--font-color);
 }
-.signUpForm,
-.loginData {
+.form--signup,
+.form__tab--login {
   display: none;
   clip-path: inset(0% 100%);
 }
-.signButton {
+.form__submit,
+.form__button {
   margin: 3rem 0 1rem;
   padding: 1rem 3rem;
   font-size: 1.5rem;
@@ -54,52 +55,48 @@
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-.signup {
+.form__submit--signup {
   margin: 0;
 }
-.next,
-.prev {
+.form__button {
   background-color: transparent;
   border: 3px solid #fff;
 }
-.signButton:hover {
+.form__submit:hover {
   background-color: var(--accent-color);
   color: #fff;
   box-shadow: var(--shadow);
 }
 
-.next:hover,
-.prev:hover {
+.form__button:hover {
   background-color: #fff;
   color: #000;
 }
 
-.changeFormText {
+.form__changeForm {
   text-align: center;
   margin-bottom: 5rem;
   transition: opacity 0.5s;
 }
-.startImage {
+.startContainer__image > img {
   width: 300px;
 }
-.rightFormImage,
-.leftFormImage {
+.startContainer__image {
   position: absolute;
   bottom: 40px;
 }
-.leftFormImage {
+.startContainer__image--left {
   left: 0;
 }
-.rightFormImage {
+.startContainer__image--right {
   right: 0;
 }
-.changeFormButton,
-.noPassword {
+.form__textButton {
   font-weight: 700;
   color: var(--font-color);
   cursor: pointer;
 }
-.formError {
+.form__error {
   color: #fff;
   background-color: #f44336;
   padding: 1rem 2rem;

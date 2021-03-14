@@ -1,5 +1,5 @@
 window.onload = () => {
-  const clock = document.querySelector(".clock");
+  const clock = document.querySelector(".navbar__clock");
 
   const timeString = clock.innerText;
   const hoursString = timeString.substr(0, 2);

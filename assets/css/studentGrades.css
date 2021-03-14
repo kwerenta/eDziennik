@@ -1,4 +1,4 @@
-.gradesPanel {
+.studentContainer--grades {
   background-color: var(--tile-color);
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
   min-width: 1000px;
   box-shadow: var(--shadow);
 }
-.gradesTabs {
+.studentContainer__tabs {
   position: relative;
   display: flex;
   width: 75%;
@@ -19,16 +19,16 @@
   margin-bottom: 2rem;
   padding-bottom: 1rem;
 }
-.tabHeader {
+.studentContainer__tabHeader {
   text-align: center;
   width: 33.3%;
   cursor: pointer;
 }
-.active {
+.studentContainer__tabHeader--active {
   color: var(--accent-color);
   transition: color 1s;
 }
-.activeBar {
+.studentContainer__activeBar {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -37,26 +37,26 @@
   background: var(--accent-color);
   border-radius: 1rem;
 }
-.gradesList {
+.studentContainer__gradesList {
   width: 100%;
 }
 
-.subjectItem > h2,
-.subjectItem > .header:first-child {
+.studentContainer__item--subject > h2,
+.studentContainer__item--subject > .studentContainer__header:first-child {
   flex: 1;
   padding-right: 2rem;
 }
-.subjectItem > p,
-.subjectItem > .header:last-child {
+.studentContainer__item--subject > p,
+.studentContainer__item--subject > .studentContainer__header:last-child {
   flex: 3;
 }
-.subjectItem:first-child,
-.summaryItem:first-child {
+.studentContainer__item--subject:first-child,
+.studentContainer__item--summary:first-child {
   border-bottom: 3px solid #ccc;
   margin-bottom: 2rem;
 }
-.subjectItem,
-.summaryItem {
+.studentContainer__item--subject,
+.studentContainer__item--summary {
   width: 100%;
   display: flex;
   align-items: center;
@@ -64,32 +64,32 @@
   margin-bottom: 1.5rem;
   border-bottom: 1px solid #ccc;
 }
-.summaryItem > * {
+.studentContainer__item--summary > * {
   flex: 1;
 }
-.detailedGradesList,
-.gradesSummary {
+.studentContainer__detailedGradesList,
+.studentContainer__gradesSummary {
   display: none;
   width: 100%;
 }
-.detailedSubjectItem {
+.studentContainer__item--detailedSubject {
   margin: 0.5rem 0 3rem 0;
   width: 100%;
 }
-.detailedGradeItem {
+.studentContainer__item--detailedGrade {
   margin: 0 1rem 1rem;
 }
-.detailedGradeItem > div:last-child {
+.studentContainer__item--detailedGrade > div:last-child {
   border-bottom: 3px solid #ccc;
 }
-.detailedGradeItem > div {
+.studentContainer__item--detailedGrade > div {
   display: flex;
   padding: 1rem;
   border-bottom: 1px solid #ccc;
 }
-.detailedGradeItem > div > h4 {
+.studentContainer__item--detailedGrade > div > h4 {
   flex: 1;
 }
-.detailedGradeItem > div > p {
+.studentContainer__item--detailedGrade > div > p {
   flex: 3;
 }

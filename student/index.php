@@ -29,26 +29,26 @@ if ($query) $latestNote = mysqli_fetch_array($query);
 ?>
 
 
-<main class="dashboardContainer">
-  <div class="leftPanel">
-    <div class="simpleInfo">
-      <div class="dashboardTile">
+<main class="studentDashboard">
+  <div class="studentDashboard__panel studentDashboard__panel--left">
+    <div class="studentDashboard__basicInfo">
+      <div class="studentDashboard__tile">
         <h2>Witaj, <?php echo "{$_SESSION['user']['first_name']} {$_SESSION['user']['last_name']}!" ?></h2>
         <p>Jesteś w klasie <?php echo $_SESSION["user"]["class"] ?>.</p>
       </div>
-      <div class="dashboardTile">
+      <div class="studentDashboard__tile">
         <h2>Najbliższy dzień wolny</h2>
         <p>Wielkanoc</p>
       </div>
-      <div class="dashboardTile">
+      <div class="studentDashboard__tile">
         <h2>Szczęśliwy numer</h2>
         <p><?php echo rand(1, 31) ?></p>
       </div>
     </div>
 
-    <div class="latestGrades">
+    <div class="studentDashboard__latestGrades">
       <h2>Ostatnie oceny</h2>
-      <div class="latestGradesItem">
+      <div class="studentDashboard__latestGradesItem">
         <h2>Przedmiot</h2>
         <h2>Ocena</h2>
         <h2>Kategoria</h2>
@@ -60,7 +60,7 @@ if ($query) $latestNote = mysqli_fetch_array($query);
         $category = $_SESSION['categories'][$grade['category_id'] - 1];
         $date = date('d.m.Y', strtotime($grade['date']));
         echo <<<HTML
-          <div class="latestGradesItem">
+          <div class="studentDashboard__latestGradesItem">
             <h4>{$subject['name']}</h4>
             <h3>{$grade['grade']}</h3>
             <p>{$category['name']}</p>
@@ -72,19 +72,19 @@ if ($query) $latestNote = mysqli_fetch_array($query);
     </div>
   </div>
 
-  <div class="rightPanel">
-    <div class="latestNote">
+  <div class="studentDashboard__panel studentDashboard__panel--right">
+    <div class="studentDashboard__latestNote">
       <?php
       if (isset($latestNote)) {
         if ($latestNote['points'] <= 0) $sign = "";
         else $sign = "+";
         $date = date('d.m.Y', strtotime($latestNote['date']));
         echo <<<HTML
-        <div class="latestNoteRow">
+        <div class="studentDashboard__latestNoteRow">
           <h2>Ostatnia uwaga</h2>
           <p>{$date}</p>
         </div>
-        <div class="latestNoteRow">
+        <div class="studentDashboard__latestNoteRow">
           <h3>{$latestNote['teacher_id']}</h3>
           <h2>{$sign}{$latestNote['points']}</h2>
         </div>
@@ -92,16 +92,16 @@ if ($query) $latestNote = mysqli_fetch_array($query);
         HTML;
       } else {
         echo <<<HTML
-        <div class="latestNoteRow">
+        <div class="studentDashboard__latestNoteRow">
           <h2>Brak uwag</h2>
         </div>
         HTML;
       }
       ?>
     </div>
-    <div class="shortTimetable">
+    <div class="studentDashboard__shortTimetable">
       <h2>Plan lekcji</h2>
-      <ol class="shortTimetableList">
+      <ol class="studentDashboard__shortTimetableList">
         <li>W-F</li>
         <li>GKiAI</li>
         <li>Matematyka</li>

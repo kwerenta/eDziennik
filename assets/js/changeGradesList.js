@@ -1,11 +1,11 @@
-const tabHeaders = document.querySelectorAll(".tabHeader");
+const tabHeaders = document.querySelectorAll(".studentContainer__tabHeader");
 
 const changeHeader = index => {
   const left = index * 50;
-  const gradesPanel = document.querySelector(".gradesPanel");
+  const gradesPanel = document.querySelector(".studentContainer--grades");
   const panelChildren = gradesPanel.querySelectorAll(`:scope > div:not(:first-child)`);
 
-  gsap.to(".activeBar", { left: `${left}%`, x: `-${left}%` });
+  gsap.to(".studentContainer__activeBar", { left: `${left}%`, x: `-${left}%` });
   tabHeaders.forEach(header => header.classList.remove("active"));
   tabHeaders[index].classList.add("active");
 

@@ -1,4 +1,4 @@
-.notesPanel {
+.studentContainer--notes {
   background-color: var(--tile-color);
   display: flex;
   flex-direction: column;
@@ -10,31 +10,31 @@
   min-width: 1000px;
   box-shadow: var(--shadow);
 }
-.notesList {
+.notes__list {
   width: 100%;
 }
-.notesItem {
+.notes__item {
   margin: 0 1rem 2rem;
 }
-.notesItem:first-child {
+.notes__item:first-child {
   padding-top: 2rem;
   border-top: 3px solid #ccc;
 }
-.notesRowTitle {
+.notes__title {
   display: flex;
   justify-content: space-between;
 }
-.notesData > div:last-child {
+.notes__data > div:last-child {
   border-bottom: 3px solid #ccc;
 }
-.notesData > div {
+.notes__data > div {
   display: flex;
   padding: 1rem;
   border-bottom: 1px solid #ccc;
 }
-.notesData > div > h4 {
+.notes__data > div > h4 {
   flex: 1;
 }
-.notesData > div > p {
+.notes__data > div > p {
   flex: 3;
 }
