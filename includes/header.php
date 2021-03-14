@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Kamil Wenta">
   <meta name="description" content="Prosty eDziennik do zastosowań lokalnych">
-  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/navbar.css">
   <?php
   foreach ($styles as $style) {
     echo '<link rel="stylesheet" href="/assets/css/' . $style . '.css">';

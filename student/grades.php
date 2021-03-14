@@ -4,7 +4,7 @@ require '../functions/isLoggedIn.php';
 require '../db.php';
 require '../view.php';
 $header = new View('header');
-$header->allocate('styles', ['navbar', 'studentGrades']);
+$header->allocate('styles', ['student']);
 $header->allocate('scripts', ['clock', 'changeGradesList', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js']);
 $header->render();
 

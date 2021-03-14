@@ -3,7 +3,7 @@ session_start();
 require '../functions/isLoggedIn.php';
 require '../view.php';
 $header = new View('header');
-$header->allocate('styles', ['navbar', 'studentNotes']);
+$header->allocate('styles', ['student']);
 $header->allocate('scripts', ['clock']);
 $header->render();
 
