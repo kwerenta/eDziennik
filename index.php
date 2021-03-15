@@ -9,7 +9,6 @@ if (isset($_SESSION["user"])) {
 require 'view.php';
 
 $header = new View('header');
-$header->allocate('styles', ['forms']);
 $header->allocate('scripts', ['https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js', 'changeForm']);
 $header->render();
 

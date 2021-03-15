@@ -1,0 +1,51 @@
+.adminDashboard {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 5rem);
+  &__panel{
+    display: flex;
+    width: 100%;
+    min-width: 850px;
+    &--bottom { 
+      height: 100%;
+      margin-top: 2rem;
+      background: var(--tile-color);
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+
+      &>div:nth-child(2) {
+        margin: 1rem 0;
+        border-bottom: 3px solid #ccc;
+      }
+    }
+  }
+  &__tile {
+    background: var(--tile-color);
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    flex:1;
+    height: 12rem;
+    & > h1 {
+      font-size: 4rem;
+    }
+    &:nth-child(2) {
+      margin: 0 2rem;
+    }
+  }
+
+  &__latestUsersItem {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    text-align: center;
+    padding: .75rem 0;
+    border-bottom: 1px solid #ccc;
+    & > * {
+      width: 25%;
+    }
+  }
+}

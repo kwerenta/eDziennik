@@ -8,11 +8,14 @@
   <meta name="author" content="Kamil Wenta">
   <meta name="description" content="Prosty eDziennik do zastosowań lokalnych">
   <link rel="stylesheet" href="/assets/css/main.css">
-  <link rel="stylesheet" href="/assets/css/navbar.css">
+
   <?php
-  foreach ($styles as $style) {
-    echo '<link rel="stylesheet" href="/assets/css/' . $style . '.css">';
-  }
+
+  if (isset($_SESSION['user']['rank'])) {
+    echo "<link rel='stylesheet' href='/assets/css/{$_SESSION['user']['rank']}.css'>";
+    echo "<link rel='stylesheet' href='/assets/css/navbar.css'>";
+  } else echo "<link rel='stylesheet' href='/assets/css/forms.css'>";
+
   foreach ($scripts as $script) {
     if (strpos($script, "http") !== 0) {
       echo '<script defer src="/assets/js/' . $script . '.js"></script>';

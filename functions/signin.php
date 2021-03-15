@@ -22,7 +22,7 @@ if ($user && password_verify($_POST['password'], $user['password'])) {
   if ($query) {
     $data = mysqli_fetch_array($query);
     $data['rank'] = $rank;
-    $data['id'] = intval($data['id']);
+    if (isset($data['id'])) $data['id'] = intval($data['id']);
     $_SESSION['user'] = $data;
 
     $sql = "SELECT * FROM subjects";
