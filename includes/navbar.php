@@ -42,7 +42,7 @@
 <div class="navbar__topbar">
   <h1 class="navbar__title">
     <?php
-    switch ($_SERVER["SCRIPT_FILENAME"]) {
+    switch (basename($_SERVER["SCRIPT_FILENAME"])) {
       case 'grades.php':
         $title = "Oceny";
         break;
