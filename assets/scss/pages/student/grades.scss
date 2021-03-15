@@ -1,0 +1,106 @@
+.grades {
+  &__tabs {
+    position: relative;
+    display: flex;
+    width: 75%;
+    min-width: 750px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+  }
+  &__tabHeader {
+    text-align: center;
+    width: 33.3%;
+    cursor: pointer;
+
+    &--active {
+      color: var(--accent-color);
+      transition: color .5s;
+    }
+  }
+
+  &__activeBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: calc(33%);
+    height: 0.5rem;
+    background: var(--accent-color);
+    border-radius: 1rem;
+  }
+
+  &__gradesList {
+    width: 100%;
+  }
+
+  &__detailedGradesList,
+  &__gradesSummary {
+    display: none;
+    width: 100%;
+  }
+
+  &__item {
+    &--subject {
+      &:not(:first-child) {
+        padding-left: 1rem;
+      }
+
+      & > h2,
+      & > .grades__header:first-child {
+        flex: 1;
+        padding-right: 2rem;
+      }
+
+      & > p,
+      & > .grades__header:last-child {
+        flex: 3;
+      }
+    }
+
+    &--detailedSubject {
+      margin: 0.5rem 0 3rem 0;
+      width: 100%;
+    }
+
+    &--detailedGrade {
+      margin: 0 1rem 1rem;
+      & > div {
+        display: flex;
+        padding: 1rem;
+        border-bottom: 1px solid #ccc;
+
+        &:last-child {
+          border-bottom: 3px solid #ccc;
+        }
+        & > h4 {
+          flex: 1;
+        }
+        & > p {
+          flex: 3;
+        }
+      }
+    }
+
+    &--subject,
+    &--summary {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #ccc;
+
+      &:first-child {
+        border-bottom: 3px solid #ccc;
+        margin-bottom: 2rem;
+      }
+      &:not(:first-child) {
+        padding-left: 1rem;
+      }
+    }
+
+    &--summary > * {
+      flex: 1;
+    }
+  }
+}

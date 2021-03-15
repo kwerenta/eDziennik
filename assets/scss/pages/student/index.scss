@@ -1,0 +1,89 @@
+.studentDashboard {
+  display: flex;
+  height: calc(100% - 5rem);
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &--left {
+      flex: 2;
+      margin-right: 2rem;
+      min-width: 650px;
+    }
+    &--right {
+      min-width: 325px;
+      flex: 1;
+    }
+  }
+
+  &__tile,
+  &__shortTimetable,
+  &__latestGrades,
+  &__latestNote {
+    background: var(--tile-color);
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+  }
+  &__basicInfo {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__tile {
+    flex: 1;
+    height: 8rem;
+
+    &:first-child {
+      flex: 100%;
+      margin-bottom: 2rem;
+    }
+    &:last-child {
+      margin-left: 2rem;
+    }
+  }
+
+  &__latestGrades {
+    width: 100%;
+    height: 100%;
+    margin-top: 2rem;
+    & > h2 {
+      margin-bottom: 0.5rem;
+    }
+  }
+  &__latestGradesItem {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ccc;
+
+    &:nth-child(2) {
+      margin-bottom: 1.5rem;
+      border-bottom: 3px solid #ccc;
+    }
+    & > * {
+      width: 25%;
+    }
+  }
+
+  &__latestNote {
+    height: 50%;
+    margin-bottom: 2rem;
+  }
+  &__latestNoteRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__shortTimetable {
+    height: 50%;
+  }
+  &__shortTimetableList {
+    margin-left: 2rem;
+  }
+}
