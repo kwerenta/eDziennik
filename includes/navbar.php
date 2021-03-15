@@ -62,14 +62,7 @@
   </h1>
   <h1 class="navbar__clock">
     <?php
-    $date = getDate();
-    if (strlen($date["hours"]) === 1) $hours = "0" . $date["hours"];
-    else $hours = $date["hours"];
-    if (strlen($date["minutes"]) === 1) $minutes = "0" . $date["minutes"];
-    else $minutes = $date["minutes"];
-    if (strlen($date["seconds"]) === 1) $seconds = "0" . $date["seconds"];
-    else $seconds = $date["seconds"];
-    echo $hours . ":" . $minutes . ":" . $seconds;
+    echo date('H:i:s');
     ?>
   </h1>
 </div>
