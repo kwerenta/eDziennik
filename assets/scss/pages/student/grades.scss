@@ -1,34 +1,4 @@
 .grades {
-  &__tabs {
-    position: relative;
-    display: flex;
-    width: 75%;
-    min-width: 750px;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-  }
-  &__tabHeader {
-    text-align: center;
-    width: 33.3%;
-    cursor: pointer;
-
-    &--active {
-      color: var(--accent-color);
-      transition: color .5s;
-    }
-  }
-
-  &__activeBar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: calc(33%);
-    height: 0.5rem;
-    background: var(--accent-color);
-    border-radius: 1rem;
-  }
-
   &__gradesList {
     width: 100%;
   }

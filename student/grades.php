@@ -4,7 +4,7 @@ require '../functions/isLoggedIn.php';
 require '../db.php';
 require '../view.php';
 $header = new View('header');
-$header->allocate('scripts', ['clock', 'changeGradesList', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js']);
+$header->allocate('scripts', ['clock', 'changeList', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js']);
 $header->render();
 
 $navbar = new View('navbar');
@@ -25,11 +25,11 @@ while (($row = mysqli_fetch_array($query)) !== null) {
 
 <main>
   <div class="studentContainer studentContainer--grades">
-    <div class="grades__tabs">
-      <h2 class="grades__tabHeader grades__tabHeader--active">Oceny częściowe</h2>
-      <h2 class="grades__tabHeader">Oceny szczgółowo</h2>
-      <h2 class="grades__tabHeader">Podsumowanie Ocen</h2>
-      <div class="grades__activeBar"></div>
+    <div class="menu__tabs">
+      <h2 class="menu__tabHeader menu__tabHeader--active">Oceny częściowe</h2>
+      <h2 class="menu__tabHeader">Oceny szczgółowo</h2>
+      <h2 class="menu__tabHeader">Podsumowanie Ocen</h2>
+      <div class="menu__activeBar"></div>
     </div>
     <div class="grades__gradesList">
       <div class="grades__item grades__item--subject">
