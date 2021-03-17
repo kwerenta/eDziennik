@@ -1,8 +1,13 @@
 const nextTab = document.querySelector(".form__button--next");
 const prevTab = document.querySelector(".form__button--prev");
 
-const personalInputs = document.querySelectorAll(".form__tab--personal > input");
+const personalTab = document.querySelector(".form__tab--personal");
+const personalInputs = document.querySelectorAll(".form__tab--personal > input:not([name='phone'])");
+const accountType = document.querySelector(".form__tab--personal > select[name='type']");
+const phoneInput = document.querySelector(".form__tab--personal > input[name='phone']");
+const classInput = document.querySelector(".form__tab--personal > select[name='class']");
 
+const signupButton = document.querySelector(".form__submit--signup");
 const changeFormText = document.querySelector(".form__changeForm > p");
 const changeFormButton = document.querySelector(".form__textButton--changeForm");
 const cssVariables = document.documentElement;
@@ -51,12 +56,26 @@ timeline
 
 nextTab.addEventListener("click", () => {
   let isEmpty = false;
-  personalInputs.forEach(input => {
-    if (input.value === "") isEmpty = true;
+  const inputsArray = Array.from(personalInputs);
+  inputsArray.push(accountType.value === "student" ? classInput : phoneInput);
+
+  inputsArray.forEach(input => {
+    if (!input.value) {
+      isEmpty = true;
+      input.classList.add("error");
+    } else {
+      input.classList.remove("error");
+    }
   });
+
   if (!isEmpty) timeline.play();
 });
 
 prevTab.addEventListener("click", () => {
   timeline.reverse();
+});
+
+accountType.addEventListener("change", e => {
+  phoneInput.style.display = e.target.value === "student" ? "none" : "block";
+  classInput.style.display = e.target.value === "student" ? "block" : "none";
 });

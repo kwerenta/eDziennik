@@ -3,11 +3,12 @@
     <h1>eDziennik</h1>
   </div>
   <form class="form form--signin" action="../functions/signin.php" method="post">
-    <?php if (isset($_SESSION['signinErrors'])) {
+
+    <?php if (isset($_SESSION['formErrors'])) {
       echo <<<HTML
-      <div class="form__error">{$_SESSION['signinErrors']}</div>
+      <div class="form__error">{$_SESSION['formErrors']}</div>
       HTML;
-      unset($_SESSION['signinErrors']);
+      unset($_SESSION['formErrors']);
     } ?>
     <input type="text" name="email" autocomplete="email" placeholder="E-mail" required>
     <input type="password" name="password" autocomplete="current-password" placeholder="Hasło" required>
@@ -17,9 +18,26 @@
 
   <form class="form form--signup" action="../functions/signup.php" method="post">
     <div class="form__tab form__tab--personal">
+      <select name="type">
+        <option value="student" selected>Uczeń</option>
+        <option value="teacher">Nauczyciel</option>
+      </select>
       <input type="text" name="firstName" autocomplete="given-name" placeholder="Imię">
       <input type="text" name="lastName" autocomplete="family-name" placeholder="Nazwisko">
-      <input type="tel" name="class" autocomplete="off" placeholder="Klasa">
+      <select name="class">
+        <option value="" selected disabled hidden>Klasa</option>
+        <?php
+        $letters = ['A', 'B', 'C', 'D'];
+        $numbers = ['1', '2', '3', '4'];
+        foreach ($numbers as $number) {
+          foreach ($letters as $letter) {
+            $class = $number . $letter;
+            echo "<option value='{$class}'>{$class}</option>";
+          }
+        }
+        ?>
+      </select>
+      <input type="text" name="phone" autocomplete="tel" placeholder="Numer telefonu">
       <button class="form__button form__button--next" type="button">Przejdź dalej</button>
     </div>
     <div class="form__tab form__tab--login">

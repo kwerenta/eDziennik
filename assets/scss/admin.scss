@@ -1,4 +1,4 @@
-@import 'pages/admin/index';
+@import "pages/admin/index";
 
 .adminContainer {
   background-color: var(--tile-color);
@@ -11,5 +11,5 @@
   width: 70%;
   min-width: 1000px;
   box-shadow: var(--shadow);
-  @import 'pages/admin/users';
+  @import "pages/admin/users";
 }

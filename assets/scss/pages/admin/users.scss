@@ -1,23 +1,24 @@
-.users{
-    &__list {
-      width: 100%;
-      &--teachers,&--admins {
-        display: none;
-      }
+.users {
+  &__list {
+    width: 100%;
+    &--teachers,
+    &--admins {
+      display: none;
     }
-    &__item {
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
-      text-align: center;
-      padding: .75rem 0;
-      border-bottom: 1px solid #ccc;
-      & > * {
-        width: 33%;
-      }
-      &:not(:first-child):hover{
-        cursor: pointer;
-        background:  #ccc;
-      }
+  }
+  &__item {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    text-align: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #ccc;
+    & > * {
+      width: 33%;
     }
+    &:not(:first-child):hover {
+      cursor: pointer;
+      background: #ccc;
+    }
+  }
 }

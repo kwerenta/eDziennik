@@ -26,7 +26,8 @@
     clip-path: inset(-30% 0%);
   }
 
-  & input {
+  & input,
+  & select {
     background-color: var(--background-color);
     padding: 1rem 2rem;
     border: 1px solid var(--font-color);
@@ -36,10 +37,17 @@
     margin-bottom: 1rem;
     outline: none;
     transition: background 1s;
+    width: 100%;
 
     &::placeholder {
-      color: var(--font-color);
+      color: #4f4f4f;
     }
+  }
+  & .error {
+    border: 1px solid #f44336;
+  }
+  & input[name="phone"] {
+    display: none;
   }
 
   &--signup,

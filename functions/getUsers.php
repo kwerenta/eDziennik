@@ -1,15 +1,15 @@
 <?php
 function getUsers($amount = 0)
 {
-  require '../db.php';
+  require_once '../db.php';
   $conn = connectToDB();
 
-  if ($amount > 0) $amount = "ORDER BY `id` LIMIT {$amount}";
+  if ($amount > 0) $amount = "ORDER BY `id` DESC LIMIT {$amount}";
   else $amount = "";
 
   $sql = "SELECT `id`,`email` FROM users {$amount}";
   $query = mysqli_query($conn, $sql);
-  while (($row = mysqli_fetch_array($query)) !== null) {
+  while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
     $users[] = $row;
   }
   foreach ($users as $index => $user) {

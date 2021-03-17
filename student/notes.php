@@ -32,6 +32,10 @@ while (($row = mysqli_fetch_array($query)) !== null) {
         if ($note['points'] <= 0) $sign = "";
         else $sign = "+";
 
+        $idColumn = array_column($_SESSION['teachers'], 'id');
+        $teacherIndex = array_search($grade['teacher_id'], $idColumn);
+        $teacher = $_SESSION['teachers'][$teacherIndex];
+
         echo <<<HTML
         <div class="notes__item">
           <div class="notes__title">
@@ -41,7 +45,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
           <div class="notes__data">
             <div>
               <h4>Nauczyciel</h4>
-              <p>{$note['teacher_id']}</p>
+              <p>{$teacher['first_name']} {$teacher['last_name']}</p>
             </div>
             <div>
               <h4>Opis</h4>

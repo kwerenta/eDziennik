@@ -58,6 +58,11 @@ while (($row = mysqli_fetch_array($query)) !== null) {
 
         foreach ($subjects as $grade) {
           $category = $_SESSION['categories'][$grade['category_id'] - 1];
+
+          $idColumn = array_column($_SESSION['teachers'], 'id');
+          $teacherIndex = array_search($grade['teacher_id'], $idColumn);
+          $teacher = $_SESSION['teachers'][$teacherIndex];
+
           echo <<<HTML
           <div class="grades__item--detailedGrade">
             <div>
@@ -74,7 +79,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
             </div>
             <div>
               <h4>Wystawiona</h4>
-              <p>{$grade['teacher_id']}, {$grade['date']}</p>
+              <p>{$teacher['first_name']} {$teacher['last_name']}, {$grade['date']}</p>
             </div>
           </div>
           HTML;

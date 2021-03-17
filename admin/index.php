@@ -1,7 +1,8 @@
 <?php
 session_start();
 require '../functions/isLoggedIn.php';
-require '../db.php';
+require_once '../db.php';
+require '../functions/getUsers.php';
 require '../view.php';
 $header = new View('header');
 $header->allocate('scripts', ['clock']);
@@ -19,39 +20,7 @@ foreach ($countNames as $name) {
   $query = mysqli_query($conn, $sql);
   $count[$name] = mysqli_fetch_array($query)[0];
 }
-
-$sql = "SELECT `id`,`email` FROM users ORDER BY `id` DESC LIMIT 8";
-$query = mysqli_query($conn, $sql);
-while (($row = mysqli_fetch_array($query)) !== null) {
-  $latestUsers[] = $row;
-}
-foreach ($latestUsers as $index => $user) {
-  $sql = "SELECT `rank` FROM ranks WHERE `user_id` = {$user['id']}";
-  $query = mysqli_query($conn, $sql);
-  $rank = mysqli_fetch_array($query);
-  if (isset($rank['rank'])) {
-    switch ($rank['rank']) {
-      case '1':
-        $rank['displayName'] = "Administrator";
-        $rank['name'] = "admin";
-        break;
-      case '2':
-        $rank['displayName'] = "Nauczyciel";
-        $rank['name'] = "teacher";
-        break;
-    }
-  } else {
-    $rank['displayName'] = "Uczeń";
-    $rank['name'] = "student";
-  }
-  $sql = "SELECT `first_name`,`last_name` FROM {$rank['name']}s WHERE `user_id` = {$user['id']}";
-  $query = mysqli_query($conn, $sql);
-  $personalData = mysqli_fetch_array($query);
-
-  $latestUsers[$index]['rank'] = $rank['displayName'];
-  $latestUsers[$index]['first_name'] = $personalData['first_name'];
-  $latestUsers[$index]['last_name'] = $personalData['last_name'];
-}
+$latestUsers = getUsers(8);
 ?>
 <main class="adminDashboard">
   <div class="adminDashboard__panel adminDashboard__panel--top">

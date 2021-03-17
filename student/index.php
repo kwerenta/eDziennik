@@ -75,6 +75,10 @@ if ($query) $latestNote = mysqli_fetch_array($query);
     <div class="studentDashboard__latestNote">
       <?php
       if (isset($latestNote)) {
+        $idColumn = array_column($_SESSION['teachers'], 'id');
+        $teacherIndex = array_search($grade['teacher_id'], $idColumn);
+        $teacher = $_SESSION['teachers'][$teacherIndex];
+
         if ($latestNote['points'] <= 0) $sign = "";
         else $sign = "+";
         $date = date('d.m.Y', strtotime($latestNote['date']));
@@ -84,7 +88,7 @@ if ($query) $latestNote = mysqli_fetch_array($query);
           <p>{$date}</p>
         </div>
         <div class="studentDashboard__latestNoteRow">
-          <h3>{$latestNote['teacher_id']}</h3>
+          <h3>{$teacher['first_name']} {$teacher['last_name']}</h3>
           <h2>{$sign}{$latestNote['points']}</h2>
         </div>
         <p>{$latestNote['description']}</p>

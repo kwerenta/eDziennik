@@ -9,13 +9,16 @@ $query = mysqli_query($conn, $sql);
 $user = mysqli_fetch_array($query);
 
 if ($user && password_verify($_POST['password'], $user['password'])) {
+  if ($user['isActivated'] === "0") {
+    $_SESSION['formErrors'] = 'Twoje konto nie jest aktywne!';
+    header("Location: http://{$_SERVER['HTTP_HOST']}/");
+    exit();
+  }
   $sql = "SELECT `rank` FROM ranks WHERE user_id = {$user['id']}";
   $query = mysqli_query($conn, $sql);
   $rank = mysqli_fetch_array($query);
 
-  if (!isset($rank[0])) $rank = "student";
-  elseif ($rank[0] == "1") $rank = "admin";
-  elseif ($rank[0] == "2") $rank = "teacher";
+  $rank = (!isset($rank[0])) ? "student" : ($rank[0] == "1" ? "admin" : "teacher");
 
   $sql = "SELECT * FROM {$rank}s WHERE user_id = {$user['id']}";
   $query = mysqli_query($conn, $sql);
@@ -36,10 +39,14 @@ if ($user && password_verify($_POST['password'], $user['password'])) {
     while (($row = mysqli_fetch_array($query)) !== null) {
       $_SESSION['categories'][] = $row;
     }
-  }
 
-  header("Location: http://{$_SERVER['HTTP_HOST']}/{$rank}");
+    $sql = "SELECT `id`,`first_name`,`last_name` FROM teachers";
+    $query = mysqli_query($conn, $sql);
+    while (($row = mysqli_fetch_array($query)) !== null) {
+      $_SESSION['teachers'][] = $row;
+    }
+  }
 } else {
-  $_SESSION['signinErrors'] = 'Błędny login lub hasło!';
-  header("Location: http://{$_SERVER['HTTP_HOST']}/");
+  $_SESSION['formErrors'] = 'Błędny login lub hasło!';
 }
+header("Location: http://{$_SERVER['HTTP_HOST']}/");
