@@ -13,12 +13,12 @@ const changeFormButton = document.querySelector(".form__textButton--changeForm")
 const cssVariables = document.documentElement;
 
 const changeText = () => {
-  if (changeFormText.innerHTML == "Nie masz konta?") {
-    changeFormText.innerHTML = "Masz już konto?";
-    changeFormButton.innerHTML = "Zaloguj się!";
+  if (changeFormText.innerText == "Nie masz konta?") {
+    changeFormText.innerText = "Masz już konto?";
+    changeFormButton.innerText = "Zaloguj się!";
   } else {
-    changeFormText.innerHTML = "Nie masz konta?";
-    changeFormButton.innerHTML = "Zarejestruj się!";
+    changeFormText.innerText = "Nie masz konta?";
+    changeFormButton.innerText = "Zarejestruj się!";
   }
 };
 

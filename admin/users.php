@@ -28,7 +28,6 @@ $users = getUsers();
         <h2>Nazwisko</h2>
       </div>
       <?php
-      $edit = file_get_contents("../assets/icons/edit-solid.svg");
       foreach ($users['students'] as $student) {
 
         echo <<<HTML
