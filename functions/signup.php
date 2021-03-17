@@ -22,7 +22,7 @@ if ($isTypeCorrect && $_POST['type'] === 'student') {
     foreach ($letters as $letter) {
       $class = $number . $letter;
       if (isset($_POST['class']) && $_POST['class'] === $class) {
-        $isClassCorrect = true;
+        $isLastInputCorrect = true;
         break 2;
       }
     }
