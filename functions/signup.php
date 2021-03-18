@@ -28,7 +28,7 @@ if ($isTypeCorrect && $_POST['type'] === 'student') {
     }
   }
 } else {
-  $isLastInputCorrect = preg_match('/^[0-9]{6}(?:[0-9]{2})?$/', $_POST['phone']);
+  $isLastInputCorrect = preg_match('/^[0-9]{6}(?:[0-9]{3})?$/', $_POST['phone']);
 }
 if (!$isEmpty && $isLastInputCorrect && $isEmailCorrect && $isTypeCorrect) {
 

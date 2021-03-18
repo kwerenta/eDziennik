@@ -10,7 +10,7 @@
   --bg-color: var(--primary-bg-color);
   --font-color: #2d2d2d;
   --accent-color: #3e9bd3;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.15);
+  --shadow: 0 1px 5px rgba(0, 0, 0, 0.18), 0 1px 3px rgba(0, 0, 0, 0.22);
   --tile-color: #fff;
   font-size: 16px;
 }
@@ -43,7 +43,7 @@ main {
 
     &--active {
       color: var(--accent-color);
-      transition: color .5s;
+      transition: color 0.5s;
     }
   }
 
@@ -55,5 +55,34 @@ main {
     height: 0.5rem;
     background: var(--accent-color);
     border-radius: 1rem;
+  }
+}
+.overlay {
+  position: fixed;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(#2d2d2d, 0.5);
+  display: grid;
+  place-items: center;
+  padding-left: 5rem;
+
+  &__content {
+    background: var(--secondary-bg-color);
+    border-radius: 1rem;
+    min-width: 500px;
+    width: 50%;
+    max-width: 600px;
+    padding: 2rem 1rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__header {
+    margin-bottom: 2rem;
   }
 }

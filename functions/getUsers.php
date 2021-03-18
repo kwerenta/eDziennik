@@ -31,13 +31,14 @@ function getUsers($amount = 0)
       $rank['displayName'] = "Uczeń";
       $rank['name'] = "student";
     }
-    $sql = "SELECT `first_name`,`last_name` FROM {$rank['name']}s WHERE `user_id` = {$user['id']}";
+    $sql = "SELECT `first_name`,`last_name`, `id` FROM {$rank['name']}s WHERE `user_id` = {$user['id']}";
     $query = mysqli_query($conn, $sql);
     $personalData = mysqli_fetch_array($query);
 
     $users[$index]['rank'] = $rank['displayName'];
     $users[$index]['first_name'] = $personalData['first_name'];
     $users[$index]['last_name'] = $personalData['last_name'];
+    $users[$index]['type_id'] = $personalData['id'];
   }
   if ($amount === '') {
     $filter['students'] = array_filter($users, fn ($user) => $user['rank'] === "Uczeń");

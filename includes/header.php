@@ -14,6 +14,9 @@
   if (isset($_SESSION['user']['rank'])) {
     echo "<link rel='stylesheet' href='/assets/css/{$_SESSION['user']['rank']}.css'>";
     echo "<link rel='stylesheet' href='/assets/css/navbar.css'>";
+    if ($_SESSION['user']['rank'] === "admin" && basename($_SERVER['SCRIPT_FILENAME']) === "users.php") {
+      echo "<link rel='stylesheet' href='/assets/css/forms.css'>";
+    }
   } else echo "<link rel='stylesheet' href='/assets/css/forms.css'>";
 
   foreach ($scripts as $script) {
