@@ -5,6 +5,13 @@
     &--admins {
       display: none;
     }
+    &--students,
+    &--teachers {
+      & .users__item:not(:first-child):hover {
+        cursor: pointer;
+        background: #ccc;
+      }
+    }
   }
   &__item {
     display: flex;
@@ -16,10 +23,6 @@
     transition: background 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
     & > * {
       width: 33%;
-    }
-    &:not(:first-child):hover {
-      cursor: pointer;
-      background: #ccc;
     }
   }
 }

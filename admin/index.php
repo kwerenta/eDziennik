@@ -20,7 +20,7 @@ foreach ($countNames as $name) {
   $query = mysqli_query($conn, $sql);
   $count[$name] = mysqli_fetch_array($query)[0];
 }
-$latestUsers = getUsers(8);
+$latestUsers = getUsers(7);
 ?>
 <main class="adminDashboard">
   <div class="adminDashboard__panel adminDashboard__panel--top">

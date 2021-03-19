@@ -86,6 +86,13 @@
     &--delete:hover {
       background-color: #f44336;
     }
+    &--confirm {
+      background-color: #f44336;
+      color: #fff;
+      &:hover {
+        background-color: #c0342a;
+      }
+    }
     &--signup,
     &--delete {
       margin: 0;

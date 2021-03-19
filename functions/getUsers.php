@@ -7,7 +7,7 @@ function getUsers($amount = 0)
   if ($amount > 0) $amount = "ORDER BY `id` DESC LIMIT {$amount}";
   else $amount = "";
 
-  $sql = "SELECT `id`,`email` FROM users {$amount}";
+  $sql = "SELECT `id`,`email`,`isActivated` FROM users {$amount}";
   $query = mysqli_query($conn, $sql);
   while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
     $users[] = $row;
@@ -31,7 +31,8 @@ function getUsers($amount = 0)
       $rank['displayName'] = "Uczeń";
       $rank['name'] = "student";
     }
-    $sql = "SELECT `first_name`,`last_name`, `id` FROM {$rank['name']}s WHERE `user_id` = {$user['id']}";
+    $lastField = $rank['name'] === "student" ? "class" : "phone";
+    $sql = "SELECT `first_name`,`last_name`, `id`, `{$lastField}` FROM {$rank['name']}s WHERE `user_id` = {$user['id']}";
     $query = mysqli_query($conn, $sql);
     $personalData = mysqli_fetch_array($query);
 
@@ -39,6 +40,7 @@ function getUsers($amount = 0)
     $users[$index]['first_name'] = $personalData['first_name'];
     $users[$index]['last_name'] = $personalData['last_name'];
     $users[$index]['type_id'] = $personalData['id'];
+    $users[$index]['last_field'] = $personalData[$lastField];
   }
   if ($amount === '') {
     $filter['students'] = array_filter($users, fn ($user) => $user['rank'] === "Uczeń");
