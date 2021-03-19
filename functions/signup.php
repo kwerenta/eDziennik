@@ -53,7 +53,7 @@ if (!$isEmpty && $isLastInputCorrect && $isEmailCorrect && $isTypeCorrect) {
       ("{$id}",
       "{$_POST['firstName']}",
       "{$_POST['lastName']}",
-      "{$_POST['{$lastField}']}");
+      "{$_POST[$lastField]}");
     SQL;
     $newData = mysqli_query($conn, $sql);
     if ($newData && $_POST['type'] === "teacher") {
