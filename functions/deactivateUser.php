@@ -1,4 +1,5 @@
 <?php
+require '../functions/isLoggedIn.php';
 require "../db.php";
 $conn = connectToDB();
 

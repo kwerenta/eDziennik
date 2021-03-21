@@ -45,6 +45,9 @@ if ($user && password_verify($_POST['password'], $user['password'])) {
     while (($row = mysqli_fetch_array($query)) !== null) {
       $_SESSION['teachers'][] = $row;
     }
+
+    $holidays = file_get_contents("https://date.nager.at/Api/v2/NextPublicHolidays/PL");
+    $_SESSION['holiday'] = json_decode($holidays, true)[0];
   }
 } else {
   $_SESSION['formErrors'] = 'Błędny login lub hasło!';

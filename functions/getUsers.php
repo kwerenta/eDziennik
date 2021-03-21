@@ -1,4 +1,5 @@
 <?php
+require '../functions/isLoggedIn.php';
 function getUsers($amount = 0)
 {
   require_once '../db.php';

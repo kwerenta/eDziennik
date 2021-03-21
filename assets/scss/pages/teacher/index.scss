@@ -1,0 +1,84 @@
+.teacherDashboard {
+  display: flex;
+  height: calc(100% - 5rem);
+  flex-direction: column;
+
+  & .classSelection {
+    &__list {
+      width: 100%;
+      max-width: 1000px;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      grid-gap: 1.5rem;
+      padding: 1rem 5rem 1rem;
+    }
+
+    &__item {
+      display: grid;
+      place-items: center;
+      font-size: 2.5rem;
+      height: 100%;
+      border-radius: 1rem;
+      border: 3px solid var(--font-color);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+      box-shadow: var(--shadow);
+      color: var(--font-color);
+      text-decoration: none;
+
+      &:hover {
+        background: #ddd;
+        font-size: 3rem;
+      }
+    }
+  }
+
+  &__panel {
+    display: flex;
+    width: 100%;
+    min-width: 850px;
+    &--bottom {
+      height: 100%;
+      margin-top: 2rem;
+      background: var(--tile-color);
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+
+      & > div:nth-child(2) {
+        margin: 1rem 0;
+        border-bottom: 3px solid #ccc;
+      }
+    }
+  }
+  &__tile {
+    background: var(--tile-color);
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    flex: 1;
+    height: 12rem;
+    & > h1 {
+      font-size: 4rem;
+    }
+    &:nth-child(2) {
+      margin: 0 2rem;
+    }
+  }
+
+  &__latestGradesItem {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    text-align: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #ccc;
+    & > * {
+      width: 25%;
+    }
+  }
+}

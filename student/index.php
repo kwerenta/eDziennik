@@ -36,8 +36,8 @@ if ($query) $latestNote = mysqli_fetch_array($query);
         <p>Jesteś w klasie <?php echo $_SESSION["user"]["class"] ?>.</p>
       </div>
       <div class="studentDashboard__tile">
-        <h2>Najbliższy dzień wolny</h2>
-        <p>Wielkanoc</p>
+        <h2>Najbliższe święto</h2>
+        <p><?php echo "{$_SESSION['holiday']['localName']}, {$_SESSION['holiday']['date']}" ?></p>
       </div>
       <div class="studentDashboard__tile">
         <h2>Szczęśliwy numer</h2>

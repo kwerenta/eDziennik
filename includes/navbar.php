@@ -16,6 +16,7 @@
       $options[] = array("name" => "Oceny", "icon" => "award", "file" => "grades");
       $options[] = array("name" => "Uwagi", "icon" => "theater-masks", "file" => "notes");
     }
+    if ($_SESSION['user']['rank'] === "teacher") $options[] = array("name" => "Zmień klasę", "icon" => "edit", "file" => "class");
 
     foreach ($options as $option) {
       $icon = file_get_contents("../assets/icons/{$option['icon']}-solid.svg");
