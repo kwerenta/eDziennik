@@ -28,12 +28,11 @@ while (($row = mysqli_fetch_array($query)) !== null) {
     <h1>Suma punktów: <?php echo $sum ?></h1>
     <div class="notes__list">
       <?php
+      $idColumn = array_column($_SESSION['teachers'], 'id');
       foreach ($notes as $note) {
-        if ($note['points'] <= 0) $sign = "";
-        else $sign = "+";
+        $sign = $note['points'] <= 0 ? "" : "+";
 
-        $idColumn = array_column($_SESSION['teachers'], 'id');
-        $teacherIndex = array_search($grade['teacher_id'], $idColumn);
+        $teacherIndex = array_search($note['teacher_id'], $idColumn);
         $teacher = $_SESSION['teachers'][$teacherIndex];
 
         echo <<<HTML

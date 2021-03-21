@@ -56,10 +56,10 @@ while (($row = mysqli_fetch_array($query)) !== null) {
         $subject = $_SESSION['subjects'][$index - 1];
         echo "<div class='grades__item--detailedSubject'><h2>{$subject['name']}</h2>";
 
+        $idColumn = array_column($_SESSION['teachers'], 'id');
         foreach ($subjects as $grade) {
           $category = $_SESSION['categories'][$grade['category_id'] - 1];
 
-          $idColumn = array_column($_SESSION['teachers'], 'id');
           $teacherIndex = array_search($grade['teacher_id'], $idColumn);
           $teacher = $_SESSION['teachers'][$teacherIndex];
 

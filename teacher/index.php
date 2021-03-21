@@ -76,10 +76,10 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
       <h2>Data</h2>
     </div>
     <?php
+    $idColumn = array_column($students, 'id');
     foreach ($latestGrades as $grade) {
       $category = $_SESSION['categories'][$grade['category_id'] - 1];
 
-      $idColumn = array_column($students, 'id');
       $studentIndex = array_search($grade['student_id'], $idColumn);
       $student = $students[$studentIndex];
 

@@ -11,7 +11,6 @@ $navbar = new View('navbar');
 $navbar->render();
 
 $users = getUsers();
-
 ?>
 <main>
   <div class="adminContainer adminContainer--users">
@@ -35,6 +34,7 @@ $users = getUsers();
             </div>
         HTML;
       foreach ($users[$type] as $user) {
+
         echo <<<HTML
           <div data-id={$user['id']} data-typeid={$user['type_id']} data-isActivated={$user['isActivated']} class="users__item users__item--{$type}">
             <h3 class="users__data users__data--email">{$user['email']}</h3>

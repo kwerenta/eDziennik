@@ -74,14 +74,14 @@ if ($query) $latestNote = mysqli_fetch_array($query);
   <div class="studentDashboard__panel studentDashboard__panel--right">
     <div class="studentDashboard__latestNote">
       <?php
+      $idColumn = array_column($_SESSION['teachers'], 'id');
       if (isset($latestNote)) {
-        $idColumn = array_column($_SESSION['teachers'], 'id');
-        $teacherIndex = array_search($grade['teacher_id'], $idColumn);
+        $teacherIndex = array_search($latestNote['teacher_id'], $idColumn);
         $teacher = $_SESSION['teachers'][$teacherIndex];
 
-        if ($latestNote['points'] <= 0) $sign = "";
-        else $sign = "+";
+        $sign = $latestNote['points'] <= 0 ? "" : "+";
         $date = date('d.m.Y', strtotime($latestNote['date']));
+
         echo <<<HTML
         <div class="studentDashboard__latestNoteRow">
           <h2>Ostatnia uwaga</h2>
