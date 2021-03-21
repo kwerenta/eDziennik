@@ -51,12 +51,14 @@
   }
   & .error {
     border: 1px solid #f44336;
+    background-color: #f5cfcd;
   }
   & input[name="phone"] {
     display: none;
   }
 
   &--signup,
+  &--resetPassword,
   &__tab--login {
     display: none;
     clip-path: inset(0% 100%);

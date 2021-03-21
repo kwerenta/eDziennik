@@ -13,7 +13,7 @@
     <input type="text" name="email" autocomplete="email" placeholder="E-mail" required>
     <input type="password" name="password" autocomplete="current-password" placeholder="Hasło" required>
     <button type="submit" class="form__submit form__submit--signin">Zaloguj się</button>
-    <p class="form__textButton form__textButton--noPassword">Nie pamiętam hasła</p>
+    <p class="form__textButton form__textButton--resetPassword">Nie pamiętam hasła</p>
   </form>
 
   <form class="form form--signup" action="../functions/signup.php" method="post">
@@ -47,6 +47,13 @@
       <button class="form__button form__button--prev" type="button">Wróć</button>
       <button type="submit" class="form__submit form__submit--signup">Zarejestruj się</button>
     </div>
+  </form>
+
+  <form class="form form--resetPassword" action="../functions/resetPassword.php" method="POST">
+    <input type="text" name="email" autocomplete="email" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+    <input type="text" name="firstName" autocomplete="given-name" placeholder="Imię" required>
+    <input type="text" name="lastName" autocomplete="family-name" placeholder="Nazwisko" required>
+    <button type="submit" class="form__submit form__submit--resetPassword">Zresetuj hasło</button>
   </form>
 
   <div class="form__changeForm">
