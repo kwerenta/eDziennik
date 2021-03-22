@@ -4,7 +4,7 @@ require '../db.php';
 
 $conn = connectToDB();
 
-$sql = "SELECT * FROM users WHERE `email` = \"{$_POST['email']}\"";
+$sql = "SELECT * FROM users WHERE `email` = '{$_POST['email']}'";
 $query = mysqli_query($conn, $sql);
 $user = mysqli_fetch_array($query);
 
@@ -28,26 +28,30 @@ if ($user && password_verify($_POST['password'], $user['password'])) {
     if (isset($data['id'])) $data['id'] = intval($data['id']);
     $_SESSION['user'] = $data;
 
-    $sql = "SELECT * FROM subjects";
-    $query = mysqli_query($conn, $sql);
-    while (($row = mysqli_fetch_array($query)) !== null) {
-      $_SESSION['subjects'][] = $row;
+    if ($rank === "student") {
+      $sql = "SELECT `id`,`first_name`,`last_name` FROM teachers";
+      $query = mysqli_query($conn, $sql);
+      while (($row = mysqli_fetch_array($query)) !== null) {
+        $_SESSION['teachers'][$row['id']] = $row;
+      }
     }
 
-    $sql = "SELECT `name`,`weight` FROM categories";
-    $query = mysqli_query($conn, $sql);
-    while (($row = mysqli_fetch_array($query)) !== null) {
-      $_SESSION['categories'][] = $row;
-    }
+    if ($rank !== "admin") {
+      $sql = "SELECT * FROM subjects";
+      $query = mysqli_query($conn, $sql);
+      while (($row = mysqli_fetch_array($query)) !== null) {
+        $_SESSION['subjects'][$row['id']] = $row;
+      }
 
-    $sql = "SELECT `id`,`first_name`,`last_name` FROM teachers";
-    $query = mysqli_query($conn, $sql);
-    while (($row = mysqli_fetch_array($query)) !== null) {
-      $_SESSION['teachers'][] = $row;
-    }
+      $sql = "SELECT * FROM categories";
+      $query = mysqli_query($conn, $sql);
+      while (($row = mysqli_fetch_array($query)) !== null) {
+        $_SESSION['categories'][$row['id']] = $row;
+      }
 
-    $holidays = file_get_contents("https://date.nager.at/Api/v2/NextPublicHolidays/PL");
-    $_SESSION['holiday'] = json_decode($holidays, true)[0];
+      $holidays = file_get_contents("https://date.nager.at/Api/v2/NextPublicHolidays/PL");
+      $_SESSION['holiday'] = json_decode($holidays, true)[0];
+    }
   }
 } else {
   $_SESSION['formErrors'] = 'Błędny login lub hasło!';

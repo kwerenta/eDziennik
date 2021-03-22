@@ -55,8 +55,8 @@ if ($query) $latestNote = mysqli_fetch_array($query);
       </div>
       <?php
       foreach ($latestGrades as $grade) {
-        $subject = $_SESSION['subjects'][$grade['subject_id'] - 1];
-        $category = $_SESSION['categories'][$grade['category_id'] - 1];
+        $subject = $_SESSION['subjects'][$grade['subject_id']];
+        $category = $_SESSION['categories'][$grade['category_id']];
         $date = date('d.m.Y', strtotime($grade['date']));
         echo <<<HTML
           <div class="studentDashboard__latestGradesItem">
@@ -74,11 +74,8 @@ if ($query) $latestNote = mysqli_fetch_array($query);
   <div class="studentDashboard__panel studentDashboard__panel--right">
     <div class="studentDashboard__latestNote">
       <?php
-      $idColumn = array_column($_SESSION['teachers'], 'id');
       if (isset($latestNote)) {
-        $teacherIndex = array_search($latestNote['teacher_id'], $idColumn);
-        $teacher = $_SESSION['teachers'][$teacherIndex];
-
+        $teacher = $_SESSION['teachers'][$latestNote['teacher_id']];
         $sign = $latestNote['points'] <= 0 ? "" : "+";
         $date = date('d.m.Y', strtotime($latestNote['date']));
 

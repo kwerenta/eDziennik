@@ -20,8 +20,7 @@
 
     foreach ($options as $option) {
       $icon = file_get_contents("../assets/icons/{$option['icon']}-solid.svg");
-      if (isset($option['file'])) $file = $option['file'] . ".php";
-      else $file = "";
+      $file = isset($option['file']) ? $option['file'] . ".php" : "";
       echo <<<HTML
         <li class="navbar__item">
           <a href="/{$_SESSION['user']['rank']}/{$file}" class="navbar__link">

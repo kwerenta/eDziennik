@@ -48,7 +48,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
 $sql = "SELECT `id`,`first_name`,`last_name` FROM students WHERE `class`='{$_SESSION['class']}'";
 $query = mysqli_query($conn, $sql);
 while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
-  $students[] = $row;
+  $students[$row['id']] = $row;
 }
 ?>
 
@@ -76,12 +76,9 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
       <h2>Data</h2>
     </div>
     <?php
-    $idColumn = array_column($students, 'id');
     foreach ($latestGrades as $grade) {
-      $category = $_SESSION['categories'][$grade['category_id'] - 1];
-
-      $studentIndex = array_search($grade['student_id'], $idColumn);
-      $student = $students[$studentIndex];
+      $category = $_SESSION['categories'][$grade['category_id']];
+      $student = $students[$grade['student_id']];
 
       echo <<<HTML
           <div class="teacherDashboard__latestGradesItem">
