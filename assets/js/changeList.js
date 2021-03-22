@@ -2,7 +2,10 @@ const tabHeaders = document.querySelectorAll(".menu__tabHeader");
 
 const changeHeader = index => {
   const left = index * 50;
-  const panel = document.querySelector(".studentContainer--grades") || document.querySelector(".adminContainer--users");
+  const panel =
+    document.querySelector(".studentContainer--grades") ||
+    document.querySelector(".adminContainer--users") ||
+    document.querySelector(".teacherContainer--grades");
   const panelChildren = panel.querySelectorAll(`:scope > div:not(:first-child)`);
 
   gsap.to(".menu__activeBar", { left: `${left}%`, x: `-${left}%` });

@@ -15,11 +15,11 @@ function getUsers($amount = 0)
 
   // $limit = $amount > 0 ? "ORDER BY `user_id` DESC LIMIT {$amount}" : "";
 
-  // $sql = "(SELECT `user_id`,`first_name`,`last_name`,`class` lastField FROM students) ORDER BY `user_id` {$limit}
+  // $sql = "(SELECT `user_id`,`first_name`,`last_name`,`class` lastField FROM students) {$limit}
   // UNION ALL 
-  // (SELECT `user_id`,`first_name`,`last_name`,`phone` lastField FROM teachers) ORDER BY `user_id` {$limit}
+  // (SELECT `user_id`,`first_name`,`last_name`,`phone` lastField FROM teachers) {$limit}
   // UNION ALL 
-  // (SELECT `user_id`,`first_name`,`last_name`,`phone` lastField FROM admins) ORDER BY `user_id` {$limit}
+  // (SELECT `user_id`,`first_name`,`last_name`,`phone` lastField FROM admins) {$limit}
   // {$limit}
   // ";
 

@@ -12,15 +12,24 @@ $navbar->render();
 
 $conn = connectToDB();
 
+$numerator = array();
+$denominator = array();
+
 $grades = [];
 
 $sql = "SELECT * FROM grades WHERE `student_id` = {$_SESSION['user']['id']}";
 $query = mysqli_query($conn, $sql);
 
 while (($row = mysqli_fetch_array($query)) !== null) {
+  if (!isset($numerator[$row['subject_id']])) $numerator[$row['subject_id']] = 0;
+  if (!isset($denominator[$row['subject_id']])) $denominator[$row['subject_id']] = 0;
+
+  $weight = $_SESSION['categories'][$row['category_id']]['weight'];
+  $numerator[$row['subject_id']] += $row['grade'] * $weight;
+  $denominator[$row['subject_id']] += $weight;
+
   $grades[$row['subject_id']][] = $row;
 }
-
 ?>
 
 <main>
@@ -40,12 +49,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
       foreach ($grades as $index => $subjects) {
         $subject = $_SESSION['subjects'][$index];
         echo "<div class='grades__item grades__item--subject'><h2>{$subject['name']}</h2><p>";
-
-        foreach ($subjects as $index => $grade) {
-          echo $grade['grade'];
-          if ($index !== array_key_last($grades[$subject['id']])) echo ',';
-        }
-
+        echo implode(",", array_column($grades[$subject['id']], 'grade'));
         echo "</p></div>";
       }
       ?>
@@ -91,14 +95,11 @@ while (($row = mysqli_fetch_array($query)) !== null) {
         <h2>Średnia</h2>
       </div>
       <?php
-      foreach ($grades as $index => $subjects) {
-        $subject = $_SESSION['subjects'][$index];
-        $sum = 0;
-        foreach ($subjects as $grade) {
-          $sum += $grade['grade'];
+      foreach ($_SESSION['subjects'] as $subject) {
+        if (isset($denominator[$subject['id']])) {
+          $average = round(($numerator[$subject['id']] / $denominator[$subject['id']]), 2);
+          echo "<div class='grades__item--summary'><h2>{$subject['name']}</h2><p>{$average}</p></div>";
         }
-        $average = $sum / count($subjects);
-        echo "<div class='grades__item--summary'><h2>{$subject['name']}</h2><p>{$average}</p></div>";
       }
       ?>
     </div>
