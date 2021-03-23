@@ -16,6 +16,8 @@ define('DB_USER', $_ENV['DB_USER'] ?? 'dziennik');
 define('DB_PASSWORD', $_ENV['DB_PASSWORD'] ?? '123'); // Tu zmień hasło jeżeli nie jest puste
 define('DB_SCHEMA', $_ENV['DB_SCHEMA'] ?? 'gradebook'); // Tu podaj nazwę bazy danych
 
+define('GSAP', "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js");
+
 /*
  * Jeżeli chcesz zdefiniować inne ustawienia, zrób to pod poniższym komentarzem
  */

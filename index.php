@@ -4,9 +4,19 @@ session_start();
 
 if (isset($_SESSION["user"])) {
   header('Location: /' . $_SESSION['user']['rank']);
+  exit();
+}
+require 'view.php';
+
+$numbers = ['1', '2', '3', '4'];
+$letters = ['A', 'B', 'C', 'D'];
+foreach ($numbers as $number) {
+  foreach ($letters as $letter) {
+    $_SESSION['classes'][] = $number . $letter;
+  }
 }
 
-require 'view.php';
+
 
 $header = new View('header');
 $header->allocate('scripts', ['https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js', 'changeForm']);

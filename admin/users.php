@@ -3,8 +3,9 @@ session_start();
 require '../functions/isLoggedIn.php';
 require '../functions/getUsers.php';
 require '../view.php';
+require_once '../config.php';
 $header = new View('header');
-$header->allocate('scripts', ['clock', 'changeList', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js', 'overlay']);
+$header->allocate('scripts', ['clock', 'changeList', GSAP, 'overlay']);
 $header->render();
 
 $navbar = new View('navbar');
@@ -31,16 +32,18 @@ $users = getUsers();
               <h2>Imię</h2>
               <h2>Nazwisko</h2>
               <h2>{$lastTitle}</h2>
+              <h2>Aktywny</h2>
             </div>
         HTML;
       foreach ($users[$type] as $user) {
-
+        $isActivated = $user['isActivated'] === "1" ? "Tak" : "Nie";
         echo <<<HTML
           <div data-id={$user['id']} data-typeid={$user['type_id']} data-isActivated={$user['isActivated']} class="users__item users__item--{$type}">
             <h3 class="users__data users__data--email">{$user['email']}</h3>
             <p class="users__data users__data--firstName">{$user['first_name']}</p>
             <p class="users__data users__data--lastName">{$user['last_name']}</p>
             <p class="users__data users__data--{$lastInput}">{$user['last_field']}</p>
+            <p class="users__data users__data--isActivated">{$isActivated}</p>
           </div>
           HTML;
       }

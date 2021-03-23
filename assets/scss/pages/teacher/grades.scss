@@ -1,4 +1,8 @@
 .grades {
+  &__insertOne,
+  &__insertMany {
+    display: none;
+  }
   &__gradesList {
     width: 100%;
   }
@@ -18,15 +22,17 @@
       }
 
       & > h2,
+      & > .grades__header:first-child {
+        flex: 2;
+      }
       & > p:last-of-type,
-      & > .grades__header:first-child,
       & > .grades__header:last-child {
         flex: 1;
       }
 
       & > p:first-of-type,
       & > .grades__header:nth-child(2) {
-        flex: 3;
+        flex: 4;
       }
     }
   }

@@ -1,10 +1,12 @@
 <?php
 session_start();
 require '../functions/isLoggedIn.php';
+require '../functions/isSelectionCorrect.php';
 require_once '../db.php';
 require '../view.php';
+require_once '../config.php';
 $header = new View('header');
-$header->allocate('scripts', ['clock', 'changeList', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js']);
+$header->allocate('scripts', ['clock', GSAP, 'changeList']);
 $header->render();
 
 $navbar = new View('navbar');
@@ -15,7 +17,7 @@ $conn = connectToDB();
 $numerator = array();
 $denominator = array();
 
-$sql = "SELECT `student_id`,`category_id`,`date`,`grade` FROM grades JOIN students ON grades.`student_id`=students.`id` WHERE `class`='{$_SESSION['class']}' AND `teacher_id`={$_SESSION['user']['id']}";
+$sql = "SELECT `student_id`,`category_id`,`date`,`grade` FROM grades JOIN students ON grades.`student_id`=students.`id` WHERE `class`='{$_SESSION['class']}' AND `subject_id`={$_SESSION['subject']['id']} AND `teacher_id`={$_SESSION['user']['id']}";
 $query = mysqli_query($conn, $sql);
 while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
   if (!isset($numerator[$row['student_id']])) $numerator[$row['student_id']] = 0;
@@ -60,6 +62,22 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
         HTML;
       }
       ?>
+    </div>
+    <div class="grades__insertOne">
+      <form action="" method="post">
+        <select name="student">
+          <option value="">1</option>
+          <option value="">2</option>
+        </select>
+      </form>
+    </div>
+    <div class="grades__insertMany">
+      <form action="" method="post">
+        <select name="student">
+          <option value="">1</option>
+          <option value="">2</option>
+        </select>
+      </form>
     </div>
   </div>
 </main>

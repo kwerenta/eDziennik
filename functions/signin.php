@@ -37,7 +37,7 @@ if ($user && password_verify($_POST['password'], $user['password'])) {
     }
 
     if ($rank !== "admin") {
-      $sql = "SELECT * FROM subjects";
+      $sql = "SELECT * FROM subjects ORDER BY `name`";
       $query = mysqli_query($conn, $sql);
       while (($row = mysqli_fetch_array($query)) !== null) {
         $_SESSION['subjects'][$row['id']] = $row;

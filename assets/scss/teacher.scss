@@ -13,5 +13,9 @@
   box-shadow: var(--shadow);
   height: 100%;
 
+  &--subjectSelection {
+    display: none;
+  }
+
   @import "pages/teacher/grades";
 }

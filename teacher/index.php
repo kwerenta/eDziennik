@@ -1,30 +1,9 @@
 <?php
 session_start();
 require '../functions/isLoggedIn.php';
+require '../functions/isSelectionCorrect.php';
 require '../view.php';
 require_once '../db.php';
-
-if (isset($_GET['class'])) {
-  $classArray = array();
-  $numbers = ['1', '2', '3', '4'];
-  $letters = ['A', 'B', 'C', 'D'];
-  foreach ($numbers as $number) {
-    foreach ($letters as $letter) {
-      $classArray[] = $number . $letter;
-    }
-  }
-
-  if (in_array($_GET['class'], $classArray)) {
-    $_SESSION['class'] = $_GET['class'];
-  } else {
-    unset($_SESSION['class']);
-  }
-}
-
-if (!isset($_SESSION['class'])) {
-  header("Location: http://{$_SERVER['HTTP_HOST']}/teacher/class.php");
-  exit();
-};
 
 $header = new View('header');
 $header->allocate('scripts', ['clock']);
@@ -39,7 +18,7 @@ $sql = "SELECT COUNT(1) FROM students WHERE `class`='{$_SESSION['class']}'";
 $query = mysqli_query($conn, $sql);
 $studentsCount = mysqli_fetch_array($query, MYSQLI_NUM)[0];
 
-$sql = "SELECT `student_id`,`category_id`,`date`,`grade` FROM grades JOIN students ON grades.`student_id`=students.`id` WHERE `class`='{$_SESSION['class']}' AND `teacher_id`={$_SESSION['user']['id']} ORDER BY `date` DESC LIMIT 7";
+$sql = "SELECT `student_id`,`category_id`,`date`,`grade` FROM grades JOIN students ON grades.`student_id`=students.`id` WHERE `class`='{$_SESSION['class']}' AND `subject_id`={$_SESSION['subject']['id']} AND `teacher_id`={$_SESSION['user']['id']} ORDER BY `date` DESC LIMIT 7";
 $query = mysqli_query($conn, $sql);
 while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
   $latestGrades[] = $row;
@@ -56,7 +35,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
   <div class="teacherDashboard__panel teacherDashboard__panel--top">
     <div class="teacherDashboard__tile">
       <h2>Witaj, <?php echo "{$_SESSION['user']['first_name']} {$_SESSION['user']['last_name']}!" ?></h2>
-      <p>Wybrano klasę <strong><?php echo $_SESSION['class'] ?></strong>.</p>
+      <p>Wybrano klasę <strong><?php echo $_SESSION['class'] ?></strong> i przedmiot <strong><?php echo $_SESSION['subject']['name'] ?></strong></p>
     </div>
     <div class="teacherDashboard__tile">
       <h2>Najbliższe święto</h2>

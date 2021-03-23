@@ -3,8 +3,9 @@ session_start();
 require '../functions/isLoggedIn.php';
 require '../db.php';
 require '../view.php';
+require_once '../config.php';
 $header = new View('header');
-$header->allocate('scripts', ['clock', 'changeList', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js']);
+$header->allocate('scripts', ['clock', GSAP, 'changeList']);
 $header->render();
 
 $navbar = new View('navbar');

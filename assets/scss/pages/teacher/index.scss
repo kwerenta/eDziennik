@@ -3,34 +3,49 @@
   height: calc(100% - 5rem);
   flex-direction: column;
 
-  & .classSelection {
+  & .selection {
+    &__content {
+      overflow-y: auto;
+      height: 100%;
+
+      &::-webkit-scrollbar {
+        width: 0.5rem;
+      }
+      &::-webkit-scrollbar-track {
+        background: #fff;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #ddd;
+        border-radius: 1rem;
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background: #ccc;
+      }
+    }
     &__list {
       width: 100%;
-      max-width: 1000px;
-      height: 100%;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(4, 1fr);
-      grid-gap: 1.5rem;
-      padding: 1rem 5rem 1rem;
+      max-width: 750px;
+      height: calc(100% - 5rem);
+      padding: 1rem 0;
+      border: 1px solid var(--font-color);
+      border-radius: 1rem;
     }
 
     &__item {
-      display: grid;
-      place-items: center;
+      text-align: center;
       font-size: 2.5rem;
-      height: 100%;
-      border-radius: 1rem;
-      border: 3px solid var(--font-color);
+      border-bottom: 1px solid #ccc;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
-      box-shadow: var(--shadow);
       color: var(--font-color);
       text-decoration: none;
 
+      &--class:nth-child(4n) {
+        border-bottom: 3px solid #ccc;
+      }
+
       &:hover {
         background: #ddd;
-        font-size: 3rem;
       }
     }
   }
