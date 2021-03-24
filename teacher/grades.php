@@ -46,20 +46,24 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
         <h2 class="grades__header">Średnia</h2>
       </div>
       <?php
-      foreach ($_SESSION['students'] as $student) {
-        echo "<div class='grades__item grades__item--student'><h2>{$student['first_name']} {$student['last_name']}</h2><p>";
+      if (isset($_SESSION['studnets'])) {
+        foreach ($_SESSION['students'] as $student) {
+          echo "<div class='grades__item grades__item--student'><h2>{$student['first_name']} {$student['last_name']}</h2><p>";
 
-        if (isset($studentGrades[$student['id']])) {
-          echo implode(",", array_column($studentGrades[$student['id']], 'grade'));
-        } else {
-          echo "Brak ocen";
-        }
-        $avg = isset($denominator[$student['id']]) ? round(($numerator[$student['id']] / $denominator[$student['id']]), 2) : "-";
-        echo <<<HTML
+          if (isset($studentGrades[$student['id']])) {
+            echo implode(",", array_column($studentGrades[$student['id']], 'grade'));
+          } else {
+            echo "Brak ocen";
+          }
+          $avg = isset($denominator[$student['id']]) ? round(($numerator[$student['id']] / $denominator[$student['id']]), 2) : "-";
+          echo <<<HTML
           </p>
             <p>{$avg}</p>
           </div> 
         HTML;
+        }
+      } else {
+        echo "<h2>Brak ocen</h2>";
       }
       ?>
     </div>
