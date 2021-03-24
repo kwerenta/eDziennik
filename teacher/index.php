@@ -55,11 +55,12 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
       <h2>Data</h2>
     </div>
     <?php
-    foreach ($latestGrades as $grade) {
-      $category = $_SESSION['categories'][$grade['category_id']];
-      $student = $_SESSION['students'][$grade['student_id']];
+    if (!empty($latestGrades)) {
+      foreach ($latestGrades as $grade) {
+        $category = $_SESSION['categories'][$grade['category_id']];
+        $student = $_SESSION['students'][$grade['student_id']];
 
-      echo <<<HTML
+        echo <<<HTML
           <div class="teacherDashboard__latestGradesItem">
             <h3>{$student['first_name']} {$student['last_name']}</h3>
             <p>{$grade['grade']}</p>
@@ -67,6 +68,9 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
             <h4>{$grade['date']}</h4>
           </div>
           HTML;
+      }
+    } else {
+      echo "<h2>Brak ocen</h2>";
     }
     ?>
   </div>
