@@ -36,7 +36,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
     <div class="menu__tabs">
       <h2 class="menu__tabHeader menu__tabHeader--active">Wyświetl oceny</h2>
       <h2 class="menu__tabHeader">Wstaw ocenę</h2>
-      <h2 class="menu__tabHeader">Wstaw oceny seryjnie</h2>
+      <h2 class="menu__tabHeader">Wstaw wiele ocen</h2>
       <div class="menu__activeBar"></div>
     </div>
     <div class="grades__gradesList">
@@ -46,33 +46,44 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
         <h2 class="grades__header">Średnia</h2>
       </div>
       <?php
-      if (isset($_SESSION['studnets'])) {
-        foreach ($_SESSION['students'] as $student) {
-          echo "<div class='grades__item grades__item--student'><h2>{$student['first_name']} {$student['last_name']}</h2><p>";
+      foreach ($_SESSION['students'] as $student) {
+        echo "<div class='grades__item grades__item--student'><h2>{$student['first_name']} {$student['last_name']}</h2><p>";
 
-          if (isset($studentGrades[$student['id']])) {
-            echo implode(",", array_column($studentGrades[$student['id']], 'grade'));
-          } else {
-            echo "Brak ocen";
-          }
-          $avg = isset($denominator[$student['id']]) ? round(($numerator[$student['id']] / $denominator[$student['id']]), 2) : "-";
-          echo <<<HTML
+        if (isset($studentGrades[$student['id']])) {
+          echo implode(",", array_column($studentGrades[$student['id']], 'grade'));
+        } else {
+          echo "Brak ocen";
+        }
+        $avg = isset($denominator[$student['id']]) ? round(($numerator[$student['id']] / $denominator[$student['id']]), 2) : "-";
+        echo <<<HTML
           </p>
             <p>{$avg}</p>
           </div> 
         HTML;
-        }
-      } else {
-        echo "<h2>Brak ocen</h2>";
       }
       ?>
     </div>
     <div class="grades__insertOne">
-      <form action="" method="post">
-        <select name="student">
-          <option value="">1</option>
-          <option value="">2</option>
+      <form class="form form--gradesInsertOne" action="../functions/insertOneGrade.php" method="POST">
+        <select name="student" required>
+          <option value="" selected disabled hidden>Uczeń</option>
+          <?php
+          foreach ($_SESSION['students'] as $student) {
+            echo "<option value='{$student['id']}'>{$student['first_name']} {$student['last_name']}</option>";
+          }
+          ?>
         </select>
+        <input type="number" name="grade" placeholder="Ocena" min="1" max="6" required>
+        <select name="category">
+          <option value="" selected disabled hidden>Kategoria (waga)</option>
+          <?php
+          foreach ($_SESSION['categories'] as $category) {
+            echo "<option value='{$category['id']}'>{$category['name']} ({$category['weight']})</option>";
+          }
+          ?>
+        </select>
+        <input type="text" name="description" placeholder="Opis">
+        <button class="form__submit form__submit--insert form__submit--gradesInsertOne" type="submit">Dodaj ocenę</button>
       </form>
     </div>
     <div class="grades__insertMany">

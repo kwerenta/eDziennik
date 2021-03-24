@@ -43,7 +43,7 @@ if ($user && password_verify($_POST['password'], $user['password'])) {
         $_SESSION['subjects'][$row['id']] = $row;
       }
 
-      $sql = "SELECT * FROM categories";
+      $sql = "SELECT * FROM categories ORDER BY `weight`, `name`";
       $query = mysqli_query($conn, $sql);
       while (($row = mysqli_fetch_array($query)) !== null) {
         $_SESSION['categories'][$row['id']] = $row;

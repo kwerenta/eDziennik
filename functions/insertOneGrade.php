@@ -1,0 +1,30 @@
+<?php
+session_start();
+if (!isset($_SESSION["user"]) || (isset($_SESSION["user"]) && $_SESSION['user']['rank'] !== "teacher")) {
+  header("Location: http://{$_SERVER['HTTP_HOST']}/");
+  exit();
+}
+require "../db.php";
+$conn = connectToDB();
+
+$sql = <<<SQL
+  INSERT INTO grades
+  (`student_id`,
+  `teacher_id`,
+  `subject_id`,
+  `category_id`,
+  `grade`,
+  `description`,
+  `date`) 
+  VALUES 
+  ({$_POST['student']},
+  {$_SESSION['user']['id']},
+  {$_SESSION['subject']['id']},
+  {$_POST['category']},
+  {$_POST['grade']},
+  "{$_POST['description']}",
+  CURRENT_TIMESTAMP())
+SQL;
+
+mysqli_query($conn, $sql);
+header("Location: http://{$_SERVER['HTTP_HOST']}/teacher/grades.php");

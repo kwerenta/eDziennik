@@ -8,7 +8,11 @@ const changeHeader = index => {
     document.querySelector(".teacherContainer--grades");
   const panelChildren = panel.querySelectorAll(`:scope > div:not(:first-child)`);
 
-  gsap.to(".menu__activeBar", { left: `${left}%`, x: `-${left}%` });
+  gsap
+    .timeline()
+    .to(".menu__activeBar", 0.25, { scaleX: 1.25 })
+    .to(".menu__activeBar", 0.5, { left: `${left}%`, x: `-${left}%` }, "-=.25")
+    .to(".menu__activeBar", 0.25, { scaleX: 1 }, "-=.25");
   tabHeaders.forEach(header => header.classList.remove("menu__tabHeader--active"));
   tabHeaders[index].classList.add("menu__tabHeader--active");
 

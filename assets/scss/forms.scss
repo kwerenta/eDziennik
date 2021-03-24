@@ -81,19 +81,22 @@
 
   &__submit {
     &:hover {
-      background-color: var(--accent-color);
+      background: var(--accent-color);
       color: #fff;
       box-shadow: var(--shadow);
     }
     &--delete:hover {
-      background-color: #f44336;
+      background: #f44336;
     }
     &--confirm {
-      background-color: #f44336;
+      background: #f44336;
       color: #fff;
       &:hover {
-        background-color: #c0342a;
+        background: #c0342a;
       }
+    }
+    &--insert {
+      background: #eee;
     }
     &--signup,
     &--delete {

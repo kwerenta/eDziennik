@@ -18,7 +18,7 @@ $denominator = array();
 
 $grades = [];
 
-$sql = "SELECT * FROM grades WHERE `student_id` = {$_SESSION['user']['id']}";
+$sql = "SELECT grades.`id`,`student_id`,`teacher_id`,`subject_id`,`category_id`,`date`,`grade`,`description` FROM grades JOIN subjects ON grades.`subject_id`=subjects.`id` WHERE `student_id` = {$_SESSION['user']['id']} ORDER BY `name`,`date` DESC";
 $query = mysqli_query($conn, $sql);
 
 while (($row = mysqli_fetch_array($query)) !== null) {
@@ -64,7 +64,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
         foreach ($subjects as $grade) {
           $category = $_SESSION['categories'][$grade['category_id']];
           $teacher = $_SESSION['teachers'][$grade['teacher_id']];
-
+          $description = $grade['description'] === "" ? "Brak opisu" : $grade['description'];
           echo <<<HTML
           <div class="grades__item--detailedGrade">
             <div>
@@ -73,7 +73,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
             </div>
             <div>
               <h4>Opis</h4>
-              <p>{$grade['description']}</p>
+              <p>{$description}</p>
             </div>
             <div>
               <h4>Kategoria (waga)</h4>

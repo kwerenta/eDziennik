@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION["user"]) && $_SESSION['user']['rank'] !== "admin") {
+if (!isset($_SESSION["user"]) || (isset($_SESSION["user"]) && $_SESSION['user']['rank'] !== "admin")) {
   header("Location: http://{$_SERVER['HTTP_HOST']}/");
   exit();
 }

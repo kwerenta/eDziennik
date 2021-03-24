@@ -14,7 +14,7 @@
   if (isset($_SESSION['user']['rank'])) {
     echo "<link rel='stylesheet' href='/assets/css/{$_SESSION['user']['rank']}.css'>";
     echo "<link rel='stylesheet' href='/assets/css/navbar.css'>";
-    if ($_SESSION['user']['rank'] === "admin" && basename($_SERVER['SCRIPT_FILENAME']) === "users.php") {
+    if ($_SESSION['user']['rank'] === "admin" || ($_SESSION['user']['rank'] === "teacher")) {
       echo "<link rel='stylesheet' href='/assets/css/forms.css'>";
     }
   } else echo "<link rel='stylesheet' href='/assets/css/forms.css'>";
