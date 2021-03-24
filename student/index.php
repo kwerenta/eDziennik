@@ -14,7 +14,7 @@ $conn = connectToDB();
 
 $latestGrades = [];
 
-$sql = "SELECT `grade`,`subject_id`,`category_id`,`date` FROM grades WHERE `student_id` = {$_SESSION['user']['id']} ORDER BY `date` DESC LIMIT 8";
+$sql = "SELECT `grade`,`subject_id`,`category_id`,`date` FROM grades WHERE `student_id` = {$_SESSION['user']['id']} ORDER BY `date` DESC LIMIT 5";
 $query = mysqli_query($conn, $sql);
 
 while (($row = mysqli_fetch_array($query)) !== null) {

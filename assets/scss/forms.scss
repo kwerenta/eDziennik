@@ -19,6 +19,9 @@
   &--overlay {
     width: 400px;
   }
+  &--notes {
+    margin-top: 1.5rem;
+  }
   &,
   &__tab {
     display: flex;
@@ -28,7 +31,14 @@
     transition: opacity 0.5s;
     clip-path: inset(-30% 0%);
   }
-
+  & textarea {
+    resize: none;
+    border: 1px solid var(--font-color);
+    border-radius: 1rem;
+    padding: 0.25rem;
+    box-shadow: var(--shadow);
+    outline: none;
+  }
   & input,
   & select {
     background-color: transparent;

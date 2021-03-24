@@ -12,7 +12,7 @@ $navbar->render();
 require '../db.php';
 $conn = connectToDB();
 
-$sql = "SELECT * FROM notes WHERE `student_id` = {$_SESSION['user']['id']}";
+$sql = "SELECT * FROM notes WHERE `student_id` = {$_SESSION['user']['id']} ORDER BY `date` DESC";
 $query = mysqli_query($conn, $sql);
 
 $sum = 0;
@@ -31,7 +31,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
       foreach ($notes as $note) {
         $sign = $note['points'] <= 0 ? "" : "+";
         $teacher = $_SESSION['teachers'][$note['teacher_id']];
-
+        $description = $note['description'] === "" ? "Brak opisu" : $note['description'];
         echo <<<HTML
         <div class="notes__item">
           <div class="notes__title">
@@ -45,7 +45,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
             </div>
             <div>
               <h4>Opis</h4>
-              <p>{$note['description']}</p>
+              <p>{$description}</p>
             </div>
           </div>
         </div>

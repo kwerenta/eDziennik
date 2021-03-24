@@ -7,8 +7,7 @@ if (!isset($_SESSION["user"]) || (isset($_SESSION["user"]) && $_SESSION['user'][
 
 $isEmpty = false;
 $isStudentOk = true;
-$isCategoryOk = true;
-$isGradeOk = true;
+$arePointsOk = true;
 
 foreach ($_POST as $input => $value) {
   if ($value === null && $input !== "description") {
@@ -19,37 +18,29 @@ foreach ($_POST as $input => $value) {
 if (!in_array($_POST['student'], array_column($_SESSION['students'], "id"))) {
   $isStudentOk = false;
 }
-if (!in_array($_POST['category'], array_column($_SESSION['categories'], "id"))) {
-  $isCategoryOk = false;
-}
-if ($_POST['grade'] < 1 || $_POST['grade'] > 6) {
-  $isGradeOk = false;
+if ($_POST['points'] < -150 || $_POST['points'] > 150) {
+  $arePointsOk = false;
 }
 
 
-if (!$isEmpty && $isCategoryOk && $isGradeOk && $isStudentOk) {
+if (!$isEmpty && $arePointsOk && $isStudentOk) {
   require "../db.php";
   $conn = connectToDB();
 
   $sql = <<<SQL
-  INSERT INTO grades
+  INSERT INTO notes
   (`student_id`,
   `teacher_id`,
-  `subject_id`,
-  `category_id`,
-  `grade`,
+  `points`,
   `description`,
   `date`) 
   VALUES 
   ({$_POST['student']},
   {$_SESSION['user']['id']},
-  {$_SESSION['subject']['id']},
-  {$_POST['category']},
-  {$_POST['grade']},
+  {$_POST['points']},
   "{$_POST['description']}",
   CURRENT_TIMESTAMP())
 SQL;
-
   mysqli_query($conn, $sql);
 }
-header("Location: http://{$_SERVER['HTTP_HOST']}/teacher/grades.php");
+header("Location: http://{$_SERVER['HTTP_HOST']}/teacher/notes.php");

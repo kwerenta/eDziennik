@@ -49,6 +49,7 @@
   &__latestGrades {
     width: 100%;
     height: 100%;
+    overflow: hidden;
     margin-top: 2rem;
     & > h2 {
       margin-bottom: 0.5rem;

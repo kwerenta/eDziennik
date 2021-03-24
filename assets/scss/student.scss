@@ -1,4 +1,4 @@
-@import 'pages/student/index';
+@import "pages/student/index";
 
 .studentContainer {
   background-color: var(--tile-color);
@@ -12,7 +12,6 @@
   min-width: 1000px;
   box-shadow: var(--shadow);
 
-  @import 'pages/student/grades';
-  @import 'pages/student/notes';
-
+  @import "pages/student/grades";
+  @import "pages/student/notes";
 }

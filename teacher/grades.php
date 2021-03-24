@@ -74,7 +74,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
           ?>
         </select>
         <input type="number" name="grade" placeholder="Ocena" min="1" max="6" required>
-        <select name="category">
+        <select name="category" required>
           <option value="" selected disabled hidden>Kategoria (waga)</option>
           <?php
           foreach ($_SESSION['categories'] as $category) {
