@@ -17,7 +17,7 @@ $conn = connectToDB();
 $numerator = array();
 $denominator = array();
 
-$sql = "SELECT `student_id`,`category_id`,`date`,`grade`,`description` FROM grades JOIN students ON grades.`student_id`=students.`id` WHERE `class`='{$_SESSION['class']}' AND `subject_id`={$_SESSION['subject']['id']} AND `teacher_id`={$_SESSION['user']['id']}";
+$sql = "SELECT `student_id`,`category_id`,`date`,`grade`,`description`,grades.`id` FROM grades JOIN students ON grades.`student_id`=students.`id` WHERE `class`='{$_SESSION['class']}' AND `subject_id`={$_SESSION['subject']['id']} AND `teacher_id`={$_SESSION['user']['id']}";
 $query = mysqli_query($conn, $sql);
 while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
   if (!isset($numerator[$row['student_id']])) $numerator[$row['student_id']] = 0;
@@ -59,7 +59,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
             $description = $grade['description'] === "" ? "Brak opisu" : $grade['description'];
             return <<<HTML
             <div class="item__container"
-            data-grade={$grade['grade']} data-category={$grade['category_id']} data-description="{$grade['description']}">
+            data-grade={$grade['grade']} data-category={$grade['category_id']} data-description="{$grade['description']}" data-student={$grade['student_id']} data-gradeid={$grade['id']}>
               <p>{$grade['grade']}</p>
               <div class="item__details">
                 <h4>Opis:</h4><p>{$description}</p>
@@ -132,6 +132,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
         </select>
         <input type="text" name="description" placeholder="Opis">
         <input type="hidden" name="student_id" value="">
+        <input type="hidden" name="grade_id" value="">
         <button class="form__submit form__submit--edit" type="submit">Edytuj</button>
         <button class="form__submit form__submit--delete" type="submit">
           <h4>Usuń</h4>

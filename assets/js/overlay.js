@@ -1,4 +1,4 @@
-const form = document.querySelector(".form");
+const form = document.querySelector(".form--overlay");
 const overlay = document.querySelector(".overlay");
 const email = overlay.querySelector("input[name='email']");
 const firstName = overlay.querySelector("input[name='first_name']");
@@ -14,6 +14,8 @@ const gradesItems = document.querySelectorAll(".item__container");
 const grade = overlay.querySelector("input[name='grade']");
 const category = overlay.querySelector("select[name='category']");
 const description = overlay.querySelector("input[name='description']");
+const studentId = overlay.querySelector("input[name='student_id']");
+const gradeId = overlay.querySelector("input[name='grade_id']");
 
 const closeBtn = document.querySelector(".form__button--close");
 const editBtn = document.querySelector(".form__submit--edit");
@@ -32,6 +34,8 @@ gradesItems?.forEach(item => {
     grade.value = e.currentTarget.dataset.grade;
     category.value = e.currentTarget.dataset.category;
     description.value = e.currentTarget.dataset.description;
+    studentId.value = e.currentTarget.dataset.student;
+    gradeId.value = e.currentTarget.dataset.gradeid;
   });
 });
 
