@@ -9,6 +9,7 @@
 
   &__item {
     &--student {
+      font-size: 1.125rem;
       width: 100%;
       display: flex;
       align-items: center;
@@ -29,8 +30,46 @@
       & > .grades__header:last-child {
         flex: 1;
       }
+      .item__row {
+        display: flex;
+        .item__container {
+          display: flex;
+          position: relative;
 
-      & > p:first-of-type,
+          .item__details {
+            position: absolute;
+            top: 50%;
+            left: 2.5rem;
+            background: var(--tile-color);
+            box-shadow: var(--shadow);
+            border-radius: 1rem;
+            min-width: 300px;
+            max-width: 450px;
+            min-height: 200px;
+            z-index: 50;
+            padding: 1rem;
+            display: none;
+
+            & > h4 {
+              &:not(:first-child) {
+                margin-top: 0.25rem;
+              }
+              &:last-child {
+                margin-top: 0.75rem;
+              }
+            }
+          }
+
+          & > p {
+            cursor: pointer;
+            padding: 0.125rem 0.125rem;
+            &:hover + .item__details {
+              display: block;
+            }
+          }
+        }
+      }
+      & > div,
       & > .grades__header:nth-child(2) {
         flex: 4;
       }

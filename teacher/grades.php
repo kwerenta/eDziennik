@@ -6,7 +6,7 @@ require_once '../db.php';
 require '../view.php';
 require_once '../config.php';
 $header = new View('header');
-$header->allocate('scripts', ['clock', GSAP, 'changeList']);
+$header->allocate('scripts', ['clock', GSAP, 'overlay', 'changeList']);
 $header->render();
 
 $navbar = new View('navbar');
@@ -17,7 +17,7 @@ $conn = connectToDB();
 $numerator = array();
 $denominator = array();
 
-$sql = "SELECT `student_id`,`category_id`,`date`,`grade` FROM grades JOIN students ON grades.`student_id`=students.`id` WHERE `class`='{$_SESSION['class']}' AND `subject_id`={$_SESSION['subject']['id']} AND `teacher_id`={$_SESSION['user']['id']}";
+$sql = "SELECT `student_id`,`category_id`,`date`,`grade`,`description` FROM grades JOIN students ON grades.`student_id`=students.`id` WHERE `class`='{$_SESSION['class']}' AND `subject_id`={$_SESSION['subject']['id']} AND `teacher_id`={$_SESSION['user']['id']}";
 $query = mysqli_query($conn, $sql);
 while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
   if (!isset($numerator[$row['student_id']])) $numerator[$row['student_id']] = 0;
@@ -47,16 +47,38 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
       </div>
       <?php
       foreach ($_SESSION['students'] as $student) {
-        echo "<div class='grades__item grades__item--student'><h2>{$student['first_name']} {$student['last_name']}</h2><p>";
+        echo <<<HTML
+          <div class='grades__item grades__item--student'>
+            <h2>{$student['first_name']} {$student['last_name']}</h2>
+          <div class="item__row">
+        HTML;
 
         if (isset($studentGrades[$student['id']])) {
-          echo implode(",", array_column($studentGrades[$student['id']], 'grade'));
+          $details = function ($grade) {
+            $category = $_SESSION['categories'][$grade['category_id']];
+            $description = $grade['description'] === "" ? "Brak opisu" : $grade['description'];
+            return <<<HTML
+            <div class="item__container"
+            data-grade={$grade['grade']} data-category={$grade['category_id']} data-description="{$grade['description']}">
+              <p>{$grade['grade']}</p>
+              <div class="item__details">
+                <h4>Opis:</h4><p>{$description}</p>
+                <h4>Kategoria (waga):</h4><p>{$category['name']} ({$category['weight']})</p>
+                <h4>Data:</h4><p>{$grade['date']}</p>
+                <h4>Naciśnij, aby edytować</h4>
+              </div>
+            </div>
+            HTML;
+          };
+          $grades = array_map($details, $studentGrades[$student['id']]);
+
+          echo implode(",", $grades);
         } else {
           echo "Brak ocen";
         }
         $avg = isset($denominator[$student['id']]) ? round(($numerator[$student['id']] / $denominator[$student['id']]), 2) : "-";
         echo <<<HTML
-          </p>
+          </div>
             <p>{$avg}</p>
           </div> 
         HTML;
@@ -92,6 +114,29 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
           <option value="">1</option>
           <option value="">2</option>
         </select>
+      </form>
+    </div>
+  </div>
+  <div class="overlay">
+    <div class="overlay__content">
+      <h1 class="overlay__header">Edycja oceny</h1>
+      <form class="form form--overlay" method="POST">
+        <input type="number" name="grade" placeholder="Ocena" min="1" max="6">
+        <select name="category">
+          <option value="" selected disabled hidden>Kategoria (waga)</option>
+          <?php
+          foreach ($_SESSION['categories'] as $category) {
+            echo "<option value='{$category['id']}'>{$category['name']} ({$category['weight']})</option>";
+          }
+          ?>
+        </select>
+        <input type="text" name="description" placeholder="Opis">
+        <input type="hidden" name="student_id" value="">
+        <button class="form__submit form__submit--edit" type="submit">Edytuj</button>
+        <button class="form__submit form__submit--delete" type="submit">
+          <h4>Usuń</h4>
+        </button>
+        <button class="form__button form__button--close">Anuluj</button>
       </form>
     </div>
   </div>
