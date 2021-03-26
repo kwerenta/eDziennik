@@ -1,6 +1,6 @@
 <div class="startContainer">
   <div class="startContainer__logo">
-    <h1>eDziennik</h1>
+    <h1>eDziennik</h1><img src="/assets/icons/mortarboard.svg" alt="logo">
   </div>
   <form class="form form--signin" action="../functions/signin.php" method="post">
 
@@ -60,7 +60,7 @@
     <p>Nie masz konta?</p>
     <p class="form__textButton form__textButton--changeForm">Zarejestruj się!</p>
   </div>
-  <div class="startContainer__image startContainer__image--left"><img src="/assets/img/start_image1.svg" alt="School image"></div>
-  <div class="startContainer__image startContainer__image--right"><img src="/assets/img/start_image2.svg" alt="School image"></div>
+  <div class="startContainer__image startContainer__image--left"><img src="/assets/img/start_image2.svg" alt="School image"></div>
+  <div class="startContainer__image startContainer__image--right"><img src="/assets/img/start_image1.svg" alt="School image"></div>
 
 </div>

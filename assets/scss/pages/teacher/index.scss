@@ -7,20 +7,6 @@
     &__content {
       overflow-y: auto;
       height: 100%;
-
-      &::-webkit-scrollbar {
-        width: 0.5rem;
-      }
-      &::-webkit-scrollbar-track {
-        background: #fff;
-      }
-      &::-webkit-scrollbar-thumb {
-        background: #ddd;
-        border-radius: 1rem;
-      }
-      &::-webkit-scrollbar-thumb:hover {
-        background: #ccc;
-      }
     }
     &__list {
       width: 100%;

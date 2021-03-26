@@ -1,12 +1,14 @@
 .grades {
   &__gradesList {
     width: 100%;
+    overflow-y: auto;
   }
 
   &__detailedGradesList,
   &__gradesSummary {
     display: none;
     width: 100%;
+    overflow-y: auto;
   }
 
   &__item {

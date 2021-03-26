@@ -2,9 +2,12 @@
   &__insertOne,
   &__insertMany {
     display: none;
+    overflow-y: auto;
   }
   &__gradesList {
     width: 100%;
+    overflow-y: auto;
+    height: 100%;
   }
 
   &__item {
@@ -20,6 +23,11 @@
       &:first-child {
         border-bottom: 3px solid #ccc;
         margin-bottom: 2rem;
+        position: sticky;
+        top: 0;
+        left: 0;
+        background: var(--tile-color);
+        z-index: 22;
       }
 
       & > h2,
@@ -48,7 +56,8 @@
             min-height: 200px;
             z-index: 50;
             padding: 1rem;
-            display: none;
+            clip-path: inset(0% 100% 100% 0%);
+            transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
 
             & > h4 {
               &:not(:first-child) {
@@ -64,7 +73,7 @@
             cursor: pointer;
             padding: 0.125rem 0.125rem;
             &:hover + .item__details {
-              display: block;
+              clip-path: inset(-10%);
             }
           }
         }

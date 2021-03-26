@@ -8,6 +8,8 @@
   <meta name="author" content="Kamil Wenta">
   <meta name="description" content="Prosty eDziennik do zastosowań lokalnych">
   <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="icon" href="/assets/icons/mortarboard.svg" type="image/svg+xml">
+  <!-- Favicon made by Freepik from https://www.flaticon.com/ -->
 
   <?php
 

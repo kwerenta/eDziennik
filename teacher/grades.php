@@ -114,11 +114,18 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
       </form>
     </div>
     <div class="grades__insertMany">
-      <form action="" method="post">
-        <select name="student">
-          <option value="">1</option>
-          <option value="">2</option>
+      <form class="form form--gradesInsertOne" action="../functions/insertOneGrade.php" method="POST">
+        <input type="number" name="grade" placeholder="Ocena" min="1" max="6" required>
+        <select name="category" required>
+          <option value="" selected disabled hidden>Kategoria (waga)</option>
+          <?php
+          foreach ($_SESSION['categories'] as $category) {
+            echo "<option value='{$category['id']}'>{$category['name']} ({$category['weight']})</option>";
+          }
+          ?>
         </select>
+        <input type="text" name="description" placeholder="Opis">
+        <button class="form__submit form__submit--insert form__submit--gradesInsertOne" type="submit">Dodaj oceny</button>
       </form>
     </div>
   </div>

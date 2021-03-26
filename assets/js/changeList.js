@@ -13,19 +13,21 @@ const changeHeader = index => {
   gsap
     .timeline()
     .to(activeBar, 0.25, { scaleX: 1.25 })
-    .to(panel, 0.25, { clipPath: "inset(-10% -10% 80% -10%)" }, "-=.25")
-    .to(activeBar, 0.5, { left: `${left}%`, x: `-${left}%` }, "-=.25")
-    .to(panel, 0.25, { clipPath: "inset(-10% -10% -10% -10%)" })
-    .to(activeBar, 0.25, { scaleX: 1 }, "-=.5");
+    .to(panel, 0.35, { clipPath: "inset(-10% -10% 88% -10%)", ease: Power1.easeOut }, "-=.25")
+    .to(activeBar, 0.5, { left: `${left}%`, x: `-${left}%` }, "-=.35")
+    .to(panel, 0.35, { clipPath: "inset(-10% -10% -10% -10%)", ease: Power1.easeIn })
+    .to(activeBar, 0.25, { scaleX: 1 }, "-=.6");
   tabHeaders.forEach(header => header.classList.remove("menu__tabHeader--active"));
   tabHeaders[index].classList.add("menu__tabHeader--active");
 
   setTimeout(() => {
     panelChildren.forEach(child => (child.style.display = "none"));
     changeChild.style.display = "block";
-  }, 250);
+  }, 350);
 };
 
 tabHeaders.forEach((header, index) => {
-  header.addEventListener("click", () => changeHeader(index));
+  header.addEventListener("click", () => {
+    if (!header.classList.contains("menu__tabHeader--active")) changeHeader(index);
+  });
 });

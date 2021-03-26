@@ -24,6 +24,20 @@ body {
 main {
   margin-left: 5rem;
   padding: 2rem;
+  height: calc(100% - 5rem);
+  & ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  & ::-webkit-scrollbar-track {
+    background: #fff;
+  }
+  & ::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 1rem;
+  }
+  & ::-webkit-scrollbar-thumb:hover {
+    background: #ccc;
+  }
 }
 
 .menu {
@@ -31,7 +45,7 @@ main {
     position: relative;
     display: flex;
     width: 75%;
-    min-width: 750px;
+    min-width: 800px;
     border-bottom: 1px solid #ccc;
     margin-bottom: 2rem;
     padding-bottom: 1rem;

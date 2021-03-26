@@ -12,6 +12,12 @@
     margin-top: 5rem;
     font-size: 2.5rem;
     color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    & > img {
+      margin-left: 0.5rem;
+      height: 5rem;
+    }
   }
 }
 
