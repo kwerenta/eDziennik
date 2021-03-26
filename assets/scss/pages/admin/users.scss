@@ -23,7 +23,18 @@
     border-bottom: 1px solid #ccc;
     transition: background 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
     & > * {
-      flex: 1;
+      flex: 2;
+      &:last-child,
+      &:nth-last-child(2) {
+        flex: 1;
+      }
+    }
+    &:first-child {
+      position: sticky;
+      top: 0;
+      left: 0;
+      background: var(--tile-color);
+      z-index: 22;
     }
   }
 }

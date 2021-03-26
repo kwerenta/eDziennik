@@ -14,20 +14,18 @@ $navbar->render();
 
 $conn = connectToDB();
 
-$sql = "SELECT COUNT(1) FROM students WHERE `class`='{$_SESSION['class']}'";
-$query = mysqli_query($conn, $sql);
-$studentsCount = mysqli_fetch_array($query, MYSQLI_NUM)[0];
-
 $sql = "SELECT `student_id`,`category_id`,`date`,`grade` FROM grades JOIN students ON grades.`student_id`=students.`id` WHERE `class`='{$_SESSION['class']}' AND `subject_id`={$_SESSION['subject']['id']} AND `teacher_id`={$_SESSION['user']['id']} ORDER BY `date` DESC LIMIT 7";
 $query = mysqli_query($conn, $sql);
 while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
   $latestGrades[] = $row;
 }
 
-$sql = "SELECT `id`,`first_name`,`last_name` FROM students WHERE `class`='{$_SESSION['class']}'";
-$query = mysqli_query($conn, $sql);
-while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
-  $_SESSION['students'][$row['id']] = $row;
+if (!isset($_SESSION['students'])) {
+  $sql = "SELECT `id`,`first_name`,`last_name` FROM students WHERE `class`='{$_SESSION['class']}' ORDER BY `last_name`,`first_name`";
+  $query = mysqli_query($conn, $sql);
+  while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
+    $_SESSION['students'][$row['id']] = $row;
+  }
 }
 ?>
 
@@ -43,7 +41,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
     </div>
     <div class="teacherDashboard__tile">
       <h2>Liczba uczniów w klasie</h2>
-      <h1><?php echo $studentsCount ?></h1>
+      <h1><?php echo count($_SESSION['students']) ?></h1>
     </div>
   </div>
   <div class="teacherDashboard__panel teacherDashboard__panel--bottom">
@@ -62,7 +60,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
 
         echo <<<HTML
           <div class="teacherDashboard__latestGradesItem">
-            <h3>{$student['first_name']} {$student['last_name']}</h3>
+            <h3>{$student['last_name']} {$student['first_name']}</h3>
             <p>{$grade['grade']}</p>
             <p>{$category['name']}</p>
             <h4>{$grade['date']}</h4>

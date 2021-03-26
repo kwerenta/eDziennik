@@ -32,7 +32,7 @@
 
       & > h2,
       & > .grades__header:first-child {
-        flex: 2;
+        flex: 3;
       }
       & > p:last-of-type,
       & > .grades__header:last-child {
@@ -40,6 +40,8 @@
       }
       .item__row {
         display: flex;
+        flex-wrap: wrap;
+        padding-right: 1rem;
         .item__container {
           display: flex;
           position: relative;

@@ -49,7 +49,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
       foreach ($_SESSION['students'] as $student) {
         echo <<<HTML
           <div class='grades__item grades__item--student'>
-            <h2>{$student['first_name']} {$student['last_name']}</h2>
+            <h2>{$student['last_name']} {$student['first_name']}</h2>
           <div class="item__row">
         HTML;
 
@@ -77,11 +77,11 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
           $grades = array_map($details, $studentGrades[$student['id']]);
 
           echo implode(",", $grades);
+          $avg = round(($numerator[$student['id']] / $denominator[$student['id']]), 2);
         } else {
           echo "Brak ocen";
+          $avg = "-";
         }
-
-        $avg = isset($denominator[$student['id']]) ? round(($numerator[$student['id']] / $denominator[$student['id']]), 2) : "-";
         echo <<<HTML
           </div>
             <p>{$avg}</p>

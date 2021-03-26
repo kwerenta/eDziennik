@@ -23,7 +23,7 @@ $users = getUsers();
     </div>
     <?php
     foreach (array_keys($users) as $type) {
-      $lastTitle = $type === "students" ? "Klasa" : "Numer Telefonu";
+      $lastTitle = $type === "students" ? "Klasa" : "Telefon";
       $lastInput = $type === "students" ? "class" : "phone";
       echo <<<HTML
           <div class='users__list users__list--{$type}'>
