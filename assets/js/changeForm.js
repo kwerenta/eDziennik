@@ -34,7 +34,7 @@ signInUp
 
 changeFormButton.addEventListener("click", () => {
   let color = "";
-  const formError = document.querySelector(".form__error");
+  const formInfo = document.querySelector(".form__info");
 
   if (resetPassword) {
     resetPasswordLogin.reverse();
@@ -51,7 +51,7 @@ changeFormButton.addEventListener("click", () => {
   }
   setTimeout(() => {
     changeText();
-    formError?.remove();
+    formInfo?.remove();
   }, 300);
 });
 

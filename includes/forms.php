@@ -4,12 +4,16 @@
   </div>
   <form class="form form--signin" action="../functions/signin.php" method="post">
 
-    <?php if (isset($_SESSION['formErrors'])) {
-      echo <<<HTML
-      <div class="form__error">{$_SESSION['formErrors']}</div>
-      HTML;
-      unset($_SESSION['formErrors']);
-    } ?>
+    <?php
+    if (isset($_SESSION['formInfos'])) {
+      foreach ($_SESSION['formInfos'] as $key => $info) {
+        echo <<<HTML
+        <div class="form__info form__info--{$key}">{$info}</div>
+        HTML;
+        unset($_SESSION['formInfos'][$key]);
+      }
+    }
+    ?>
     <input type="text" name="email" autocomplete="email" placeholder="E-mail" required>
     <input type="password" name="password" autocomplete="current-password" placeholder="Hasło" required>
     <button type="submit" class="form__submit form__submit--signin">Zaloguj się</button>

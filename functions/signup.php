@@ -36,7 +36,7 @@ if (!$isEmpty && $isLastInputCorrect && $isEmailCorrect && $isTypeCorrect) {
   $emailExist = mysqli_query($conn, $sql);
 
   if ($emailExist->num_rows !== 0) {
-    $_SESSION['formErrors'] = "Podany E-Mail jest już zajęty!";
+    $_SESSION['formInfos']['error'] = "Podany E-Mail jest już zajęty!";
     header("Location: http://{$_SERVER['HTTP_HOST']}/");
     exit();
   }
@@ -59,9 +59,10 @@ if (!$isEmpty && $isLastInputCorrect && $isEmailCorrect && $isTypeCorrect) {
     if ($newData && $_POST['type'] === "teacher") {
       $sql = "INSERT INTO ranks VALUES ({$id},2)";
       mysqli_query($conn, $sql);
+      $_SESSION['formInfos']['success'] = "Twoje konto zostało utworzone, czekaj na aktywację!";
     }
   }
 } else {
-  $_SESSION['formErrors'] = "Formularz został błędnie wypełniony!";
+  $_SESSION['formInfos']['error'] = "Formularz został błędnie wypełniony!";
 }
 header("Location: http://{$_SERVER['HTTP_HOST']}/");

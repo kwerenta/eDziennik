@@ -10,7 +10,7 @@ $user = mysqli_fetch_array($query);
 
 if ($user && password_verify($_POST['password'], $user['password'])) {
   if ($user['isActivated'] === "0") {
-    $_SESSION['formErrors'] = 'Twoje konto nie jest aktywne!';
+    $_SESSION['formInfos']['error'] = 'Twoje konto nie jest aktywne!';
     header("Location: http://{$_SERVER['HTTP_HOST']}/");
     exit();
   }
@@ -54,6 +54,6 @@ if ($user && password_verify($_POST['password'], $user['password'])) {
     }
   }
 } else {
-  $_SESSION['formErrors'] = 'Błędny login lub hasło!';
+  $_SESSION['formInfos']['error'] = 'Błędny login lub hasło!';
 }
 header("Location: http://{$_SERVER['HTTP_HOST']}/");

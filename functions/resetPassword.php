@@ -21,7 +21,7 @@ if (!$isEmpty && $isEmailCorrect) {
     $sql = "SELECT `id` FROM users WHERE `email`='{$_POST['email']}'";
     $query = mysqli_query($conn, $sql);
     if ($query->num_rows === 0) {
-      $_SESSION['formErrors'] = "Nie istnieje taki użytkownik";
+      $_SESSION['formInfos']['error'] = "Nie istnieje taki użytkownik";
       header("Location: http://{$_SERVER['HTTP_HOST']}/");
       exit();
     };
@@ -36,7 +36,7 @@ if (!$isEmpty && $isEmailCorrect) {
     $query = mysqli_query($conn, $sql);
 
     if ($query->num_rows === 0) {
-      $_SESSION['formErrors'] = "Nie istnieje taki użytkownik";
+      $_SESSION['formInfos']['error'] = "Nie istnieje taki użytkownik";
       header("Location: http://{$_SERVER['HTTP_HOST']}/");
       exit();
     };
@@ -44,15 +44,15 @@ if (!$isEmpty && $isEmailCorrect) {
     $sql = "UPDATE users SET `password` = '{$hash}' WHERE `email`='{$_POST['email']}'";
     $isChanged = mysqli_query($conn, $sql);
     if ($isChanged) {
-      $_SESSION['formErrors'] = "Twoje nowe hasło to: {$hex}";
+      $_SESSION['formInfos']['success'] = "Twoje nowe hasło to: {$hex}";
     } else {
-      $_SESSION['formErrors'] = "Nie udało się zmienić hasła!";
+      $_SESSION['formInfos']['error'] = "Nie udało się zmienić hasła!";
     }
   } else {
-    $_SESSION['formErrors'] = "Wstąpił błąd! Spróbuj ponownie";
+    $_SESSION['formInfos']['error'] = "Wstąpił błąd! Spróbuj ponownie";
   }
 } else {
-  $_SESSION['formErrors'] = "Niepoprawnie wypełniony formularz";
+  $_SESSION['formInfos']['error'] = "Niepoprawnie wypełniony formularz";
 }
 
 header("Location: http://{$_SERVER['HTTP_HOST']}/");

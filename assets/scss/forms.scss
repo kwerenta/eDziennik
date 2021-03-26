@@ -141,16 +141,24 @@
     cursor: pointer;
   }
 
-  &__error {
+  &__info {
     color: #fff;
-    background-color: #f44336;
-    padding: 1rem 2rem;
+
+    padding: 1rem 1.5rem;
     margin: -4.75rem 0 1rem;
     border-radius: 100px;
     width: 100%;
     text-align: center;
-    font-size: 1.25rem;
     font-weight: 500;
+    line-height: 1;
+    &--error {
+      background: #f44336;
+      font-size: 1.25rem;
+    }
+    &--success {
+      background: #4caf50;
+      font-size: 1.125rem;
+    }
   }
 }
 
