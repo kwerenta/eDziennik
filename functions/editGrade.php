@@ -16,13 +16,8 @@ if (!$isEmpty) {
   require "../db.php";
   $conn = connectToDB();
 
-  $sql = "SELECT `id` FROM users WHERE `id`={$_POST['id']} AND `email`='{$_POST['email']}'";
-  $exist = mysqli_query($conn, $sql);
-
-  if ($exist->num_rows !== 0) {
-    $sql = "UPDATE {$rank} SET `first_name` = '{$_POST['first_name']}', `last_name`= '{$_POST['last_name']}', {$lastField} WHERE `id`={$_POST['typeid']} AND `user_id`={$_POST['id']}";
-    mysqli_query($conn, $sql);
-  }
+  $sql = "UPDATE grades SET `grade`= {$_POST['grade']}, `description`='{$_POST['description']}', `category_id`='{$_POST['category']}' WHERE `id`={$_POST['grade_id']} AND `teacher_id`={$_SESSION['user']['id']} AND `student_id`={$_POST['student_id']}";
+  mysqli_query($conn, $sql);
 }
 
 header("Location: http://{$_SERVER['HTTP_HOST']}/teacher/grades.php");

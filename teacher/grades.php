@@ -59,7 +59,11 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
             $description = $grade['description'] === "" ? "Brak opisu" : $grade['description'];
             return <<<HTML
             <div class="item__container"
-            data-grade={$grade['grade']} data-category={$grade['category_id']} data-description="{$grade['description']}" data-student={$grade['student_id']} data-gradeid={$grade['id']}>
+            data-grade={$grade['grade']} 
+            data-category={$grade['category_id']} 
+            data-description="{$grade['description']}" 
+            data-student={$grade['student_id']}
+            data-gradeid={$grade['id']}>
               <p>{$grade['grade']}</p>
               <div class="item__details">
                 <h4>Opis:</h4><p>{$description}</p>
@@ -76,6 +80,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
         } else {
           echo "Brak ocen";
         }
+
         $avg = isset($denominator[$student['id']]) ? round(($numerator[$student['id']] / $denominator[$student['id']]), 2) : "-";
         echo <<<HTML
           </div>

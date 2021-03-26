@@ -37,7 +37,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
   <div class="studentContainer studentContainer--grades">
     <div class="menu__tabs">
       <h2 class="menu__tabHeader menu__tabHeader--active">Oceny częściowe</h2>
-      <h2 class="menu__tabHeader">Oceny szczgółowo</h2>
+      <h2 class="menu__tabHeader">Oceny szeczgółowo</h2>
       <h2 class="menu__tabHeader">Podsumowanie Ocen</h2>
       <div class="menu__activeBar"></div>
     </div>
