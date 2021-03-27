@@ -25,6 +25,11 @@ $sql = "SELECT `date`,`teacher_id`,`description`,`points` FROM notes WHERE `stud
 $query = mysqli_query($conn, $sql);
 if ($query) $latestNote = mysqli_fetch_array($query);
 
+$weekday = date('N');
+$sql = "SELECT `timetable` FROM timetables WHERE `class_id`='{$_SESSION['user']['class']}' AND `weekday`={$weekday}";
+$query = mysqli_query($conn, $sql);
+$jsonTimetable = mysqli_fetch_array($query, MYSQLI_NUM);
+if ($jsonTimetable !== null) $timetable = json_decode($jsonTimetable[0]);
 ?>
 
 
@@ -40,8 +45,8 @@ if ($query) $latestNote = mysqli_fetch_array($query);
         <p><?php echo "{$_SESSION['holiday']['localName']}, {$_SESSION['holiday']['date']}" ?></p>
       </div>
       <div class="studentDashboard__tile">
-        <h2>Szczęśliwy numer</h2>
-        <p><?php echo rand(1, 31) ?></p>
+        <h2>Ogłoszenia</h2>
+        <p>Brak ogłoszeń</p>
       </div>
     </div>
 
@@ -102,11 +107,15 @@ if ($query) $latestNote = mysqli_fetch_array($query);
     <div class="studentDashboard__shortTimetable">
       <h2>Plan lekcji</h2>
       <ol class="studentDashboard__shortTimetableList">
-        <li>W-F</li>
-        <li>GKiAI</li>
-        <li>Matematyka</li>
-        <li>Matematyka</li>
-        <li>HiS</li>
+        <?php
+        if (isset($timetable)) {
+          foreach ($timetable as $lesson) {
+            echo "<li>{$_SESSION['subjects'][$lesson]['name']}</li>";
+          }
+        } else {
+          echo "Brak wprowadzonego planu lekcji";
+        }
+        ?>
       </ol>
     </div>
   </div>

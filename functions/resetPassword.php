@@ -44,7 +44,7 @@ if (!$isEmpty && $isEmailCorrect) {
     $sql = "UPDATE users SET `password` = '{$hash}' WHERE `email`='{$_POST['email']}'";
     $isChanged = mysqli_query($conn, $sql);
     if ($isChanged) {
-      $_SESSION['formInfos']['success'] = "Twoje nowe hasło to: {$hex}";
+      $_SESSION['formInfos']['success'] = "Twoje nowe hasło to:<br>{$hex}";
     } else {
       $_SESSION['formInfos']['error'] = "Nie udało się zmienić hasła!";
     }

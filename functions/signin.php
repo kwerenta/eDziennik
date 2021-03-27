@@ -20,7 +20,7 @@ if ($user && password_verify($_POST['password'], $user['password'])) {
 
   $rank = (!isset($rank[0])) ? "student" : ($rank[0] == "1" ? "admin" : "teacher");
 
-  $sql = "SELECT * FROM {$rank}s WHERE user_id = {$user['id']}";
+  $sql = "SELECT `id` FROM {$rank}s WHERE `user_id` = {$user['id']}";
   $query = mysqli_query($conn, $sql);
   if ($query) {
     $data = mysqli_fetch_array($query);
@@ -42,7 +42,7 @@ if ($user && password_verify($_POST['password'], $user['password'])) {
       while (($row = mysqli_fetch_array($query)) !== null) {
         $_SESSION['subjects'][$row['id']] = $row;
       }
-
+      $_SESSION['subjects'][0] = "-";
       $sql = "SELECT * FROM categories ORDER BY `weight`, `name`";
       $query = mysqli_query($conn, $sql);
       while (($row = mysqli_fetch_array($query)) !== null) {
