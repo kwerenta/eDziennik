@@ -3,16 +3,9 @@ session_start();
 require "../db.php";
 $conn = connectToDB();
 
-$isEmpty = false;
-$isEmailCorrect = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+require 'validate.php';
 
-foreach ($_POST as $input => $value) {
-  if ($value === null) {
-    $isEmpty = true;
-  }
-}
-
-if (!$isEmpty && $isEmailCorrect) {
+if (!isEmpty() && isEmailCorrect()) {
   $binary = openssl_random_pseudo_bytes(4, $isStrong);
   if ($isStrong) {
     $sql = "SELECT `id` FROM users WHERE `email`='{$_POST['email']}'";

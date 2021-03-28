@@ -1,12 +1,11 @@
 <?php
 session_start();
 require '../db.php';
+require 'validate.php';
 
 $conn = connectToDB();
 
-$isEmailCorrect = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
-
-if ($isEmailCorrect) {
+if (isEmailCorrect()) {
   $sql = sprintf(
     "SELECT * FROM users WHERE `email` = '%s'",
     mysqli_real_escape_string($conn, $_POST['email'])

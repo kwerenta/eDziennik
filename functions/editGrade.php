@@ -5,13 +5,10 @@ if (!isset($_SESSION["user"]) || (isset($_SESSION["user"]) && $_SESSION['user'][
   exit();
 }
 
-$isEmpty = false;
+require 'validate.php';
 
-foreach ($_POST as $input => $value) {
-  if ($value === null) {
-    $isEmpty = true;
-  }
-}
+$isStudentOk = true;
+$isCategoryOk = true;
 
 if (!in_array($_POST['student_id'], array_column($_SESSION['students'], "id"))) {
   $isStudentOk = false;
@@ -19,11 +16,8 @@ if (!in_array($_POST['student_id'], array_column($_SESSION['students'], "id"))) 
 if (!in_array($_POST['category'], array_column($_SESSION['categories'], "id"))) {
   $isCategoryOk = false;
 }
-if ($_POST['grade'] < 1 || $_POST['grade'] > 6) {
-  $isGradeOk = false;
-}
 
-if (!$isEmpty) {
+if (!isEmpty() && isValueCorrect($_POST['grade'], 1, 6) && $isStudentOk && $isCategoryOk) {
   require "../db.php";
   $conn = connectToDB();
 

@@ -5,25 +5,14 @@ if (!isset($_SESSION["user"]) || (isset($_SESSION["user"]) && $_SESSION['user'][
   exit();
 }
 
-$isEmpty = false;
 $isStudentOk = true;
-$arePointsOk = true;
-
-foreach ($_POST as $input => $value) {
-  if ($value === null && $input !== "description") {
-    $isEmpty = true;
-  }
-}
 
 if (!in_array($_POST['student'], array_column($_SESSION['students'], "id"))) {
   $isStudentOk = false;
 }
-if ($_POST['points'] < -150 || $_POST['points'] > 150) {
-  $arePointsOk = false;
-}
 
 
-if (!$isEmpty && $arePointsOk && $isStudentOk) {
+if (!isEmpty() && isValueCorrect($_POST['points'], -150, 150) && $isStudentOk) {
   require "../db.php";
   $conn = connectToDB();
 

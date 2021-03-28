@@ -6,6 +6,7 @@ const personalInputs = document.querySelectorAll(".form__tab--personal > input:n
 const accountType = document.querySelector(".form__tab--personal > select[name='type']");
 const phoneInput = document.querySelector(".form__tab--personal > input[name='phone']");
 const classInput = document.querySelector(".form__tab--personal > select[name='class']");
+const loginInputs = document.querySelectorAll(".form__tab--login > input");
 
 const signupButton = document.querySelector(".form__submit--signup");
 const changeFormText = document.querySelector(".form__changeForm > p");
@@ -25,8 +26,21 @@ const changeText = () => {
   }
 };
 
-const signInUp = gsap.timeline({ paused: true });
-signInUp
+const isEmpty = inputs => {
+  let empty = false;
+  inputs.forEach(input => {
+    if (!input.value) {
+      empty = true;
+      input.classList.add("error");
+    } else {
+      input.classList.remove("error");
+    }
+  });
+  return empty;
+};
+
+const signInUp = gsap
+  .timeline({ paused: true })
   .to([".form--signin", ".form__changeForm"], { clipPath: "inset(0% 100%)", duration: 0.25 })
   .set(".form--signin", { display: "none" }, ">")
   .set(".form--signup", { display: "flex" })
@@ -55,41 +69,63 @@ changeFormButton.addEventListener("click", () => {
   }, 300);
 });
 
-const personalLoginData = gsap.timeline({ paused: true });
-personalLoginData
+const personalLoginData = gsap
+  .timeline({ paused: true })
   .to(".form__tab--personal", { clipPath: "inset(0% 100%)", duration: 0.25 })
   .set(".form__tab--personal", { display: "none" }, ">")
   .set(".form__tab--login", { display: "flex" })
   .to(".form__tab--login", { clipPath: "inset(0% 0%)", duration: 0.25 });
 
-nextTab.addEventListener("click", () => {
-  let isEmpty = false;
+nextTab.addEventListener("click", e => {
   const inputsArray = Array.from(personalInputs);
   inputsArray.push(accountType.value === "student" ? classInput : phoneInput);
 
-  inputsArray.forEach(input => {
-    if (!input.value) {
-      isEmpty = true;
-      input.classList.add("error");
-    } else {
-      input.classList.remove("error");
-    }
-  });
+  const isPhoneCorrect = phoneInput.value.match("^[0-9]{6}(?:[0-9]{3})?$");
 
-  if (!isEmpty) personalLoginData.play();
+  // if (!isPhoneCorrect && accountType.value !== "student") {
+  //   phoneInput.setCustomValidity("Numer telefonu powinien być w formacie: 123456789 lub 123456");
+  // }
+  if (!isEmpty(inputsArray) && isPhoneCorrect) {
+    inputsArray.forEach(input => {
+      input.required = false;
+    });
+    loginInputs.forEach(input => {
+      input.required = true;
+    });
+    personalLoginData.play();
+    e.preventDefault();
+  }
 });
 
 prevTab.addEventListener("click", () => {
+  const inputsArray = Array.from(personalInputs);
+  inputsArray.push(accountType.value === "student" ? classInput : phoneInput);
   personalLoginData.reverse();
+
+  loginInputs.forEach(input => {
+    input.required = false;
+  });
+  inputsArray.forEach(input => {
+    input.required = true;
+  });
 });
 
 accountType.addEventListener("change", e => {
-  phoneInput.style.display = e.target.value === "student" ? "none" : "block";
-  classInput.style.display = e.target.value === "student" ? "block" : "none";
+  if (e.target.value === "student") {
+    phoneInput.style.display = "none";
+    classInput.style.display = "block";
+    phoneInput.required = false;
+    classInput.required = true;
+  } else {
+    classInput.style.display = "none";
+    phoneInput.style.display = "block";
+    classInput.required = false;
+    phoneInput.required = true;
+  }
 });
 
-const resetPasswordLogin = gsap.timeline({ paused: true });
-resetPasswordLogin
+const resetPasswordLogin = gsap
+  .timeline({ paused: true })
   .to([".form--signin", ".form__changeForm"], { clipPath: "inset(0% 100%)", duration: 0.25 })
   .set(".form--signin", { display: "none" }, ">")
   .set(".form--resetPassword", { display: "flex" })
@@ -101,22 +137,4 @@ resetPasswordButton.addEventListener("click", e => {
   setTimeout(() => {
     changeText();
   }, 300);
-});
-
-resetPasswordSubmit.addEventListener("click", e => {
-  e.preventDefault();
-  let isEmpty = false;
-  const form = document.querySelector(".form--resetPassword");
-  const inputsArray = form.querySelectorAll("input");
-
-  inputsArray.forEach(input => {
-    if (!input.value) {
-      isEmpty = true;
-      input.classList.add("error");
-    } else {
-      input.classList.remove("error");
-    }
-  });
-
-  if (!isEmpty) form.submit();
 });

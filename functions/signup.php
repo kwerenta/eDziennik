@@ -5,32 +5,16 @@ require 'validate.php';
 
 $conn = connectToDB();
 $isLastInputCorrect = false;
-$isPasswordConfirmed = false;
-$isEmailCorrect = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
 $isTypeCorrect = in_array($_POST['type'], array('student', 'teacher'));
 
-foreach ($_POST as $input => $value) {
-  if ($value === null) {
-    $isEmpty = true;
+if ($isTypeCorrect) {
+  if ($_POST['type'] === 'student') {
+    $isLastInputCorrect = isClassCorrect();
+  } else {
+    $isLastInputCorrect = isPhoneCorrect();
   }
 }
-
-if ($isTypeCorrect && $_POST['type'] === 'student') {
-  $letters = ['A', 'B', 'C', 'D'];
-  $numbers = ['1', '2', '3', '4'];
-  foreach ($numbers as $number) {
-    foreach ($letters as $letter) {
-      $class = $number . $letter;
-      if (isset($_POST['class']) && $_POST['class'] === $class) {
-        $isLastInputCorrect = true;
-        break 2;
-      }
-    }
-  }
-} else {
-  $isLastInputCorrect = preg_match('/^[0-9]{6}(?:[0-9]{3})?$/', $_POST['phone']);
-}
-if (!$isEmpty && $isLastInputCorrect && $isEmailCorrect && $isTypeCorrect) {
+if (!isEmpty() && isEmailCorrect() && $isLastInputCorrect && $isTypeCorrect) {
 
   $sql = sprintf(
     "SELECT `email` FROM users WHERE `email`='%s'",
@@ -62,7 +46,7 @@ if (!$isEmpty && $isLastInputCorrect && $isEmailCorrect && $isTypeCorrect) {
     if ($newData && $_POST['type'] === "teacher") {
       $sql = "INSERT INTO ranks VALUES ({$id},2)";
       mysqli_query($conn, $sql);
-      $_SESSION['formInfos']['success'] = "Twoje konto zostało utworzone, czekaj na aktywację!";
+      $_SESSION['formInfos']['success'] = "Twoje konto zostało utworzone,<br>czekaj na aktywację!";
     }
   }
 } else {

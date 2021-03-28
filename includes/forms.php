@@ -14,7 +14,7 @@
       }
     }
     ?>
-    <input type="text" name="email" autocomplete="email" placeholder="E-mail" required>
+    <input type="email" name="email" autocomplete="email" placeholder="E-mail" required>
     <input type="password" name="password" autocomplete="current-password" placeholder="Hasło" required>
     <button type="submit" class="form__submit form__submit--signin">Zaloguj się</button>
     <p class="form__textButton form__textButton--resetPassword">Nie pamiętam hasła</p>
@@ -22,13 +22,13 @@
 
   <form class="form form--signup" action="../functions/signup.php" method="post">
     <div class="form__tab form__tab--personal">
-      <select name="type">
+      <select name="type" required>
         <option value="student" selected>Uczeń</option>
         <option value="teacher">Nauczyciel</option>
       </select>
-      <input type="text" name="firstName" autocomplete="given-name" placeholder="Imię">
-      <input type="text" name="lastName" autocomplete="family-name" placeholder="Nazwisko">
-      <select name="class">
+      <input type="text" name="firstName" autocomplete="given-name" placeholder="Imię" max="100" required>
+      <input type="text" name="lastName" autocomplete="family-name" placeholder="Nazwisko" max="100" required>
+      <select name="class" required>
         <option value="" selected disabled hidden>Klasa</option>
         <?php
         $letters = ['A', 'B', 'C', 'D'];
@@ -41,11 +41,11 @@
         }
         ?>
       </select>
-      <input type="text" name="phone" autocomplete="tel" placeholder="Numer telefonu">
-      <button class="form__button form__button--next" type="button">Przejdź dalej</button>
+      <input type="text" name="phone" autocomplete="tel" pattern="/^[0-9]{6}(?:[0-9]{3})?$/" placeholder="Numer telefonu">
+      <button class="form__button form__button--next" type="submit">Przejdź dalej</button>
     </div>
     <div class="form__tab form__tab--login">
-      <input type="text" name="email" autocomplete="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="E-mail">
+      <input type="email" name="email" autocomplete="email" placeholder="E-mail">
       <input type="password" name="password" autocomplete="new-password" placeholder="Hasło">
       <input type="password" name="confirmPassword" autocomplete="new-password" placeholder="Potwierdź hasło">
       <button class="form__button form__button--prev" type="button">Wróć</button>
@@ -54,9 +54,9 @@
   </form>
 
   <form class="form form--resetPassword" action="../functions/resetPassword.php" method="POST">
-    <input type="text" name="email" autocomplete="email" placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
-    <input type="text" name="firstName" autocomplete="given-name" placeholder="Imię" required>
-    <input type="text" name="lastName" autocomplete="family-name" placeholder="Nazwisko" required>
+    <input type="email" name="email" autocomplete="email" placeholder="E-mail" required>
+    <input type="text" name="firstName" autocomplete="given-name" placeholder="Imię" max="100" required>
+    <input type="text" name="lastName" autocomplete="family-name" placeholder="Nazwisko" max="100" required>
     <button type="submit" class="form__submit form__submit--resetPassword">Zresetuj hasło</button>
   </form>
 

@@ -5,32 +5,17 @@ if (!isset($_SESSION["user"]) || (isset($_SESSION["user"]) && $_SESSION['user'][
   exit();
 }
 
-$isEmpty = false;
+require 'validate.php';
+
 $isLastInputCorrect = false;
 
-foreach ($_POST as $input => $value) {
-  if ($value === null) {
-    $isEmpty = true;
-  }
-}
-
-if (isset($_POST['class'])) {
-  $letters = ['A', 'B', 'C', 'D'];
-  $numbers = ['1', '2', '3', '4'];
-  foreach ($numbers as $number) {
-    foreach ($letters as $letter) {
-      $class = $number . $letter;
-      if ($_POST['class'] === $class) {
-        $isLastInputCorrect = true;
-        break 2;
-      }
-    }
-  }
+if (!empty($_POST['class'])) {
+  $isLastInputCorrect = isClassCorrect();
 } else {
-  $isLastInputCorrect = preg_match('/^[0-9]{6}(?:[0-9]{3})?$/', $_POST['phone']);
+  $isLastInputCorrect = isPhoneCorrect();
 }
 
-if (!$isEmpty && $isLastInputCorrect) {
+if (!isEmpty() && $isLastInputCorrect) {
   require "../db.php";
   $conn = connectToDB();
 
