@@ -30,6 +30,10 @@ $sql = "SELECT `timetable` FROM timetables WHERE `class_id`='{$_SESSION['user'][
 $query = mysqli_query($conn, $sql);
 $jsonTimetable = mysqli_fetch_array($query, MYSQLI_NUM);
 if ($jsonTimetable !== null) $timetable = json_decode($jsonTimetable[0]);
+
+$sql = "SELECT `value` FROM lucky_number";
+$query = mysqli_query($conn, $sql);
+$luckyNumber = mysqli_fetch_array($query, MYSQLI_NUM)[0];
 ?>
 
 
@@ -45,8 +49,8 @@ if ($jsonTimetable !== null) $timetable = json_decode($jsonTimetable[0]);
         <p><?php echo "{$_SESSION['holiday']['localName']}, {$_SESSION['holiday']['date']}" ?></p>
       </div>
       <div class="studentDashboard__tile">
-        <h2>Ogłoszenia</h2>
-        <p>Brak ogłoszeń</p>
+        <h2>Szczęśliwy numer</h2>
+        <p><?php echo $luckyNumber ?></p>
       </div>
     </div>
 
@@ -110,7 +114,8 @@ if ($jsonTimetable !== null) $timetable = json_decode($jsonTimetable[0]);
         <?php
         if (isset($timetable)) {
           foreach ($timetable as $lesson) {
-            echo "<li>{$_SESSION['subjects'][$lesson]['name']}</li>";
+            $text = $lesson !== 0 ? $_SESSION['subjects'][$lesson]['name'] : "-";
+            echo "<li>{$text}</li>";
           }
         } else {
           echo "Brak wprowadzonego planu lekcji";
