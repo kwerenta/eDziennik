@@ -4,11 +4,17 @@ require '../db.php';
 
 $conn = connectToDB();
 
-$sql = "SELECT * FROM users WHERE `email` = '{$_POST['email']}'";
-$query = mysqli_query($conn, $sql);
-$user = mysqli_fetch_array($query);
+$isEmailCorrect = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
 
-if ($user && password_verify($_POST['password'], $user['password'])) {
+if ($isEmailCorrect) {
+  $sql = sprintf(
+    "SELECT * FROM users WHERE `email` = '%s'",
+    mysqli_real_escape_string($conn, $_POST['email'])
+  );
+  $query = mysqli_query($conn, $sql);
+  $user = mysqli_fetch_array($query);
+}
+if (isset($user) && password_verify($_POST['password'], $user['password'])) {
   if ($user['isActivated'] === "0") {
     $_SESSION['formInfos']['error'] = 'Twoje konto nie jest aktywne!';
     header("Location: http://{$_SERVER['HTTP_HOST']}/");

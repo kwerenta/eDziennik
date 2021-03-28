@@ -16,7 +16,15 @@ if (!$isEmpty) {
   require "../db.php";
   $conn = connectToDB();
 
-  $sql = "UPDATE grades SET `grade`= {$_POST['grade']}, `description`='{$_POST['description']}', `category_id`='{$_POST['category']}' WHERE `id`={$_POST['grade_id']} AND `teacher_id`={$_SESSION['user']['id']} AND `student_id`={$_POST['student_id']}";
+  $sql = sprintf(
+    "UPDATE grades SET `grade`= %s, `description`='%s', `category_id`='%s' WHERE `id`=%s AND `student_id`=%s AND `teacher_id`=%s",
+    mysqli_real_escape_string($conn, $_POST['grade']),
+    mysqli_real_escape_string($conn, $_POST['description']),
+    mysqli_real_escape_string($conn, $_POST['category']),
+    mysqli_real_escape_string($conn, $_POST['grade_id']),
+    mysqli_real_escape_string($conn, $_POST['student_id']),
+    $_SESSION['user']['id']
+  );
   mysqli_query($conn, $sql);
 }
 

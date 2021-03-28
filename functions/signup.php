@@ -32,7 +32,10 @@ if ($isTypeCorrect && $_POST['type'] === 'student') {
 }
 if (!$isEmpty && $isLastInputCorrect && $isEmailCorrect && $isTypeCorrect) {
 
-  $sql = "SELECT `email` FROM users WHERE `email`='{$_POST['email']}'";
+  $sql = sprintf(
+    "SELECT `email` FROM users WHERE `email`='%s'",
+    mysqli_real_escape_string($conn, $_POST['email'])
+  );
   $emailExist = mysqli_query($conn, $sql);
 
   if ($emailExist->num_rows !== 0) {
