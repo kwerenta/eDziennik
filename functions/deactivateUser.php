@@ -7,7 +7,12 @@ if (!isset($_SESSION["user"]) && $_SESSION['user']['rank'] !== "admin") {
 require "../db.php";
 $conn = connectToDB();
 
-$sql = "SELECT `isActivated` FROM users WHERE `id`={$_POST['id']} AND `email`='{$_POST['email']}' AND `isActivated`={$_POST['isActivated']}";
+$sql = sprintf(
+  "SELECT `isActivated` FROM users WHERE `id`=%s AND `email`='%s' AND `isActivated`=%s",
+  mysqli_real_escape_string($conn, $_POST['id']),
+  mysqli_real_escape_string($conn, $_POST['email']),
+  mysqli_real_escape_string($conn, $_POST['isActivated']),
+);
 $isActivated = mysqli_query($conn, $sql);
 
 if ($isActivated->num_rows !== 0) {

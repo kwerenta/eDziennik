@@ -12,6 +12,17 @@ foreach ($_POST as $input => $value) {
     $isEmpty = true;
   }
 }
+
+if (!in_array($_POST['student_id'], array_column($_SESSION['students'], "id"))) {
+  $isStudentOk = false;
+}
+if (!in_array($_POST['category'], array_column($_SESSION['categories'], "id"))) {
+  $isCategoryOk = false;
+}
+if ($_POST['grade'] < 1 || $_POST['grade'] > 6) {
+  $isGradeOk = false;
+}
+
 if (!$isEmpty) {
   require "../db.php";
   $conn = connectToDB();

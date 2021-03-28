@@ -1,9 +1,9 @@
 <?php
 session_start();
 require '../db.php';
+require 'validate.php';
 
 $conn = connectToDB();
-$isEmpty = false;
 $isLastInputCorrect = false;
 $isPasswordConfirmed = false;
 $isEmailCorrect = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
