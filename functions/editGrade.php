@@ -31,6 +31,14 @@ if (!isEmpty() && isValueCorrect($_POST['grade'], 1, 6) && $isStudentOk && $isCa
     $_SESSION['user']['id']
   );
   mysqli_query($conn, $sql);
+
+  if (mysqli_affected_rows($conn) > 0) {
+    $_SESSION['snackalert'] = ["type" => "success", "text" => "Ocena została zedytowana"];
+  } else {
+    $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się zedytować oceny"];
+  };
+} else {
+  $_SESSION['snackalert'] = ["type" => "error", "text" => "Formularz został błędnie wypełniony"];
 }
 
 header("Location: http://{$_SERVER['HTTP_HOST']}/teacher/grades.php");

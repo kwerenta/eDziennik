@@ -4,13 +4,8 @@ if (!isset($_SESSION["user"]) || (isset($_SESSION["user"]) && $_SESSION['user'][
   header("Location: http://{$_SERVER['HTTP_HOST']}/");
   exit();
 }
-
-$isStudentOk = true;
-
-if (!in_array($_POST['student'], array_column($_SESSION['students'], "id"))) {
-  $isStudentOk = false;
-}
-
+require 'validate.php';
+$isStudentOk = in_array($_POST['student'], array_column($_SESSION['students'], "id"));
 
 if (!isEmpty() && isValueCorrect($_POST['points'], -150, 150) && $isStudentOk) {
   require "../db.php";
@@ -31,5 +26,13 @@ if (!isEmpty() && isValueCorrect($_POST['points'], -150, 150) && $isStudentOk) {
   CURRENT_TIMESTAMP())
 SQL;
   mysqli_query($conn, $sql);
+
+  if (mysqli_affected_rows($conn) > 0) {
+    $_SESSION['snackalert'] = ["type" => "success", "text" => "Uwaga została dodana"];
+  } else {
+    $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się dodać uwagi"];
+  }
+} else {
+  $_SESSION['snackalert'] = ["type" => "error", "text" => "Formularz został błędnie wypełniony"];
 }
 header("Location: http://{$_SERVER['HTTP_HOST']}/teacher/notes.php");

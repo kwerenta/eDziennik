@@ -39,6 +39,15 @@ const isEmpty = inputs => {
   return empty;
 };
 
+const changeRequired = (prev, next) => {
+  prev.forEach(input => {
+    input.required = false;
+  });
+  next.forEach(input => {
+    input.required = true;
+  });
+};
+
 const signInUp = gsap
   .timeline({ paused: true })
   .to([".form--signin", ".form__changeForm"], { clipPath: "inset(0% 100%)", duration: 0.25 })
@@ -82,18 +91,10 @@ nextTab.addEventListener("click", e => {
 
   const isPhoneCorrect = phoneInput.value.match("^[0-9]{6}(?:[0-9]{3})?$");
 
-  // if (!isPhoneCorrect && accountType.value !== "student") {
-  //   phoneInput.setCustomValidity("Numer telefonu powinien być w formacie: 123456789 lub 123456");
-  // }
-  if (!isEmpty(inputsArray) && isPhoneCorrect) {
-    inputsArray.forEach(input => {
-      input.required = false;
-    });
-    loginInputs.forEach(input => {
-      input.required = true;
-    });
+  if (!isEmpty(inputsArray)) {
+    changeRequired(inputsArray, loginInputs);
     personalLoginData.play();
-    e.preventDefault();
+    // e.preventDefault();
   }
 });
 
@@ -101,13 +102,7 @@ prevTab.addEventListener("click", () => {
   const inputsArray = Array.from(personalInputs);
   inputsArray.push(accountType.value === "student" ? classInput : phoneInput);
   personalLoginData.reverse();
-
-  loginInputs.forEach(input => {
-    input.required = false;
-  });
-  inputsArray.forEach(input => {
-    input.required = true;
-  });
+  changeRequired(loginInputs, inputsArray);
 });
 
 accountType.addEventListener("change", e => {

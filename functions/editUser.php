@@ -32,6 +32,14 @@ if (!isEmpty() && $isLastInputCorrect) {
     mysqli_real_escape_string($conn, $_POST['id']),
   );
   mysqli_query($conn, $sql);
+
+  if (mysqli_affected_rows($conn) > 0) {
+    $_SESSION['snackalert'] = ["type" => "success", "text" => "Użytkownik został zedytowany"];
+  } else {
+    $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się zedytować użytkownia"];
+  };
+} else {
+  $_SESSION['snackalert'] = ["type" => "error", "text" => "Formularz został błędnie wypełniony"];
 }
 
 header("Location: http://{$_SERVER['HTTP_HOST']}/admin/users.php");

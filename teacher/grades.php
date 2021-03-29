@@ -6,11 +6,18 @@ require_once '../db.php';
 require '../view.php';
 require_once '../config.php';
 $header = new View('header');
-$header->allocate('scripts', ['clock', GSAP, 'overlay', 'changeList']);
+$header->allocate('scripts', ['clock', GSAP, 'overlay', 'changeList', 'snackalert']);
 $header->render();
 
 $navbar = new View('navbar');
 $navbar->render();
+
+if (isset($_SESSION['snackalert'])) {
+  $snackalert = new View('snackalert');
+  $snackalert->allocate('alert', [$_SESSION['snackalert']['type'], $_SESSION['snackalert']['text']]);
+  $snackalert->render();
+  unset($_SESSION['snackalert']);
+}
 
 $conn = connectToDB();
 

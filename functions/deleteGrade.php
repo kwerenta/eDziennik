@@ -15,5 +15,10 @@ $sql = sprintf(
   $_SESSION['subject']['id']
 );
 mysqli_query($conn, $sql);
+if (mysqli_affected_rows($conn) > 0) {
+  $_SESSION['snackalert'] = ["type" => "success", "text" => "Ocena została usunięta"];
+} else {
+  $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się usunąć oceny"];
+};
 
 header("Location: http://{$_SERVER['HTTP_HOST']}/teacher/grades.php");

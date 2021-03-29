@@ -14,7 +14,15 @@ if ($isTypeCorrect) {
     $isLastInputCorrect = isPhoneCorrect();
   }
 }
-if (!isEmpty() && isEmailCorrect() && $isLastInputCorrect && $isTypeCorrect) {
+if (
+  !isEmpty() &&
+  isEmailCorrect() &&
+  isLenghtCorrect($_POST["firstName"], 1, 100) &&
+  isLenghtCorrect($_POST["lastName"], 1, 100) &&
+  isLenghtCorrect($_POST['password'], 8, 32) &&
+  $isLastInputCorrect &&
+  $isTypeCorrect
+) {
 
   $sql = sprintf(
     "SELECT `email` FROM users WHERE `email`='%s'",

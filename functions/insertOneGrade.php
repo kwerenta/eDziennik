@@ -7,21 +7,12 @@ if (!isset($_SESSION["user"]) || (isset($_SESSION["user"]) && $_SESSION['user'][
 
 require 'validate.php';
 
-$isStudentOk = true;
-$isCategoryOk = true;
+$isStudentOk = in_array($_POST['student'], array_column($_SESSION['students'], "id"));
+$isCategoryOk = in_array($_POST['category'], array_column($_SESSION['categories'], "id"));
 
-if (!in_array($_POST['student'], array_column($_SESSION['students'], "id"))) {
-  $isStudentOk = false;
-}
-if (!in_array($_POST['category'], array_column($_SESSION['categories'], "id"))) {
-  $isCategoryOk = false;
-}
-
-
-if (!isEmpty() && $isCategoryOk && isValueCorrect($_POST['grade'], 1, 6) && $isStudentOk) {
+if (!isEmpty('description') && $isCategoryOk && isValueCorrect($_POST['grade'], 1, 6) && $isStudentOk) {
   require "../db.php";
   $conn = connectToDB();
-
   $sql = <<<SQL
   INSERT INTO grades
   (`student_id`,
@@ -40,7 +31,13 @@ if (!isEmpty() && $isCategoryOk && isValueCorrect($_POST['grade'], 1, 6) && $isS
   "{$_POST['description']}",
   CURRENT_TIMESTAMP())
 SQL;
-
   mysqli_query($conn, $sql);
+  if (mysqli_affected_rows($conn) > 0) {
+    $_SESSION['snackalert'] = ["type" => "success", "text" => "Ocena została dodana"];
+  } else {
+    $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się dodać oceny"];
+  }
+} else {
+  $_SESSION['snackalert'] = ["type" => "error", "text" => "Formularz został błędnie wypełniony"];
 }
 header("Location: http://{$_SERVER['HTTP_HOST']}/teacher/grades.php");

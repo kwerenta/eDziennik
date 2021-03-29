@@ -17,8 +17,15 @@ $isActivated = mysqli_query($conn, $sql);
 
 if ($isActivated->num_rows !== 0) {
   $newValue = $_POST['isActivated'] === "0" ? 1 : 0;
+  $snackText = $newValue === 1 ? "odblokowa" : "zablokowa";
   $sql = "UPDATE users SET `isActivated` = {$newValue} WHERE `id`={$_POST['id']} AND `email`='{$_POST['email']}'";
   mysqli_query($conn, $sql);
+
+  if (mysqli_affected_rows($conn) > 0) {
+    $_SESSION['snackalert'] = ["type" => "success", "text" => "Użytkownik został {$snackText}ny"];
+  } else {
+    $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się {$snackText}ć użytkownia"];
+  };
 }
 
 header("Location: http://{$_SERVER['HTTP_HOST']}/admin/users.php");

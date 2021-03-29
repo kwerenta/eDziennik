@@ -15,7 +15,7 @@
     }
     ?>
     <input type="email" name="email" autocomplete="email" placeholder="E-mail" required>
-    <input type="password" name="password" autocomplete="current-password" placeholder="Hasło" required>
+    <input type="password" name="password" autocomplete="current-password" maxlength="32" placeholder="Hasło" required>
     <button type="submit" class="form__submit form__submit--signin">Zaloguj się</button>
     <p class="form__textButton form__textButton--resetPassword">Nie pamiętam hasła</p>
   </form>
@@ -26,8 +26,8 @@
         <option value="student" selected>Uczeń</option>
         <option value="teacher">Nauczyciel</option>
       </select>
-      <input type="text" name="firstName" autocomplete="given-name" placeholder="Imię" max="100" required>
-      <input type="text" name="lastName" autocomplete="family-name" placeholder="Nazwisko" max="100" required>
+      <input type="text" name="firstName" autocomplete="given-name" placeholder="Imię" maxlength="100" required>
+      <input type="text" name="lastName" autocomplete="family-name" placeholder="Nazwisko" maxlength="100" required>
       <select name="class" required>
         <option value="" selected disabled hidden>Klasa</option>
         <?php
@@ -41,13 +41,13 @@
         }
         ?>
       </select>
-      <input type="text" name="phone" autocomplete="tel" pattern="/^[0-9]{6}(?:[0-9]{3})?$/" placeholder="Numer telefonu">
-      <button class="form__button form__button--next" type="submit">Przejdź dalej</button>
+      <input type="text" name="phone" autocomplete="tel" placeholder="Numer telefonu">
+      <button class="form__button form__button--next" type="button">Przejdź dalej</button>
     </div>
     <div class="form__tab form__tab--login">
       <input type="email" name="email" autocomplete="email" placeholder="E-mail">
-      <input type="password" name="password" autocomplete="new-password" placeholder="Hasło">
-      <input type="password" name="confirmPassword" autocomplete="new-password" placeholder="Potwierdź hasło">
+      <input type="password" name="password" autocomplete="new-password" minlength="8" maxlength="32" placeholder="Hasło">
+      <input type="password" name="confirmPassword" autocomplete="new-password" minlength="8" maxlength="32" placeholder="Potwierdź hasło">
       <button class="form__button form__button--prev" type="button">Wróć</button>
       <button type="submit" class="form__submit form__submit--signup">Zarejestruj się</button>
     </div>
