@@ -13,41 +13,23 @@ function getUsers($amount = 0)
     $users[$row['id']] = $row;
   }
 
-  // $limit = $amount > 0 ? "ORDER BY `user_id` DESC LIMIT {$amount}" : "";
+  foreach (["admins", "teachers", "students"] as $rank) {
+    $displayRank = $rank === "admins" ? "Administrator" : ($rank === "teachers" ? "Nauczyciel" : "Uczeń");
+    $lastField = $rank === "students" ? "class" : "phone";
 
-  // $sql = "(SELECT `user_id`,`first_name`,`last_name`,`class` lastField FROM students) {$limit}
-  // UNION ALL 
-  // (SELECT `user_id`,`first_name`,`last_name`,`phone` lastField FROM teachers) {$limit}
-  // UNION ALL 
-  // (SELECT `user_id`,`first_name`,`last_name`,`phone` lastField FROM admins) {$limit}
-  // {$limit}
-  // ";
-
-  foreach ($users as $index => $user) {
-    switch ($user['rank']) {
-      case '1':
-        $rank['displayName'] = "Administrator";
-        $rank['name'] = "admin";
-        break;
-      case '2':
-        $rank['displayName'] = "Nauczyciel";
-        $rank['name'] = "teacher";
-        break;
-      default:
-        $rank['displayName'] = "Uczeń";
-        $rank['name'] = "student";
-    }
-    $lastField = $rank['name'] === "student" ? "class" : "phone";
-    $sql = "SELECT `first_name`,`last_name`, `id`, `{$lastField}` FROM {$rank['name']}s WHERE `user_id` = {$user['id']}";
+    $sql = "SELECT `first_name`, `last_name`, `id`,`user_id`, `{$lastField}` FROM {$rank}";
     $query = mysqli_query($conn, $sql);
-    $personalData = mysqli_fetch_array($query);
-
-    $users[$index]['rank'] = $rank['displayName'];
-    $users[$index]['first_name'] = $personalData['first_name'];
-    $users[$index]['last_name'] = $personalData['last_name'];
-    $users[$index]['type_id'] = $personalData['id'];
-    $users[$index]['last_field'] = $personalData[$lastField];
+    while (($row = mysqli_fetch_array($query)) !== null) {
+      if ($users[$row['user_id']]) {
+        $users[$row['user_id']]['rank'] = $displayRank;
+        $users[$row['user_id']]['first_name'] = $row['first_name'];
+        $users[$row['user_id']]['last_name'] = $row['last_name'];
+        $users[$row['user_id']]['type_id'] = $row['id'];
+        $users[$row['user_id']]['last_field'] = $row[$lastField];
+      }
+    }
   }
+
   if ($amount === 0) {
     $filter['students'] = array_filter($users, fn ($user) => $user['rank'] === "Uczeń");
     $filter['teachers'] = array_filter($users, fn ($user) => $user['rank'] === "Nauczyciel");
