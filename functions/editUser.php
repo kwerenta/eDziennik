@@ -8,36 +8,59 @@ if (!isset($_SESSION["user"]) || (isset($_SESSION["user"]) && $_SESSION['user'][
 require 'validate.php';
 
 $isLastInputCorrect = false;
+$isStudent = !empty($_POST['class']);
 
-if (!empty($_POST['class'])) {
+
+if ($isStudent) {
   $isLastInputCorrect = isClassCorrect();
 } else {
   $isLastInputCorrect = isPhoneCorrect();
 }
 
 if (!isEmpty() && $isLastInputCorrect) {
-  require "../db.php";
+  require_once "../db.php";
   $conn = connectToDB();
 
   $rank = isset($_POST['class']) ? "students" : "teachers";
-  $lastField = isset($_POST['class']) ? "`class`='{$_POST['class']}'" : "`phone`='{$_POST['phone']}'";
+  $lastField = isset($_POST['class']) ? "class" : "phone";
 
-  $sql = sprintf(
-    "UPDATE %s SET `first_name` = '%s', `last_name`= '%s', %s WHERE `id`=%s AND `user_id`=%s",
-    $rank,
-    mysqli_real_escape_string($conn, $_POST['first_name']),
-    mysqli_real_escape_string($conn, $_POST['last_name']),
-    $lastField,
-    mysqli_real_escape_string($conn, $_POST['typeid']),
-    mysqli_real_escape_string($conn, $_POST['id']),
-  );
-  mysqli_query($conn, $sql);
+  mysqli_begin_transaction($conn);
+  mysqli_autocommit($conn, false);
+  try {
+    $sql = sprintf(
+      "UPDATE %s SET
+    `first_name` = '%s', 
+    `last_name`= '%s', 
+    `%s`='%s' 
+    WHERE `id`=%s AND `user_id`=%s
+    ",
+      $rank,
+      mysqli_real_escape_string($conn, $_POST['first_name']),
+      mysqli_real_escape_string($conn, $_POST['last_name']),
+      $lastField,
+      mysqli_real_escape_string($conn, $_POST[$lastField]),
+      mysqli_real_escape_string($conn, $_POST['typeid']),
+      mysqli_real_escape_string($conn, $_POST['id'])
+    );
+    mysqli_query($conn, $sql);
 
-  if (mysqli_affected_rows($conn) > 0) {
+    $sql = sprintf(
+      "UPDATE users SET
+      `email` = '%s' 
+      WHERE `id`=%s
+      ",
+      mysqli_real_escape_string($conn, $_POST['email']),
+      mysqli_real_escape_string($conn, $_POST['id'])
+    );
+    mysqli_query($conn, $sql);
+
     $_SESSION['snackalert'] = ["type" => "success", "text" => "Użytkownik został zedytowany"];
-  } else {
+    mysqli_commit($conn);
+  } catch (mysqli_sql_exception $e) {
     $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się zedytować użytkownia"];
-  };
+    mysqli_rollback($conn);
+    throw $e;
+  }
 } else {
   $_SESSION['snackalert'] = ["type" => "error", "text" => "Formularz został błędnie wypełniony"];
 }

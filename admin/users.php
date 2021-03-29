@@ -62,9 +62,9 @@ $users = getUsers();
     <div class="overlay__content">
       <h1 class="overlay__header">Edycja użytkownika</h1>
       <form class="form form--overlay" method="POST">
-        <input disabled type="text" name="email" placeholder="E-Mail">
-        <input type="text" name="first_name" placeholder="Imię">
-        <input type="text" name="last_name" placeholder="Nazwisko">
+        <input type="email" name="email" placeholder="E-Mail" required>
+        <input type="text" name="first_name" placeholder="Imię" maxlength="100" required>
+        <input type="text" name="last_name" placeholder="Nazwisko" maxlength="100" required>
         <input type="text" name="phone" placeholder="Numer telefonu">
         <select name="class">
           <option value="" selected disabled hidden>Klasa</option>

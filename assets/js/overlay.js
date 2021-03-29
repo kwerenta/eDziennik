@@ -114,7 +114,6 @@ editBtn.addEventListener("click", e => {
   if (!isEmpty) {
     if (email) {
       form.action = "../functions/editUser.php";
-      email.disabled = false;
       (phone.style.display === "block" ? studentClass : phone).disabled = true;
     } else {
       form.action = "../functions/editGrade.php";

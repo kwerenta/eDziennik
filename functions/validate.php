@@ -2,7 +2,7 @@
 function isEmpty(string $notRequired = "")
 {
   foreach ($_POST as $index => $value) {
-    if (empty($value) && $index !== $notRequired) return true;
+    if ($value === null && $index !== $notRequired) return true;
   }
   return false;
 }
