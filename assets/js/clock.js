@@ -2,21 +2,15 @@ window.onload = () => {
   const clock = document.querySelector(".navbar__clock");
 
   const timeString = clock.innerText;
-  const hoursString = timeString.substr(0, 2);
-  const minutesString = timeString.substr(3, 2);
-  const secondsString = timeString.substr(6, 2);
-
-  let time = new Date();
-  time.setHours(hoursString);
-  time.setMinutes(minutesString);
-  time.setSeconds(secondsString);
-  time = Math.floor(time / 1000);
+  const serverTime = Date.parse(Date(timeString));
+  const clientTime = Date.now();
+  const timeDiff = clientTime - serverTime;
+  const timezoneDiff = new Date(serverTime).getTimezoneOffset() * 60000;
 
   if (clock) {
     setInterval(() => {
-      time++;
-      const displayTime = new Date((time + 3600) * 1000).toISOString().substr(11, 8);
-      clock.innerHTML = `${displayTime}`;
+      const displayTime = new Date(Date.now() + timeDiff - timezoneDiff).toISOString().substr(11, 8);
+      clock.innerText = `${displayTime}`;
     }, 1000);
   }
 };

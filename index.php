@@ -7,6 +7,7 @@ if (isset($_SESSION["user"])) {
   exit();
 }
 require 'view.php';
+require 'config.php';
 
 $numbers = ['1', '2', '3', '4'];
 $letters = ['A', 'B', 'C', 'D'];
@@ -19,7 +20,7 @@ foreach ($numbers as $number) {
 
 
 $header = new View('header');
-$header->allocate('scripts', ['https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js', 'changeForm']);
+$header->allocate('scripts', [GSAP, 'changeForm']);
 $header->render();
 
 $forms = new View("forms");

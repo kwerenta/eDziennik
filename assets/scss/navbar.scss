@@ -17,7 +17,7 @@
   &__item {
     width: 100%;
 
-    &:last-child {
+    &:nth-last-child(2) {
       margin-top: auto;
     }
   }
@@ -29,6 +29,10 @@
     height: 5rem;
     text-decoration: none;
     transition: background 0.3s;
+
+    &--settings {
+      cursor: pointer;
+    }
 
     &:hover {
       background: var(--secondary-bg-color);

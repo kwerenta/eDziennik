@@ -32,6 +32,12 @@
     }
     ?>
     <li class="navbar__item">
+      <div class="navbar__link navbar__link--settings">
+        <?php echo file_get_contents("../assets/icons/user-cog-solid.svg") ?>
+        <span class="navbar__text">Ustawienia</span>
+      </div>
+    </li>
+    <li class="navbar__item">
       <a href="../functions/logout.php" class="navbar__link">
         <?php echo file_get_contents("../assets/icons/sign-out-alt-solid.svg") ?>
         <span class="navbar__text">Wyloguj się</span>

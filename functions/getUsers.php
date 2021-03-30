@@ -17,7 +17,7 @@ function getUsers($amount = 0)
     $displayRank = $rank === "admins" ? "Administrator" : ($rank === "teachers" ? "Nauczyciel" : "Uczeń");
     $lastField = $rank === "students" ? "class" : "phone";
 
-    $sql = "SELECT `first_name`, `last_name`, `id`,`user_id`, `{$lastField}` FROM {$rank}";
+    $sql = "SELECT `first_name`, `last_name`, `id`,`user_id`, `{$lastField}` FROM {$rank} {$limit}";
     $query = mysqli_query($conn, $sql);
     while (($row = mysqli_fetch_array($query)) !== null) {
       if ($users[$row['user_id']]) {
