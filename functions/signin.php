@@ -27,7 +27,7 @@ if (isset($user) && password_verify($_POST['password'], $user['password'])) {
 
   $sql = "SELECT * FROM {$rank}s WHERE `user_id` = {$user['id']}";
   $query = mysqli_query($conn, $sql);
-  if ($query) {
+  if (mysqli_num_rows($query)) {
     $data = mysqli_fetch_array($query);
     $data['rank'] = $rank;
     if (isset($data['id'])) $data['id'] = intval($data['id']);

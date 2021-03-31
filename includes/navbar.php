@@ -31,6 +31,7 @@
         HTML;
     }
     ?>
+
     <li class="navbar__item">
       <div class="navbar__link navbar__link--settings">
         <?php echo file_get_contents("../assets/icons/user-cog-solid.svg") ?>

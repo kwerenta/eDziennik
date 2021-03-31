@@ -22,11 +22,13 @@ const editBtn = document.querySelector(".form__submit--edit");
 const deleteBtn = document.querySelector(".form__submit--delete");
 const deleteText = deleteBtn.querySelector("h4");
 
-const tl = gsap.timeline({ paused: true });
-tl.to(overlay, 0.2, { autoAlpha: 1 }).from(".overlay__content", 0.6, {
-  y: -850,
-  ease: Elastic.easeOut.config(1, 0.75),
-});
+const tl = gsap
+  .timeline({ paused: true })
+  .to(overlay, 0.2, { autoAlpha: 1 })
+  .from(".overlay__content", 0.6, {
+    y: -850,
+    ease: Elastic.easeOut.config(1, 0.75),
+  });
 
 gradesItems?.forEach(item => {
   item.addEventListener("click", e => {

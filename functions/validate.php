@@ -1,4 +1,5 @@
 <?php
+session_start();
 function isEmpty(string $notRequired = "")
 {
   foreach ($_POST as $index => $value) {
@@ -14,14 +15,9 @@ function isEmailCorrect()
 
 function isClassCorrect()
 {
-  $letters = ['A', 'B', 'C', 'D'];
-  $numbers = ['1', '2', '3', '4'];
-  foreach ($numbers as $number) {
-    foreach ($letters as $letter) {
-      $class = $number . $letter;
-      if (!empty($_POST['class']) && $_POST['class'] === $class) {
-        return true;
-      }
+  foreach ($_SESSION['classes'] as $class) {
+    if (!empty($_POST['class']) && $_POST['class'] === $class) {
+      return true;
     }
   }
   return false;

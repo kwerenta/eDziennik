@@ -36,11 +36,13 @@ if (
     exit();
   }
 
-  $pass = password_hash($_POST['password'], PASSWORD_BCRYPT);
-  $sql = "INSERT INTO users(`email`,`password`) VALUES ('{$_POST['email']}','{$pass}')";
-  $newUser = mysqli_query($conn, $sql);
+  mysqli_begin_transaction($conn);
+  mysqli_autocommit($conn, false);
+  try {
+    $pass = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $sql = "INSERT INTO users(`email`,`password`) VALUES ('{$_POST['email']}','{$pass}')";
+    mysqli_query($conn, $sql);
 
-  if ($newUser) {
     $id = mysqli_insert_id($conn);
     $lastField = $_POST['type'] === "student" ? "class" : "phone";
     $sql = <<<SQL
@@ -50,14 +52,20 @@ if (
       "{$_POST['lastName']}",
       "{$_POST[$lastField]}");
     SQL;
-    $newData = mysqli_query($conn, $sql);
-    if ($newData && $_POST['type'] === "teacher") {
+    mysqli_query($conn, $sql);
+    if ($_POST['type'] === "teacher") {
       $sql = "INSERT INTO ranks VALUES ({$id},2)";
       mysqli_query($conn, $sql);
-      $_SESSION['formInfos']['success'] = "Twoje konto zostało utworzone,<br>czekaj na aktywację!";
     }
+    $_SESSION['formInfos']['success'] = "Twoje konto zostało utworzone,<br>czekaj na aktywację!";
+    mysqli_commit($conn);
+  } catch (mysqli_sql_exception $e) {
+    $_SESSION['formInfos']['error'] = "Formularz został błędnie wypełniony!";
+    mysqli_rollback($conn);
+    throw $e;
   }
 } else {
   $_SESSION['formInfos']['error'] = "Formularz został błędnie wypełniony!";
 }
+
 header("Location: http://{$_SERVER['HTTP_HOST']}/");

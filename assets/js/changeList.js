@@ -5,7 +5,8 @@ const changeHeader = index => {
   const panel =
     document.querySelector(".studentContainer--grades") ||
     document.querySelector(".adminContainer--users") ||
-    document.querySelector(".teacherContainer--grades");
+    document.querySelector(".teacherContainer--grades") ||
+    document.querySelector(".teacherContainer--notes");
   const panelChildren = panel.querySelectorAll(`:scope > div:not(:first-child)`);
   const changeChild = panel.querySelector(`:scope > div:nth-child(${index + 2})`);
   const activeBar = document.querySelector(".menu__activeBar");

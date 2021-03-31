@@ -69,13 +69,8 @@ $users = getUsers();
         <select name="class">
           <option value="" selected disabled hidden>Klasa</option>
           <?php
-          $numbers = ['1', '2', '3', '4'];
-          $letters = ['A', 'B', 'C', 'D'];
-          foreach ($numbers as $number) {
-            foreach ($letters as $letter) {
-              $class = $number . $letter;
-              echo "<option value='{$class}'>{$class}</option>";
-            }
+          foreach ($_SESSION['classes'] as $class) {
+            echo "<option value='{$class}'>{$class}</option>";
           }
           ?>
         </select>
