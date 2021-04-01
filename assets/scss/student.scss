@@ -1,19 +1,6 @@
 @import "pages/student/index";
 
 .studentContainer {
-  background-color: var(--tile-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 1rem;
-  padding: 1rem 2rem;
-  margin: 0 auto;
-  width: 70%;
-  min-width: 1000px;
-  box-shadow: var(--shadow);
-  height: 100%;
-  min-height: 600px;
-
   @import "pages/student/grades";
   @import "pages/student/notes";
   @import "pages/student/timetable";
