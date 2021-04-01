@@ -11,6 +11,11 @@
   }
   &__item {
     margin: 0 1rem 2rem;
+    cursor: pointer;
+    transition: background 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+    &:hover {
+      background: #ccc;
+    }
 
     &:first-child {
       padding-top: 2rem;

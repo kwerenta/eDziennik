@@ -1,0 +1,39 @@
+.timetable {
+  &__title {
+    border-bottom: 3px solid #ccc;
+    text-align: center;
+    width: 100%;
+    margin: 0 1rem;
+  }
+  &__table {
+    width: 100%;
+    padding: 2rem;
+    border-spacing: 0;
+  }
+  &__row {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+
+    &:not(:first-child) > * {
+      padding: 0.625rem 0;
+      border-right: 2px solid #ccc;
+      &:first-child {
+        background: #eee;
+      }
+    }
+
+    &:first-child {
+      margin-bottom: 1rem;
+      background: #eee;
+    }
+
+    & > *:first-child {
+      width: 10%;
+    }
+    & > *:not(:first-child) {
+      width: 18%;
+      border-bottom: 2px solid #ccc;
+    }
+  }
+}

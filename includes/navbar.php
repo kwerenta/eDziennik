@@ -16,6 +16,7 @@
       $options[] = array("name" => "Oceny", "icon" => "award", "file" => "grades");
       $options[] = array("name" => "Uwagi", "icon" => "theater-masks", "file" => "notes");
     }
+    if ($_SESSION['user']['rank'] === "student") $options[] = array("name" => "Plan lekcji", "icon" => "calendar-alt", "file" => "timetable");
     if ($_SESSION['user']['rank'] === "teacher") $options[] = array("name" => "Panel wyboru", "icon" => "edit", "file" => "selection");
 
     foreach ($options as $option) {

@@ -41,13 +41,13 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
       <?php
       foreach ($_SESSION['students'] as $index => $student) {
         if (!empty($notes[$index])) {
-          echo "<div class='notes__item--detailedSubject'><h2>{$student['last_name']} {$student['first_name']}</h2>";
+          echo "<div class='notes__item--student'><h2>{$student['last_name']} {$student['first_name']}</h2>";
 
           foreach ($notes[$index] as $note) {
             $sign = $note['points'] <= 0 ? "" : "+";
             $description = $note['description'] === "" ? "Brak opisu" : $note['description'];
             echo <<<HTML
-          <div class="notes__item">
+          <div class="notes__item" data-studentid={$note['student_id']} data-noteid={$note['id']}>
             <div class="notes__title">
               <h2>{$sign}{$note['points']}</h2>
               <h3>{$note['date']}</h3>
@@ -87,7 +87,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
         <input type="number" name="points" placeholder="Punkty" min="-150" max="150" required>
         </select>
         <textarea type="text" name="description" placeholder="Opis" cols="40" rows="10"></textarea>
-        <button class="form__submit form__submit--insert form__submit--insertNote" type="submit">Dodaj uwagę</button>
+        <button class="form__submit form__submit--insert form__submit--insertNote" type="submit">Dodaj uwagi</button>
       </form>
     </div>
   </div>
