@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 function isEmpty(string $notRequired = "")
 {
   foreach ($_POST as $index => $value) {
@@ -21,6 +23,14 @@ function isClassCorrect()
     }
   }
   return false;
+}
+
+function isStudentCorrect()
+{
+  foreach ($_POST['student_id'] as $id) {
+    if (!in_array($id, array_column($_SESSION['students'], "id"))) return false;
+  }
+  return true;
 }
 
 function isPhoneCorrect()

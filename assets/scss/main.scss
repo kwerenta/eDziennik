@@ -51,7 +51,6 @@ main {
     min-width: 1000px;
     box-shadow: var(--shadow);
     height: 100%;
-    min-height: 600px;
   }
 }
 
@@ -144,6 +143,28 @@ main {
     transition: opacity 0.3s;
     &:hover {
       opacity: 1;
+    }
+  }
+}
+.insertMany {
+  &__topInputs {
+    width: 40%;
+  }
+  &__list {
+    width: 100%;
+    margin-top: 4rem;
+  }
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    & > *:first-child {
+      flex: 3;
+    }
+    & > *:not(:first-child) {
+      flex: 2;
     }
   }
 }

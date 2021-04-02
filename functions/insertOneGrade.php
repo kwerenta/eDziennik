@@ -20,16 +20,14 @@ if (!isEmpty('description') && $isCategoryOk && isValueCorrect($_POST['grade'], 
   `subject_id`,
   `category_id`,
   `grade`,
-  `description`,
-  `date`) 
+  `description`) 
   VALUES 
   ({$_POST['student']},
   {$_SESSION['user']['id']},
   {$_SESSION['subject']['id']},
   {$_POST['category']},
   {$_POST['grade']},
-  "{$_POST['description']}",
-  CURRENT_TIMESTAMP())
+  "{$_POST['description']}")
 SQL;
   mysqli_query($conn, $sql);
   if (mysqli_affected_rows($conn) > 0) {

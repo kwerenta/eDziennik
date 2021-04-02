@@ -63,7 +63,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
         if (isset($studentGrades[$student['id']])) {
           $details = function ($grade) {
             $category = $_SESSION['categories'][$grade['category_id']];
-            $description = empty($grade['description']) === "" ? "Brak opisu" : $grade['description'];
+            $description = empty($grade['description']) ? "Brak opisu" : $grade['description'];
             return <<<HTML
             <div class="item__container"
             data-grade={$grade['grade']} 
@@ -121,18 +121,32 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
       </form>
     </div>
     <div class="grades__insertMany">
-      <form class="form form--gradesInsertOne" action="../functions/insertOneGrade.php" method="POST">
-        <input type="number" name="grade" placeholder="Ocena" min="1" max="6" required>
-        <select name="category" required>
-          <option value="" selected disabled hidden>Kategoria (waga)</option>
+      <form class="form form--gradesInsertMany" action="../functions/insertManyGrades.php" method="POST">
+        <div class="insertMany__topInputs">
+          <select name="category" required>
+            <option value="" selected disabled hidden>Kategoria (waga)</option>
+            <?php
+            foreach ($_SESSION['categories'] as $category) {
+              echo "<option value='{$category['id']}'>{$category['name']} ({$category['weight']})</option>";
+            }
+            ?>
+          </select>
+          <input type="text" name="description" placeholder="Opis">
+          <button class="form__submit form__submit--insert form__submit--gradesInsertOne" type="submit">Dodaj oceny</button>
+        </div>
+        <div class="insertMany__list">
           <?php
-          foreach ($_SESSION['categories'] as $category) {
-            echo "<option value='{$category['id']}'>{$category['name']} ({$category['weight']})</option>";
+          foreach ($_SESSION['students'] as $student) {
+            echo <<<HTML
+          <div class="insertMany__item">
+            <h2>{$student['last_name']} {$student['first_name']}</h2> 
+            <input type="number" name="grade[]" placeholder="Ocena" min="1" max="6">
+            <input type="hidden" name="student_id[]" value={$student['id']}>
+          </div>
+          HTML;
           }
           ?>
-        </select>
-        <input type="text" name="description" placeholder="Opis">
-        <button class="form__submit form__submit--insert form__submit--gradesInsertOne" type="submit">Dodaj oceny</button>
+        </div>
       </form>
     </div>
   </div>
