@@ -84,10 +84,23 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
     </div>
     <div class="notes__insertMany">
       <form class="form form--notes" action="../functions/insertManyNotes.php" method="POST">
-        <input type="number" name="points" placeholder="Punkty" min="-150" max="150" required>
-        </select>
-        <textarea type="text" name="description" placeholder="Opis" cols="40" rows="10"></textarea>
-        <button class="form__submit form__submit--insert form__submit--insertNote" type="submit">Dodaj uwagi</button>
+        <div class="insertMany__topInputs">
+          <textarea type="text" name="description" placeholder="Opis" cols="40" rows="10"></textarea>
+          <button class="form__submit form__submit--insert form__submit--insertNote" type="submit">Dodaj uwagi</button>
+        </div>
+        <div class="insertMany__list">
+          <?php
+          foreach ($_SESSION['students'] as $student) {
+            echo <<<HTML
+          <div class="insertMany__item">
+            <h2>{$student['last_name']} {$student['first_name']}</h2> 
+            <input type="number" name="points[]" placeholder="Punkty" min="-150" max="150">
+            <input type="hidden" name="student_id[]" value={$student['id']}>
+          </div>
+          HTML;
+          }
+          ?>
+        </div>
       </form>
     </div>
   </div>

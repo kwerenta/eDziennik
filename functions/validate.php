@@ -25,7 +25,7 @@ function isClassCorrect()
   return false;
 }
 
-function isStudentCorrect()
+function areStudentsCorrect()
 {
   foreach ($_POST['student_id'] as $id) {
     if (!in_array($id, array_column($_SESSION['students'], "id"))) return false;

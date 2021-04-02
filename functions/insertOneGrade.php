@@ -13,7 +13,8 @@ $isCategoryOk = in_array($_POST['category'], array_column($_SESSION['categories'
 if (!isEmpty('description') && $isCategoryOk && isValueCorrect($_POST['grade'], 1, 6) && $isStudentOk) {
   require "../db.php";
   $conn = connectToDB();
-  $sql = <<<SQL
+  $sql = sprintf(
+    <<<SQL
   INSERT INTO grades
   (`student_id`,
   `teacher_id`,
@@ -22,13 +23,18 @@ if (!isEmpty('description') && $isCategoryOk && isValueCorrect($_POST['grade'], 
   `grade`,
   `description`) 
   VALUES 
-  ({$_POST['student']},
+  (%s,
   {$_SESSION['user']['id']},
   {$_SESSION['subject']['id']},
-  {$_POST['category']},
-  {$_POST['grade']},
-  "{$_POST['description']}")
-SQL;
+  %s,
+  %s,
+  "%s")
+SQL,
+    mysqli_real_escape_string($conn, $_POST['student']),
+    mysqli_real_escape_string($conn, $_POST['category']),
+    mysqli_real_escape_string($conn, $_POST['grade']),
+    mysqli_real_escape_string($conn, $_POST['description'])
+  );
   mysqli_query($conn, $sql);
   if (mysqli_affected_rows($conn) > 0) {
     $_SESSION['snackalert'] = ["type" => "success", "text" => "Ocena została dodana"];

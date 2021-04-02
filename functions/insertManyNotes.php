@@ -5,29 +5,41 @@ if (!isset($_SESSION["user"]) || (isset($_SESSION["user"]) && $_SESSION['user'][
   exit();
 }
 require 'validate.php';
-$isStudentOk = in_array($_POST['student'], array_column($_SESSION['students'], "id"));
 
-if (!isEmpty() && isValueCorrect($_POST['points'], -150, 150) && $isStudentOk) {
+$arePointsOk = true;
+
+foreach ($_POST['points'] as $points) {
+  if (!empty($points) && !isValueCorrect($points, -150, 150)) {
+    $arePointsOk = false;
+    break;
+  }
+}
+
+if ($arePointsOk && areStudentsCorrect()) {
   require "../db.php";
   $conn = connectToDB();
 
-  $sql = sprintf(
-    <<<SQL
+  $description = mysqli_real_escape_string($conn, $_POST['description']);
+
+  $prepareValue = function ($points, $id) use ($description) {
+    $studentId = $_POST['student_id'][$id];
+    return "({$studentId},{$_SESSION['user']['id']}, {$points}, '{$description}')";
+  };
+
+  $data = array_filter($_POST['points']);
+  $valuesArray = array_map($prepareValue, $data, array_keys($data));
+
+  $values = implode(",", $valuesArray);
+
+  $sql = <<<SQL
   INSERT INTO notes
   (`student_id`,
   `teacher_id`,
   `points`,
   `description`) 
   VALUES 
-  (%s,
-  {$_SESSION['user']['id']},
-  %s,
-  "%s")
-SQL,
-    mysqli_real_escape_string($conn, $_POST['student']),
-    mysqli_real_escape_string($conn, $_POST['points']),
-    mysqli_real_escape_string($conn, $_POST['description'])
-  );
+  {$values}
+SQL;
   mysqli_query($conn, $sql);
 
   if (mysqli_affected_rows($conn) > 0) {

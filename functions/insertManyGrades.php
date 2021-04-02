@@ -18,16 +18,15 @@ foreach ($_POST['grade'] as $grade) {
 
 $isCategoryOk = !empty($_POST['category']) ? in_array($_POST['category'], array_column($_SESSION['categories'], "id")) : false;
 
-if (!isEmpty('description') && $isCategoryOk && $areGradesOk && isStudentCorrect()) {
+if ($isCategoryOk && $areGradesOk && areStudentsCorrect()) {
   require "../db.php";
   $conn = connectToDB();
 
-  $description = empty($_POST['description']) ? "" : ", '{$_POST['description']}'";
-  $sqlDescription = $description === "" ? "" : ", `description`";
+  $description = mysqli_real_escape_string($conn, $_POST['description']);
 
   $prepareValue = function ($grade, $id) use ($description) {
     $studentId = $_POST['student_id'][$id];
-    return "({$studentId},{$_SESSION['user']['id']}, {$_SESSION['subject']['id']}, {$_POST['category']}, {$grade}{$description})";
+    return "({$studentId},{$_SESSION['user']['id']}, {$_SESSION['subject']['id']}, {$_POST['category']}, {$grade}, '{$description}')";
   };
 
   $data = array_filter($_POST['grade']);
@@ -41,8 +40,8 @@ if (!isEmpty('description') && $isCategoryOk && $areGradesOk && isStudentCorrect
   `teacher_id`,
   `subject_id`,
   `category_id`,
-  `grade`
-  {$sqlDescription}) 
+  `grade`,
+  `description`) 
   VALUES 
   {$values}
 SQL;
