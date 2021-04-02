@@ -6,7 +6,7 @@ require '../view.php';
 require_once '../db.php';
 require_once '../config.php';
 $header = new View('header');
-$header->allocate('scripts', ['clock', GSAP, 'changeList', 'snackalert']);
+$header->allocate('scripts', ['clock', GSAP, 'changeList', 'snackalert', 'overlay']);
 $header->render();
 
 $navbar = new View('navbar');
@@ -47,7 +47,10 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
             $sign = $note['points'] <= 0 ? "" : "+";
             $description = $note['description'] === "" ? "Brak opisu" : $note['description'];
             echo <<<HTML
-          <div class="notes__item" data-studentid={$note['student_id']} data-noteid={$note['id']}>
+          <div class="notes__item" 
+          data-studentid={$note['student_id']} 
+          data-noteid={$note['id']}
+          data-points={$note['points']}>
             <div class="notes__title">
               <h2>{$sign}{$note['points']}</h2>
               <h3>{$note['date']}</h3>
@@ -55,7 +58,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
             <div class="notes__data">
               <div>
                 <h4>Opis</h4>
-                <p>{$description}</p>
+                <p class="notes__description">{$description}</p>
               </div>
             </div>
           </div>
@@ -66,6 +69,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
       }
       ?>
     </div>
+
     <div class="notes__insertOne">
       <form class="form form--notes" action="../functions/insertOneNote.php" method="POST">
         <select name="student" required>
@@ -82,6 +86,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
         <button class="form__submit form__submit--insert form__submit--insertNote" type="submit">Dodaj uwagę</button>
       </form>
     </div>
+
     <div class="notes__insertMany">
       <form class="form form--notes" action="../functions/insertManyNotes.php" method="POST">
         <div class="insertMany__topInputs">
@@ -101,6 +106,24 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
           }
           ?>
         </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="overlay">
+    <div class="overlay__content">
+      <h1 class="overlay__header">Edycja uwagi</h1>
+      <form class="form form--overlay" method="POST">
+        <input type="number" name="points" placeholder="Punkty" min="-150" max="150" required>
+        </select>
+        <textarea type="text" name="description" placeholder="Opis" cols="50" rows="10"></textarea>
+        <input type="hidden" name="student_id" value="">
+        <input type="hidden" name="note_id" value="">
+        <button class="form__submit form__submit--edit" type="submit">Edytuj</button>
+        <button class="form__submit form__submit--delete" type="submit">
+          <h4>Usuń</h4>
+        </button>
+        <button class="form__button form__button--close">Anuluj</button>
       </form>
     </div>
   </div>

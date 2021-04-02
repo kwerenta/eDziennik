@@ -66,14 +66,12 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
             $description = empty($grade['description']) ? "Brak opisu" : $grade['description'];
             return <<<HTML
             <div class="item__container"
-            data-grade={$grade['grade']} 
             data-category={$grade['category_id']} 
-            data-description="{$grade['description']}" 
             data-student={$grade['student_id']}
             data-gradeid={$grade['id']}>
-              <p>{$grade['grade']}</p>
+              <p class="grades__text grades__text--grade">{$grade['grade']}</p>
               <div class="item__details">
-                <h4>Opis:</h4><p>{$description}</p>
+                <h4>Opis:</h4><p class="grades__text grades__text--description">{$description}</p>
                 <h4>Kategoria (waga):</h4><p>{$category['name']} ({$category['weight']})</p>
                 <h4>Data:</h4><p>{$grade['date']}</p>
                 <h4>Naciśnij, aby edytować</h4>

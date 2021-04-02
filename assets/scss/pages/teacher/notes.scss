@@ -14,16 +14,19 @@
     height: 100%;
   }
   &__item {
-    margin: 0 1rem 2rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
     cursor: pointer;
     transition: background 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+    border-bottom: 1px solid #ccc;
     &:hover {
       background: #ccc;
     }
-
-    &:first-child {
-      padding-top: 2rem;
-      border-top: 3px solid #ccc;
+    &--student {
+      margin-top: 2.5rem;
+      .notes__item:last-child {
+        border-bottom: 3px solid #ccc;
+      }
     }
   }
 
@@ -35,10 +38,7 @@
   &__data > div {
     display: flex;
     padding: 1rem;
-    border-bottom: 1px solid #ccc;
-    &:last-child {
-      border-bottom: 3px solid #ccc;
-    }
+
     & > h4 {
       flex: 1;
     }

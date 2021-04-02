@@ -1,5 +1,8 @@
 const form = document.querySelector(".form--overlay");
 const overlay = document.querySelector(".overlay");
+
+const usersItems = document.querySelectorAll(".users__list:not(.users__list--admins) > .users__item:not(:first-child)");
+const isActivated = overlay.querySelector("input[name='isActivated']");
 const email = overlay.querySelector("input[name='email']");
 const firstName = overlay.querySelector("input[name='first_name']");
 const lastName = overlay.querySelector("input[name='last_name']");
@@ -7,15 +10,18 @@ const phone = overlay.querySelector("input[name='phone']");
 const studentClass = overlay.querySelector("select[name='class']");
 const idInput = overlay.querySelector("input[name='id']");
 const typeidInput = overlay.querySelector("input[name='typeid']");
-const isActivated = overlay.querySelector("input[name='isActivated']");
-const usersItems = document.querySelectorAll(".users__list:not(.users__list--admins) > .users__item:not(:first-child)");
 
 const gradesItems = document.querySelectorAll(".item__container");
 const grade = overlay.querySelector("input[name='grade']");
 const category = overlay.querySelector("select[name='category']");
 const description = overlay.querySelector("input[name='description']");
-const studentId = overlay.querySelector("input[name='student_id']");
 const gradeId = overlay.querySelector("input[name='grade_id']");
+const studentId = overlay.querySelector("input[name='student_id']");
+
+const notesItems = document.querySelectorAll(".notes__item");
+const points = overlay.querySelector("input[name='points']");
+const noteDescription = overlay.querySelector("textarea[name='description']");
+const noteId = overlay.querySelector("input[name='note_id']");
 
 const closeBtn = document.querySelector(".form__button--close");
 const editBtn = document.querySelector(".form__submit--edit");
@@ -30,12 +36,25 @@ const tl = gsap
     ease: Elastic.easeOut.config(1, 0.75),
   });
 
+notesItems?.forEach(item => {
+  item.addEventListener("click", e => {
+    tl.play();
+    const descriptionText = e.currentTarget.querySelector(".notes__description").innerText;
+    points.value = e.currentTarget.dataset.points;
+    noteDescription.value = descriptionText === "Brak opisu" ? "" : descriptionText;
+    studentId.value = e.currentTarget.dataset.studentid;
+    noteId.value = e.currentTarget.dataset.noteid;
+  });
+});
+
 gradesItems?.forEach(item => {
   item.addEventListener("click", e => {
     tl.play();
-    grade.value = e.currentTarget.dataset.grade;
+    const descriptionText = e.currentTarget.querySelector(".grades__text--description").innerText;
+    const gradeText = e.currentTarget.querySelector(".grades__text--grade").innerText;
+    grade.value = gradeText;
     category.value = e.currentTarget.dataset.category;
-    description.value = e.currentTarget.dataset.description;
+    description.value = descriptionText === "Brak opisu" ? "" : descriptionText;
     studentId.value = e.currentTarget.dataset.student;
     gradeId.value = e.currentTarget.dataset.gradeid;
   });
@@ -92,7 +111,9 @@ deleteBtn.addEventListener("click", e => {
       form.action = "../functions/deactivateUser.php";
       email.disabled = false;
       (phone.style.display === "block" ? studentClass : phone).disabled = true;
-    } else {
+    } else if (points) {
+      form.action = "../functions/deleteNote.php";
+    } else if (grade) {
       form.action = "../functions/deleteGrade.php";
     }
     form.submit();
@@ -104,7 +125,9 @@ editBtn.addEventListener("click", e => {
   let isEmpty = false;
   const inputs = email
     ? [email, firstName, lastName, phone.style.display === "block" ? phone : studentClass]
-    : [grade, category];
+    : grade
+    ? [grade, category]
+    : [points];
   inputs.forEach(input => {
     if (!input.value) {
       isEmpty = true;
@@ -117,7 +140,9 @@ editBtn.addEventListener("click", e => {
     if (email) {
       form.action = "../functions/editUser.php";
       (phone.style.display === "block" ? studentClass : phone).disabled = true;
-    } else {
+    } else if (points) {
+      form.action = "../functions/editNote.php";
+    } else if (grade) {
       form.action = "../functions/editGrade.php";
     }
     form.submit();
