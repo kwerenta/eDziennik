@@ -87,6 +87,7 @@ $luckyNumber = mysqli_fetch_array($query, MYSQLI_NUM)[0];
         $teacher = $_SESSION['teachers'][$latestNote['teacher_id']];
         $sign = $latestNote['points'] <= 0 ? "" : "+";
         $date = date('d.m.Y', strtotime($latestNote['date']));
+        $description = empty($latestNote['description']) ? "Brak opisu" : $latestNote['description'];
 
         echo <<<HTML
         <div class="studentDashboard__latestNoteRow">
@@ -97,7 +98,7 @@ $luckyNumber = mysqli_fetch_array($query, MYSQLI_NUM)[0];
           <h3>{$teacher['first_name']} {$teacher['last_name']}</h3>
           <h2>{$sign}{$latestNote['points']}</h2>
         </div>
-        <p>{$latestNote['description']}</p>
+        <p>{$description}</p>
         HTML;
       } else {
         echo <<<HTML

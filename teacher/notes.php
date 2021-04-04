@@ -39,8 +39,10 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
     </div>
     <div class="notes__list">
       <?php
+      $noNotes = true;
       foreach ($_SESSION['students'] as $index => $student) {
         if (!empty($notes[$index])) {
+          $noNotes = false;
           echo "<div class='notes__item--student'><h2>{$student['last_name']} {$student['first_name']}</h2>";
 
           foreach ($notes[$index] as $note) {
@@ -67,6 +69,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
           echo "</div>";
         }
       }
+      if ($noNotes) echo "<h2>Brak uwag</h2>";
       ?>
     </div>
 

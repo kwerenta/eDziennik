@@ -2,6 +2,7 @@
 if (!empty($_GET)) {
   unset($_SESSION['class']);
   unset($_SESSION['subject']);
+  unset($_SESSION['students']);
 
   if (isset($_GET['class'])) {
     if (in_array($_GET['class'], $_SESSION['classes'])) {

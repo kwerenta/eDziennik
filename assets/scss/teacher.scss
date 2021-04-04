@@ -3,6 +3,7 @@
 .teacherContainer {
   &--subjectSelection {
     display: none;
+    position: relative;
   }
 
   @import "pages/teacher/grades";

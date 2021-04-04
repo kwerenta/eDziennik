@@ -2,6 +2,7 @@ const classContainer = document.querySelector(".teacherContainer--classSelection
 const classList = document.querySelector(".selection__content--class");
 const subjectContainer = document.querySelector(".teacherContainer--subjectSelection");
 const subjectList = document.querySelector(".selection__content--subject");
+const backButton = document.querySelector(".selection__back");
 
 let classChar = "";
 
@@ -33,4 +34,8 @@ subjectList.addEventListener("click", e => {
     const subjectChar = e.target.dataset.subjectid;
     window.location.href = `/teacher/index.php?class=${classChar}&subject=${subjectChar}`;
   }
+});
+
+backButton.addEventListener("click", e => {
+  changeSelection.reverse();
 });

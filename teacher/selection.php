@@ -29,6 +29,7 @@ $navbar->render();
     </div>
   </div>
   <div class="teacherContainer teacherContainer--subjectSelection">
+    <img class="selection__back" src="/assets/icons/angle-double-left-solid.svg" alt="back">
     <h1 class="selection__title selection__title--subject">Wybierz przedmiot</h1>
     <div class="selection__list selection__list--subject">
       <div class="selection__content selection__content--subject">
