@@ -2,10 +2,23 @@
 
 .teacherContainer {
   &--subjectSelection {
-    display: none;
+    overflow: hidden;
     position: relative;
   }
 
   @import "pages/teacher/grades";
   @import "pages/teacher/notes";
+}
+.settings {
+  &__forms {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 4rem;
+  }
+  &__title {
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px solid #ccc;
+  }
 }

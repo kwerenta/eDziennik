@@ -30,10 +30,6 @@
     text-decoration: none;
     transition: background 0.3s;
 
-    &--settings {
-      cursor: pointer;
-    }
-
     &:hover {
       background: var(--secondary-bg-color);
       box-shadow: var(--shadow);

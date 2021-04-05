@@ -23,7 +23,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
 
 <main>
   <div class="studentContainer studentContainer--timetable">
-    <h1 class="timetable__title">Plan lekcji</h1>
+    <h1 class="timetable__title">Plan lekcji klasy <?php echo $_SESSION['user']['class'] ?></h1>
     <table class="timetable__table">
       <tr class="timetable__row">
         <th>Nr.</th>

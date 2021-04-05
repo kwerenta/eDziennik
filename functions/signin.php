@@ -30,6 +30,7 @@ if (isset($user) && password_verify($_POST['password'], $user['password'])) {
   if (mysqli_num_rows($query)) {
     $data = mysqli_fetch_array($query);
     $data['rank'] = $rank;
+    $data['email'] = $user['email'];
     if (isset($data['id'])) $data['id'] = intval($data['id']);
     $_SESSION['user'] = $data;
 

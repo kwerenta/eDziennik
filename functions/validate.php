@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 function isEmpty(string $notRequired = "")
 {
   foreach ($_POST as $index => $value) {
-    if ($value === null && $index !== $notRequired) return true;
+    if ($value === "" && $index !== $notRequired) return true;
   }
   return false;
 }

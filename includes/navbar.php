@@ -19,6 +19,8 @@
     if ($_SESSION['user']['rank'] === "student") $options[] = array("name" => "Plan lekcji", "icon" => "calendar-alt", "file" => "timetable");
     if ($_SESSION['user']['rank'] === "teacher") $options[] = array("name" => "Panel wyboru", "icon" => "edit", "file" => "selection");
 
+    $options[] = array("name" => "Ustawienia konta", "icon" => "user-cog", "file" => "settings");
+
     foreach ($options as $option) {
       $icon = file_get_contents("../assets/icons/{$option['icon']}-solid.svg");
       $file = isset($option['file']) ? $option['file'] . ".php" : "";
@@ -32,19 +34,12 @@
         HTML;
     }
     ?>
-
-    <li class="navbar__item">
-      <div class="navbar__link navbar__link--settings">
-        <?php echo file_get_contents("../assets/icons/user-cog-solid.svg") ?>
-        <span class="navbar__text">Ustawienia</span>
-      </div>
-    </li>
     <li class="navbar__item">
       <a href="../functions/logout.php" class="navbar__link">
         <?php echo file_get_contents("../assets/icons/sign-out-alt-solid.svg") ?>
         <span class="navbar__text">Wyloguj się</span>
       </a>
-    </li>
+      </>
   </ul>
 </nav>
 <div class="navbar__topbar">
@@ -62,6 +57,12 @@
         break;
       case 'selection.php':
         $title = "Panel wyboru";
+        break;
+      case 'settings.php':
+        $title = "Ustawienia konta";
+        break;
+      case 'timetable.php':
+        $title = "Plan lekcji";
         break;
       default:
         $title = "Pulpit";
