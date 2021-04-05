@@ -36,8 +36,8 @@
         }
         ?>
       </select>
-      <input type="text" name="phone" autocomplete="tel" placeholder="Numer telefonu">
-      <button class="form__button form__button--next" type="button">Przejdź dalej</button>
+      <input type="text" name="phone" autocomplete="tel" placeholder="Numer telefonu" pattern="^[0-9]{6}(?:[0-9]{3})?$" disabled>
+      <button class="form__button form__button--next" type="submit">Przejdź dalej</button>
     </div>
     <div class="form__tab form__tab--login">
       <input type="email" name="email" autocomplete="email" placeholder="E-mail">

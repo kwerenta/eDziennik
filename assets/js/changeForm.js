@@ -31,7 +31,7 @@ const changeText = () => {
 const isEmpty = inputs => {
   let empty = false;
   inputs.forEach(input => {
-    if (!input.value) {
+    if (!input.value && input.name !== "phone") {
       empty = true;
       input.classList.add("error");
     } else {
@@ -46,7 +46,7 @@ const changeRequired = (prev, next) => {
     input.required = false;
   });
   next.forEach(input => {
-    input.required = true;
+    if (input.name !== "phone") input.required = true;
   });
 };
 
@@ -92,11 +92,12 @@ nextTab.addEventListener("click", e => {
   inputsArray.push(accountType.value === "student" ? classInput : phoneInput);
 
   const isPhoneCorrect = phoneInput.value.match("^[0-9]{6}(?:[0-9]{3})?$");
-
   if (!isEmpty(inputsArray)) {
-    changeRequired(inputsArray, loginInputs);
-    personalLoginData.play();
-    // e.preventDefault();
+    if (phoneInput.value === "" || isPhoneCorrect) {
+      changeRequired(inputsArray, loginInputs);
+      personalLoginData.play();
+      e.preventDefault();
+    }
   }
 });
 
@@ -111,13 +112,19 @@ accountType.addEventListener("change", e => {
   if (e.target.value === "student") {
     phoneInput.style.display = "none";
     classInput.style.display = "block";
-    phoneInput.required = false;
+
+    phoneInput.disabled = true;
+
     classInput.required = true;
+    classInput.disabled = false;
   } else {
     classInput.style.display = "none";
     phoneInput.style.display = "block";
+
     classInput.required = false;
-    phoneInput.required = true;
+    classInput.disabled = true;
+
+    phoneInput.disabled = false;
   }
 });
 

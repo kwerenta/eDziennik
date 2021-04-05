@@ -15,7 +15,7 @@ if ($isTypeCorrect) {
   }
 }
 if (
-  !isEmpty() &&
+  !isEmpty('phone') &&
   isEmailCorrect() &&
   isLenghtCorrect($_POST["firstName"], 1, 100) &&
   isLenghtCorrect($_POST["lastName"], 1, 100) &&
