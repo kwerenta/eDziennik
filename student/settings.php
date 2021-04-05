@@ -11,7 +11,7 @@ $navbar = new View('navbar');
 $navbar->render();
 
 $settings = new View('settings');
-$settings->allocate("rank", "teacher");
+$settings->allocate("rank", "student");
 $settings->render();
 
 if (isset($_SESSION['snackalert'])) {

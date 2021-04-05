@@ -16,10 +16,8 @@
   if (isset($_SESSION['user']['rank'])) {
     echo "<link rel='stylesheet' href='/assets/css/{$_SESSION['user']['rank']}.css'>";
     echo "<link rel='stylesheet' href='/assets/css/navbar.css'>";
-    if ($_SESSION['user']['rank'] === "admin" || ($_SESSION['user']['rank'] === "teacher")) {
-      echo "<link rel='stylesheet' href='/assets/css/forms.css'>";
-    }
-  } else echo "<link rel='stylesheet' href='/assets/css/forms.css'>";
+  }
+  echo "<link rel='stylesheet' href='/assets/css/forms.css'>";
 
   foreach ($scripts as $script) {
     if (strpos($script, "http") !== 0) {

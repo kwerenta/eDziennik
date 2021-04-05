@@ -151,7 +151,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
   <div class="overlay">
     <div class="overlay__content">
       <h1 class="overlay__header">Edycja oceny</h1>
-      <form class="form form--overlay" method="POST">
+      <form class="form form--overlay" action="../functions/editGrade.php" method="POST">
         <input type="number" name="grade" placeholder="Ocena" min="1" max="6">
         <select name="category">
           <option value="" selected disabled hidden>Kategoria (waga)</option>

@@ -17,7 +17,7 @@ if (!in_array($_POST['category'], array_column($_SESSION['categories'], "id"))) 
   $isCategoryOk = false;
 }
 
-if (!isEmpty() && isValueCorrect($_POST['grade'], 1, 6) && $isStudentOk && $isCategoryOk) {
+if (!isEmpty('description') && isValueCorrect($_POST['grade'], 1, 6) && $isStudentOk && $isCategoryOk) {
   require "../db.php";
   $conn = connectToDB();
 

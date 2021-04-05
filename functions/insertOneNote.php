@@ -7,7 +7,7 @@ if (!isset($_SESSION["user"]) || (isset($_SESSION["user"]) && $_SESSION['user'][
 require 'validate.php';
 $isStudentOk = in_array($_POST['student'], array_column($_SESSION['students'], "id"));
 
-if (!isEmpty() && isValueCorrect($_POST['points'], -150, 150) && $isStudentOk) {
+if (!isEmpty('description') && isValueCorrect($_POST['points'], -150, 150) && $isStudentOk) {
   require "../db.php";
   $conn = connectToDB();
 

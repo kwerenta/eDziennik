@@ -43,9 +43,9 @@ SQL;
   mysqli_query($conn, $sql);
 
   if (mysqli_affected_rows($conn) > 0) {
-    $_SESSION['snackalert'] = ["type" => "success", "text" => "Uwaga została dodana"];
+    $_SESSION['snackalert'] = ["type" => "success", "text" => "Uwagi zostały dodane"];
   } else {
-    $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się dodać uwagi"];
+    $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się dodać uwag"];
   }
 } else {
   $_SESSION['snackalert'] = ["type" => "error", "text" => "Formularz został błędnie wypełniony"];

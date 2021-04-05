@@ -13,7 +13,7 @@ if (!in_array($_POST['student_id'], array_column($_SESSION['students'], "id"))) 
   $isStudentOk = false;
 }
 
-if (!isEmpty() && isValueCorrect($_POST['points'], -150, 150) && $isStudentOk) {
+if (!isEmpty('description') && isValueCorrect($_POST['points'], -150, 150) && $isStudentOk) {
   require "../db.php";
   $conn = connectToDB();
 

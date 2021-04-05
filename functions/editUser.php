@@ -10,23 +10,23 @@ require 'validate.php';
 $isLastInputCorrect = false;
 $isStudent = !empty($_POST['class']);
 
-
 if ($isStudent) {
   $isLastInputCorrect = isClassCorrect();
 } else {
   $isLastInputCorrect = isPhoneCorrect();
 }
 
-if (!isEmpty() && $isLastInputCorrect) {
+if (!isEmpty('phone class') && $isLastInputCorrect) {
   require_once "../db.php";
   $conn = connectToDB();
 
   $rank = isset($_POST['class']) ? "students" : "teachers";
   $lastField = isset($_POST['class']) ? "class" : "phone";
 
-  mysqli_begin_transaction($conn);
-  mysqli_autocommit($conn, false);
+  mysqli_begin_transaction($conn, MYSQLI_TRANS_START_READ_WRITE);
   try {
+    mysqli_autocommit($conn, false);
+
     $sql = sprintf(
       "UPDATE %s SET
     `first_name` = '%s', 

@@ -8,7 +8,7 @@ if (!isset($_SESSION["user"])) {
 
 require 'validate.php';
 
-if (!isEmpty() && isLenghtCorrect($_POST['newPassword'], 8, 32)) {
+if (!isEmpty('email') && isLenghtCorrect($_POST['newPassword'], 8, 32)) {
   require "../db.php";
   $conn = connectToDB();
 
@@ -34,7 +34,7 @@ if (!isEmpty() && isLenghtCorrect($_POST['newPassword'], 8, 32)) {
     $_SESSION['snackalert'] = ["type" => "error", "text" => "Błędne hasło!"];
   }
 } else {
-  $_SESSION['snackalert'] = ["type" => "error", "text" => "Niepoprawnie wypełniony formularz!"];
+  $_SESSION['snackalert'] = ["type" => "error", "text" => "Formularz został błędnie wypełniony!"];
 }
 
 header("Location: http://{$_SERVER['HTTP_HOST']}/{$_SESSION['user']['rank']}/settings.php");

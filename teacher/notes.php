@@ -116,7 +116,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
   <div class="overlay">
     <div class="overlay__content">
       <h1 class="overlay__header">Edycja uwagi</h1>
-      <form class="form form--overlay" method="POST">
+      <form class="form form--overlay" action="../functions/editNote.php" method="POST">
         <input type="number" name="points" placeholder="Punkty" min="-150" max="150" required>
         </select>
         <textarea type="text" name="description" placeholder="Opis" cols="50" rows="10"></textarea>

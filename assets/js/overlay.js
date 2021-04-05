@@ -121,10 +121,8 @@ deleteBtn.addEventListener("click", e => {
 });
 
 editBtn.addEventListener("click", e => {
-  e.preventDefault();
-  let isEmpty = false;
   const inputs = email
-    ? [email, firstName, lastName, phone.style.display === "block" ? phone : studentClass]
+    ? [email, firstName, lastName, phone.style.display === "none" ? studentClass : null]
     : grade
     ? [grade, category]
     : [points];
@@ -136,16 +134,8 @@ editBtn.addEventListener("click", e => {
       input.classList.remove("error");
     }
   });
-  if (!isEmpty) {
-    if (email) {
-      form.action = "../functions/editUser.php";
-      (phone.style.display === "block" ? studentClass : phone).disabled = true;
-    } else if (points) {
-      form.action = "../functions/editNote.php";
-    } else if (grade) {
-      form.action = "../functions/editGrade.php";
-    }
-    form.submit();
+  if (email) {
+    (phone.style.display === "block" ? studentClass : phone).disabled = true;
   }
 });
 
