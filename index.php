@@ -8,12 +8,13 @@ if (isset($_SESSION["user"])) {
 }
 require 'view.php';
 require 'config.php';
-
-$numbers = ['1', '2', '3', '4'];
-$letters = ['A', 'B', 'C', 'D'];
-foreach ($numbers as $number) {
-  foreach ($letters as $letter) {
-    $_SESSION['classes'][] = $number . $letter;
+if (empty($_SESSION['classes'])) {
+  $numbers = ['1', '2', '3', '4'];
+  $letters = ['A', 'B', 'C', 'D'];
+  foreach ($numbers as $number) {
+    foreach ($letters as $letter) {
+      $_SESSION['classes'][] = $number . $letter;
+    }
   }
 }
 

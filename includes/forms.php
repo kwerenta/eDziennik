@@ -31,13 +31,8 @@
       <select name="class" required>
         <option value="" selected disabled hidden>Klasa</option>
         <?php
-        $letters = ['A', 'B', 'C', 'D'];
-        $numbers = ['1', '2', '3', '4'];
-        foreach ($numbers as $number) {
-          foreach ($letters as $letter) {
-            $class = $number . $letter;
-            echo "<option value='{$class}'>{$class}</option>";
-          }
+        foreach ($_SESSION['classes'] as $class) {
+          echo "<option value='{$class}'>{$class}</option>";
         }
         ?>
       </select>
