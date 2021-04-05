@@ -45,8 +45,10 @@ if (!isEmpty() && isEmailCorrect()) {
       $hash,
       mysqli_real_escape_string($conn, $_POST['email'])
     );
+    mysqli_query($conn, $sql);
+
     if (mysqli_affected_rows($conn) > 0) {
-      $_SESSION['formInfos']['success'] = "Twoje nowe hasło to:<br>{$hex}";
+      $_SESSION['formInfos']['success'] = "Twoje nowe hasło to:<br><span title='Naciśnij, aby skopiować' class='form__newPassword'>{$hex}</span>";
     } else {
       $_SESSION['formInfos']['error'] = "Nie udało się zmienić hasła!";
     }

@@ -13,6 +13,8 @@ const changeFormText = document.querySelector(".form__changeForm > p");
 const changeFormButton = document.querySelector(".form__textButton--changeForm");
 const resetPasswordButton = document.querySelector(".form__textButton--resetPassword");
 const resetPasswordSubmit = document.querySelector(".form__submit--resetPassword");
+const newPassword = document.querySelector(".form__newPassword");
+
 const cssVariables = document.documentElement;
 let resetPassword = false;
 
@@ -132,4 +134,17 @@ resetPasswordButton.addEventListener("click", e => {
   setTimeout(() => {
     changeText();
   }, 300);
+});
+
+newPassword?.addEventListener("click", e => {
+  const formInfo = document.querySelector(".form__info");
+  const textInput = document.createElement("textarea");
+
+  textInput.value = e.currentTarget.innerText;
+  document.body.appendChild(textInput);
+  textInput.select();
+  document.execCommand("copy");
+  document.body.removeChild(textInput);
+
+  formInfo.innerHTML = "Hasło zostało skopiowane!";
 });
