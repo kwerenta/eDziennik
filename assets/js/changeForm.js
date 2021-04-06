@@ -91,7 +91,7 @@ nextTab.addEventListener("click", e => {
   const inputsArray = Array.from(personalInputs);
   inputsArray.push(accountType.value === "student" ? classInput : phoneInput);
 
-  const isPhoneCorrect = phoneInput.value.match("^[0-9]{6}(?:[0-9]{3})?$");
+  const isPhoneCorrect = phoneInput.value.match("^[0-9]{9}$");
   if (!isEmpty(inputsArray)) {
     if (
       (accountType.value === "teacher" && (phoneInput.value === "" || isPhoneCorrect)) ||

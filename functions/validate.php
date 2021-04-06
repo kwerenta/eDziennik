@@ -36,7 +36,7 @@ function areStudentsCorrect()
 function isPhoneCorrect()
 {
   if (empty($_POST['phone'])) return true;
-  return preg_match('/^[0-9]{6}(?:[0-9]{3})?$/', $_POST['phone']) === 1 ? true : false;
+  return preg_match('/^[0-9]{9}$/', $_POST['phone']) === 1 ? true : false;
 }
 
 function isValueCorrect(string $input, int $min, int $max)

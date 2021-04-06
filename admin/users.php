@@ -65,7 +65,7 @@ $users = getUsers();
         <input type="email" name="email" placeholder="E-Mail" required>
         <input type="text" name="first_name" placeholder="Imię" maxlength="100" required>
         <input type="text" name="last_name" placeholder="Nazwisko" maxlength="100" required>
-        <input type="text" name="phone" placeholder="Numer telefonu" pattern="^[0-9]{6}(?:[0-9]{3})?$">
+        <input type="text" name="phone" placeholder="Numer telefonu" pattern="^[0-9]{9}$">
         <select name="class">
           <option value="" selected disabled hidden>Klasa</option>
           <?php
