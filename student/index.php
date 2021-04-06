@@ -63,11 +63,12 @@ $luckyNumber = mysqli_fetch_array($query, MYSQLI_NUM)[0];
         <h2>Data</h2>
       </div>
       <?php
-      foreach ($latestGrades as $grade) {
-        $subject = $_SESSION['subjects'][$grade['subject_id']];
-        $category = $_SESSION['categories'][$grade['category_id']];
-        $date = date('d.m.Y', strtotime($grade['date']));
-        echo <<<HTML
+      if (!empty($latestGrades)) {
+        foreach ($latestGrades as $grade) {
+          $subject = $_SESSION['subjects'][$grade['subject_id']];
+          $category = $_SESSION['categories'][$grade['category_id']];
+          $date = date('d.m.Y', strtotime($grade['date']));
+          echo <<<HTML
           <div class="studentDashboard__latestGradesItem">
             <h4>{$subject['name']}</h4>
             <h3>{$grade['grade']}</h3>
@@ -75,6 +76,9 @@ $luckyNumber = mysqli_fetch_array($query, MYSQLI_NUM)[0];
             <p>{$date}</p>
           </div>
           HTML;
+        }
+      } else {
+        echo "<h2>Brak ocen</h2>";
       }
       ?>
     </div>

@@ -47,25 +47,30 @@ while (($row = mysqli_fetch_array($query)) !== null) {
         <h2 class="grades__header">Oceny</h2>
       </div>
       <?php
-      foreach ($grades as $index => $subjects) {
-        $subject = $_SESSION['subjects'][$index];
-        echo "<div class='grades__item grades__item--subject'><h2>{$subject['name']}</h2><p>";
-        echo implode(",", array_column($grades[$subject['id']], 'grade'));
-        echo "</p></div>";
+      if (!empty($grades)) {
+        foreach ($grades as $index => $subjects) {
+          $subject = $_SESSION['subjects'][$index];
+          echo "<div class='grades__item grades__item--subject'><h2>{$subject['name']}</h2><p>";
+          echo implode(",", array_column($grades[$subject['id']], 'grade'));
+          echo "</p></div>";
+        }
+      } else {
+        echo "<h2>Brak ocen</h2>";
       }
       ?>
     </div>
     <div class="grades__detailedGradesList">
       <?php
-      foreach ($grades as $index => $subjects) {
-        $subject = $_SESSION['subjects'][$index];
-        echo "<div class='grades__item--detailedSubject'><h2>{$subject['name']}</h2>";
+      if (!empty($grades)) {
+        foreach ($grades as $index => $subjects) {
+          $subject = $_SESSION['subjects'][$index];
+          echo "<div class='grades__item--detailedSubject'><h2>{$subject['name']}</h2>";
 
-        foreach ($subjects as $grade) {
-          $category = $_SESSION['categories'][$grade['category_id']];
-          $teacher = $_SESSION['teachers'][$grade['teacher_id']];
-          $description = $grade['description'] === "" ? "Brak opisu" : $grade['description'];
-          echo <<<HTML
+          foreach ($subjects as $grade) {
+            $category = $_SESSION['categories'][$grade['category_id']];
+            $teacher = $_SESSION['teachers'][$grade['teacher_id']];
+            $description = $grade['description'] === "" ? "Brak opisu" : $grade['description'];
+            echo <<<HTML
           <div class="grades__item--detailedGrade">
             <div>
               <h4>Ocena</h4>
@@ -85,8 +90,11 @@ while (($row = mysqli_fetch_array($query)) !== null) {
             </div>
           </div>
           HTML;
+          }
+          echo "</div>";
         }
-        echo "</div>";
+      } else {
+        echo "<h2>Brak ocen</h2>";
       }
       ?>
     </div>
@@ -96,11 +104,15 @@ while (($row = mysqli_fetch_array($query)) !== null) {
         <h2>Średnia</h2>
       </div>
       <?php
-      foreach ($_SESSION['subjects'] as $subject) {
-        if (isset($denominator[$subject['id']])) {
-          $average = round(($numerator[$subject['id']] / $denominator[$subject['id']]), 2);
-          echo "<div class='grades__item--summary'><h2>{$subject['name']}</h2><p>{$average}</p></div>";
+      if (!empty($grades)) {
+        foreach ($_SESSION['subjects'] as $subject) {
+          if (isset($denominator[$subject['id']])) {
+            $average = round(($numerator[$subject['id']] / $denominator[$subject['id']]), 2);
+            echo "<div class='grades__item--summary'><h2>{$subject['name']}</h2><p>{$average}</p></div>";
+          }
         }
+      } else {
+        echo "<h2>Brak ocen</h2>";
       }
       ?>
     </div>

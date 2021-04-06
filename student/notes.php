@@ -25,10 +25,15 @@ while (($row = mysqli_fetch_array($query)) !== null) {
 
 <main>
   <div class="studentContainer studentContainer--notes">
-    <h1>Suma punktów: <?php echo $sum ?></h1>
+    <h1>
+      <?php
+      if (!empty($notes)) echo "Suma punktów: {$sum}";
+      else echo "Brak uwag";
+      ?>
+    </h1>
     <div class="notes__list">
       <?php
-      if (isset($notes)) {
+      if (!empty($notes)) {
         foreach ($notes as $note) {
           $sign = $note['points'] <= 0 ? "" : "+";
           $teacher = $_SESSION['teachers'][$note['teacher_id']];
@@ -52,8 +57,6 @@ while (($row = mysqli_fetch_array($query)) !== null) {
         </div>
         HTML;
         }
-      } else {
-        echo "<h3>Brak uwag</h3>";
       }
       ?>
     </div>
