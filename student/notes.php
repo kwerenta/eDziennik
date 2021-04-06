@@ -28,11 +28,12 @@ while (($row = mysqli_fetch_array($query)) !== null) {
     <h1>Suma punktów: <?php echo $sum ?></h1>
     <div class="notes__list">
       <?php
-      foreach ($notes as $note) {
-        $sign = $note['points'] <= 0 ? "" : "+";
-        $teacher = $_SESSION['teachers'][$note['teacher_id']];
-        $description = $note['description'] === "" ? "Brak opisu" : $note['description'];
-        echo <<<HTML
+      if (isset($notes)) {
+        foreach ($notes as $note) {
+          $sign = $note['points'] <= 0 ? "" : "+";
+          $teacher = $_SESSION['teachers'][$note['teacher_id']];
+          $description = $note['description'] === "" ? "Brak opisu" : $note['description'];
+          echo <<<HTML
         <div class="notes__item">
           <div class="notes__title">
             <h2>{$sign}{$note['points']}</h2>
@@ -50,6 +51,9 @@ while (($row = mysqli_fetch_array($query)) !== null) {
           </div>
         </div>
         HTML;
+        }
+      } else {
+        echo "<h3>Brak uwag</h3>";
       }
       ?>
     </div>
