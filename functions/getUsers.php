@@ -4,10 +4,10 @@ function getUsers($amount = 0)
 {
   require_once '../db.php';
   $conn = connectToDB();
+  $deactivatedOnly = $amount < 0 ? "WHERE `isActivated`=0" : "";
+  $limit = $amount > 0 ? "ORDER BY `id` DESC LIMIT {$amount}" : "ORDER BY `id` DESC";
+  $sql = "SELECT `id`,`email`,`isActivated`,`rank` FROM users LEFT JOIN ranks ON users.`id`=ranks.`user_id` {$deactivatedOnly} {$limit}";
 
-  $limit = $amount > 0 ? "ORDER BY `id` DESC LIMIT {$amount}" : "";
-
-  $sql = "SELECT `id`,`email`,`isActivated`,`rank` FROM users LEFT JOIN ranks ON users.`id`=ranks.`user_id` {$limit}";
   $query = mysqli_query($conn, $sql);
   while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
     $users[$row['id']] = $row;
@@ -29,8 +29,7 @@ function getUsers($amount = 0)
       }
     }
   }
-
-  if ($amount === 0) {
+  if ($amount <= 0) {
     $filter['students'] = array_filter($users, fn ($user) => $user['rank'] === "Uczeń");
     $filter['teachers'] = array_filter($users, fn ($user) => $user['rank'] === "Nauczyciel");
     $filter['admins'] = array_filter($users, fn ($user) => $user['rank'] === "Administrator");

@@ -12,6 +12,7 @@
 
     if ($_SESSION['user']['rank'] === "admin") {
       $options[] = array("name" => "Użytkownicy", "icon" => "users", "file" => "users");
+      $options[] = array("name" => "Nieaktywowani", "icon" => "lock", "file" => "users", "get" => "deactivatedOnly=true");
     } else {
       $options[] = array("name" => "Oceny", "icon" => "award", "file" => "grades");
       $options[] = array("name" => "Uwagi", "icon" => "theater-masks", "file" => "notes");
@@ -23,7 +24,8 @@
 
     foreach ($options as $option) {
       $icon = file_get_contents("../assets/icons/{$option['icon']}-solid.svg");
-      $file = isset($option['file']) ? $option['file'] . ".php" : "";
+      $get = isset($option['get']) ? "?{$option['get']}" : "";
+      $file = isset($option['file']) ? $option['file'] . ".php{$get}" : "";
       echo <<<HTML
         <li class="navbar__item">
           <a href="/{$_SESSION['user']['rank']}/{$file}" class="navbar__link">

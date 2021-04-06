@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="icon" href="/assets/icons/mortarboard.svg" type="image/svg+xml">
   <!-- Favicon made by Freepik from https://www.flaticon.com/ -->
+  <!-- Navbar icons are made by Fontawesome from https://fontawesome.com/license -->
 
   <?php
 

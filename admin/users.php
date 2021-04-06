@@ -17,8 +17,9 @@ if (isset($_SESSION['snackalert'])) {
   $snackalert->render();
   unset($_SESSION['snackalert']);
 }
-
-$users = getUsers();
+$_SESSION['deactivatedOnly'] = 0;
+if (isset($_GET['deactivatedOnly'])) $_SESSION['deactivatedOnly'] = -1;
+$users = getUsers($_SESSION['deactivatedOnly']);
 ?>
 <main>
   <div class="adminContainer adminContainer--users">

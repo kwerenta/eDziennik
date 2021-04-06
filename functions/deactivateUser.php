@@ -27,5 +27,6 @@ if ($isActivated->num_rows !== 0) {
     $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się {$snackText}ć użytkownia"];
   };
 }
-
-header("Location: http://{$_SERVER['HTTP_HOST']}/admin/users.php");
+$get = "";
+if ($_SESSION['deactivatedOnly'] === -1) $get = "?deactivatedOnly=true";
+header("Location: http://{$_SERVER['HTTP_HOST']}/admin/users.php{$get}");
