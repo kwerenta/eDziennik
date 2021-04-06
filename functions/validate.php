@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 function isEmpty(string $notRequired = "")
 {
   foreach ($_POST as $index => $value) {
-    if (empty($value) && (strpos($notRequired, $index) === false)) return true;
+    if (empty($value) && $value !== "0" && (strpos($notRequired, $index) === false))  return true;
   }
   return false;
 }
@@ -36,7 +36,7 @@ function areStudentsCorrect()
 function isPhoneCorrect()
 {
   if (empty($_POST['phone'])) return true;
-  return preg_match('/^[0-9]{6}(?:[0-9]{3})?$/', $_POST['phone']);
+  return preg_match('/^[0-9]{6}(?:[0-9]{3})?$/', $_POST['phone']) === 1 ? true : false;
 }
 
 function isValueCorrect(string $input, int $min, int $max)
