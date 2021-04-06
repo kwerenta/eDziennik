@@ -71,6 +71,9 @@
       }
     }
 
+    &--summary > *:first-child {
+      flex: 3;
+    }
     &--summary > * {
       flex: 1;
     }
