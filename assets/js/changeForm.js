@@ -93,7 +93,10 @@ nextTab.addEventListener("click", e => {
 
   const isPhoneCorrect = phoneInput.value.match("^[0-9]{6}(?:[0-9]{3})?$");
   if (!isEmpty(inputsArray)) {
-    if (phoneInput.value === "" || isPhoneCorrect) {
+    if (
+      (accountType.value === "teacher" && (phoneInput.value === "" || isPhoneCorrect)) ||
+      accountType.value === "student"
+    ) {
       changeRequired(inputsArray, loginInputs);
       personalLoginData.play();
       e.preventDefault();
@@ -154,4 +157,16 @@ newPassword?.addEventListener("click", e => {
   document.body.removeChild(textInput);
 
   formInfo.innerHTML = "Hasło zostało skopiowane!";
+});
+
+signupButton.addEventListener("click", e => {
+  if (loginInputs[1].value != loginInputs[2].value) {
+    loginInputs[2].setCustomValidity("Hasła się nie zgadzają!");
+    loginInputs[1].classList.add("error");
+    loginInputs[2].classList.add("error");
+  } else {
+    loginInputs[2].setCustomValidity("");
+    loginInputs[1].classList.remove("error");
+    loginInputs[2].classList.remove("error");
+  }
 });
