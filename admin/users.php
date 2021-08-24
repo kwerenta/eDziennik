@@ -24,9 +24,9 @@ $users = getUsers($_SESSION['deactivatedOnly']);
 <main>
   <div class="adminContainer adminContainer--users">
     <div class="menu__tabs">
-      <h2 class="menu__tabHeader menu__tabHeader--active">Uczniowie</h2>
-      <h2 class="menu__tabHeader">Nauczyciele</h2>
-      <h2 class="menu__tabHeader">Administratorzy</h2>
+      <h2 class="menu__tabHeader menu__tabHeader--active">Students</h2>
+      <h2 class="menu__tabHeader">Teachers</h2>
+      <h2 class="menu__tabHeader">Admins</h2>
       <div class="menu__activeBar"></div>
     </div>
     <?php
@@ -61,14 +61,14 @@ $users = getUsers($_SESSION['deactivatedOnly']);
   </div>
   <div class="overlay">
     <div class="overlay__content">
-      <h1 class="overlay__header">Edycja użytkownika</h1>
+      <h1 class="overlay__header">Edit user</h1>
       <form class="form form--overlay" action="../functions/editUser.php" method="POST">
         <input type="email" name="email" placeholder="E-Mail" required>
         <input type="text" name="first_name" placeholder="Imię" maxlength="100" required>
         <input type="text" name="last_name" placeholder="Nazwisko" maxlength="100" required>
         <input type="text" name="phone" placeholder="Numer telefonu" pattern="^[0-9]{9}$">
         <select name="class">
-          <option value="" selected disabled hidden>Klasa</option>
+          <option value="" selected disabled hidden>Class</option>
           <?php
           foreach ($_SESSION['classes'] as $class) {
             echo "<option value='{$class}'>{$class}</option>";
@@ -78,11 +78,11 @@ $users = getUsers($_SESSION['deactivatedOnly']);
         <input type="hidden" name="id" value="">
         <input type="hidden" name="typeid" value="">
         <input type="hidden" name="isActivated" value="">
-        <button class="form__submit form__submit--edit" type="submit">Edytuj</button>
+        <button class="form__submit form__submit--edit" type="submit">Edit</button>
         <button class="form__submit form__submit--delete" type="submit">
-          <h4>Zablokuj</h4>
+          <h4>Deactivate</h4>
         </button>
-        <button class="form__button form__button--close">Anuluj</button>
+        <button class="form__button form__button--close">Cancel</button>
       </form>
     </div>
   </div>

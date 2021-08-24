@@ -25,25 +25,25 @@ $latestUsers = getUsers(7);
 <main class="adminDashboard">
   <div class="adminDashboard__panel adminDashboard__panel--top">
     <div class="adminDashboard__tile">
-      <h2>Liczba użytkowników</h2>
+      <h2>Number of users</h2>
       <h1><?php echo $count['users'] ?></h1>
     </div>
     <div class="adminDashboard__tile">
-      <h2>Liczba ocen</h2>
+      <h2>Number of grades</h2>
       <h1><?php echo $count['grades'] ?></h1>
     </div>
     <div class="adminDashboard__tile">
-      <h2>Liczba uwag</h2>
+      <h2>Number of notes</h2>
       <h1><?php echo $count['notes'] ?></h1>
     </div>
   </div>
   <div class="adminDashboard__panel adminDashboard__panel--bottom">
-    <h2>Najnowsi Użytkownicy</h2>
+    <h2>Latest users</h2>
     <div class="adminDashboard__latestUsersItem">
       <h2>E-Mail</h2>
-      <h2>Imię</h2>
-      <h2>Nazwisko</h2>
-      <h2>Ranga</h2>
+      <h2>First Name</h2>
+      <h2>Last Name</h2>
+      <h2>Rank</h2>
     </div>
     <?php
     foreach ($latestUsers as $user) {
