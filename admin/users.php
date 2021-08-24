@@ -31,20 +31,20 @@ $users = getUsers($_SESSION['deactivatedOnly']);
     </div>
     <?php
     foreach (array_keys($users) as $type) {
-      $lastTitle = $type === "students" ? "Klasa" : "Telefon";
       $lastInput = $type === "students" ? "class" : "phone";
+      $lastTitle = ucfirst($lastInput);
       echo <<<HTML
           <div class='users__list users__list--{$type}'>
             <div class="users__item users__item--{$type}">
               <h2>E-Mail</h2>
-              <h2>Imię</h2>
-              <h2>Nazwisko</h2>
+              <h2>First Name</h2>
+              <h2>Last Name</h2>
               <h2>{$lastTitle}</h2>
-              <h2>Aktywny</h2>
+              <h2>Active?</h2>
             </div>
         HTML;
       foreach ($users[$type] as $user) {
-        $isActivated = $user['isActivated'] === "1" ? "Tak" : "Nie";
+        $isActivated = $user['isActivated'] === "1" ? "Yes" : "No";
         echo <<<HTML
           <div data-id={$user['id']} data-typeid={$user['type_id']} data-isActivated={$user['isActivated']} class="users__item users__item--{$type}">
             <h3 class="users__data users__data--email">{$user['email']}</h3>
