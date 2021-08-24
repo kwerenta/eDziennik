@@ -2,25 +2,25 @@
   <ul class="navbar__list">
     <li class="navbar__logo">
       <a href="/student/" class="navbar__link">
-        <span class="navbar__text">eDziennik</span>
+        <span class="navbar__text">Gradebook</span>
         <?php echo file_get_contents("../assets/icons/angle-double-left-solid.svg") ?>
       </a>
     </li>
 
     <?php
-    $options[] = array("name" => "Pulpit", "icon" => "chalkboard");
+    $options[] = array("name" => "Dashboard", "icon" => "chalkboard");
 
     if ($_SESSION['user']['rank'] === "admin") {
-      $options[] = array("name" => "Użytkownicy", "icon" => "users", "file" => "users");
-      $options[] = array("name" => "Nieaktywowani", "icon" => "lock", "file" => "users", "get" => "deactivatedOnly=true");
+      $options[] = array("name" => "Users", "icon" => "users", "file" => "users");
+      $options[] = array("name" => "Deactivated", "icon" => "lock", "file" => "users", "get" => "deactivatedOnly=true");
     } else {
-      $options[] = array("name" => "Oceny", "icon" => "award", "file" => "grades");
-      $options[] = array("name" => "Uwagi", "icon" => "theater-masks", "file" => "notes");
+      $options[] = array("name" => "Grades", "icon" => "award", "file" => "grades");
+      $options[] = array("name" => "Notes", "icon" => "theater-masks", "file" => "notes");
     }
-    if ($_SESSION['user']['rank'] === "student") $options[] = array("name" => "Plan lekcji", "icon" => "calendar-alt", "file" => "timetable");
-    if ($_SESSION['user']['rank'] === "teacher") $options[] = array("name" => "Panel wyboru", "icon" => "edit", "file" => "selection");
+    if ($_SESSION['user']['rank'] === "student") $options[] = array("name" => "Timetable", "icon" => "calendar-alt", "file" => "timetable");
+    if ($_SESSION['user']['rank'] === "teacher") $options[] = array("name" => "Selection panel", "icon" => "edit", "file" => "selection");
 
-    $options[] = array("name" => "Ustawienia konta", "icon" => "user-cog", "file" => "settings");
+    $options[] = array("name" => "Account settings", "icon" => "user-cog", "file" => "settings");
 
     foreach ($options as $option) {
       $icon = file_get_contents("../assets/icons/{$option['icon']}-solid.svg");
@@ -39,7 +39,7 @@
     <li class="navbar__item">
       <a href="../functions/logout.php" class="navbar__link">
         <?php echo file_get_contents("../assets/icons/sign-out-alt-solid.svg") ?>
-        <span class="navbar__text">Wyloguj się</span>
+        <span class="navbar__text">Log out</span>
       </a>
       </>
   </ul>
@@ -49,25 +49,25 @@
     <?php
     switch (basename($_SERVER["SCRIPT_FILENAME"])) {
       case 'grades.php':
-        $title = "Oceny";
+        $title = "Grades";
         break;
       case 'notes.php':
-        $title = "Uwagi";
+        $title = "Notes";
         break;
       case 'users.php':
-        $title = "Użytkownicy";
+        $title = "Users";
         break;
       case 'selection.php':
-        $title = "Panel wyboru";
+        $title = "Selection panel";
         break;
       case 'settings.php':
-        $title = "Ustawienia konta";
+        $title = "Account settings";
         break;
       case 'timetable.php':
-        $title = "Plan lekcji";
+        $title = "Timetable";
         break;
       default:
-        $title = "Pulpit";
+        $title = "Dashboard";
         break;
     }
     echo $title;
