@@ -17,7 +17,7 @@ $navbar->render();
 
 <main class="teacherDashboard">
   <div class="teacherContainer teacherContainer--classSelection">
-    <h1 class="selection__title selection__title--class">Wybierz klasę</h1>
+    <h1 class="selection__title selection__title--class">Choose a class</h1>
     <div class="selection__list selection__list--class">
       <div class="selection__content selection__content--class">
         <?php
@@ -30,7 +30,7 @@ $navbar->render();
   </div>
   <div class="teacherContainer teacherContainer--subjectSelection">
     <img class="selection__back" src="/assets/icons/angle-double-left-solid.svg" alt="back">
-    <h1 class="selection__title selection__title--subject">Wybierz przedmiot</h1>
+    <h1 class="selection__title selection__title--subject">Choose a subject</h1>
     <div class="selection__list selection__list--subject">
       <div class="selection__content selection__content--subject">
         <?php

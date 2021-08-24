@@ -32,25 +32,25 @@ if (!isset($_SESSION['students'])) {
 <main class="teacherDashboard">
   <div class="teacherDashboard__panel teacherDashboard__panel--top">
     <div class="teacherDashboard__tile">
-      <h2>Witaj, <?php echo "{$_SESSION['user']['first_name']} {$_SESSION['user']['last_name']}!" ?></h2>
-      <p>Wybrano klasę <strong><?php echo $_SESSION['class'] ?></strong> i przedmiot <strong><?php echo $_SESSION['subject']['name'] ?></strong></p>
+      <h2>Hi, <?php echo "{$_SESSION['user']['first_name']} {$_SESSION['user']['last_name']}!" ?></h2>
+      <p>Class <strong><?php echo $_SESSION['class'] ?></strong> and subject of <strong><?php echo $_SESSION['subject']['name'] ?></strong> were chosen</p>
     </div>
     <div class="teacherDashboard__tile">
-      <h2>Najbliższe święto</h2>
+      <h2>Next holiday</h2>
       <p><?php echo "{$_SESSION['holiday']['localName']}, {$_SESSION['holiday']['date']}" ?></p>
     </div>
     <div class="teacherDashboard__tile">
-      <h2>Liczba uczniów w klasie</h2>
+      <h2>Number of students in class</h2>
       <h1><?php echo count($_SESSION['students']) ?></h1>
     </div>
   </div>
   <div class="teacherDashboard__panel teacherDashboard__panel--bottom">
-    <h2>Najnowsze wpisane przez Ciebie oceny</h2>
+    <h2>Last grades inserted</h2>
     <div class="teacherDashboard__latestGradesItem">
-      <h2>Uczeń</h2>
-      <h2>Ocena</h2>
-      <h2>Kategoria</h2>
-      <h2>Data</h2>
+      <h2>Student</h2>
+      <h2>Grade</h2>
+      <h2>Category</h2>
+      <h2>Date</h2>
     </div>
     <?php
     if (!empty($latestGrades)) {
@@ -68,7 +68,7 @@ if (!isset($_SESSION['students'])) {
           HTML;
       }
     } else {
-      echo "<h2>Brak ocen</h2>";
+      echo "<h2>No grades</h2>";
     }
     ?>
   </div>

@@ -41,16 +41,15 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
 <main>
   <div class="teacherContainer teacherContainer--grades">
     <div class="menu__tabs">
-      <h2 class="menu__tabHeader menu__tabHeader--active">Wyświetl oceny</h2>
-      <h2 class="menu__tabHeader">Wstaw ocenę</h2>
-      <h2 class="menu__tabHeader">Wstaw wiele ocen</h2>
-      <div class="menu__activeBar"></div>
+      <h2 class="menu__tabHeader menu__tabHeader--active">Display grades</h2>
+      <h2 class="menu__tabHeader">Insert grade</h2>
+      <h2 class="menu__tabHeader">Insert many grades
     </div>
     <div class="grades__gradesList">
       <div class="grades__item grades__item--student">
-        <h2 class="grades__header">Uczeń</h2>
-        <h2 class="grades__header">Oceny</h2>
-        <h2 class="grades__header">Średnia</h2>
+        <h2 class="grades__header">Student</h2>
+        <h2 class="grades__header">Grades</h2>
+        <h2 class="grades__header">Average grade</h2>
       </div>
       <?php
       foreach ($_SESSION['students'] as $student) {
@@ -63,7 +62,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
         if (isset($studentGrades[$student['id']])) {
           $details = function ($grade) {
             $category = $_SESSION['categories'][$grade['category_id']];
-            $description = empty($grade['description']) ? "Brak opisu" : $grade['description'];
+            $description = empty($grade['description']) ? "No description" : $grade['description'];
             return <<<HTML
             <div class="item__container"
             data-category={$grade['category_id']} 
@@ -71,10 +70,10 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
             data-gradeid={$grade['id']}>
               <p class="grades__text grades__text--grade">{$grade['grade']}</p>
               <div class="item__details">
-                <h4>Opis:</h4><p class="grades__text grades__text--description">{$description}</p>
-                <h4>Kategoria (waga):</h4><p>{$category['name']} ({$category['weight']})</p>
-                <h4>Data:</h4><p>{$grade['date']}</p>
-                <h4>Naciśnij, aby edytować</h4>
+                <h4>Description:</h4><p class="grades__text grades__text--description">{$description}</p>
+                <h4>Category (waga):</h4><p>{$category['name']} ({$category['weight']})</p>
+                <h4>Date:</h4><p>{$grade['date']}</p>
+                <h4>Click to edit</h4>
               </div>
             </div>
             HTML;
@@ -84,7 +83,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
           echo implode(",", $grades);
           $avg = $denominator[$student['id']] === 0 ? "-" : round(($numerator[$student['id']] / $denominator[$student['id']]), 2);
         } else {
-          echo "Brak ocen";
+          echo "No grades";
           $avg = "-";
         }
         echo <<<HTML
@@ -98,31 +97,31 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
     <div class="grades__insertOne">
       <form class="form form--gradesInsertOne" action="../functions/insertOneGrade.php" method="POST">
         <select name="student" required>
-          <option value="" selected disabled hidden>Uczeń</option>
+          <option value="" selected disabled hidden>Student</option>
           <?php
           foreach ($_SESSION['students'] as $student) {
             echo "<option value='{$student['id']}'>{$student['first_name']} {$student['last_name']}</option>";
           }
           ?>
         </select>
-        <input type="number" name="grade" placeholder="Ocena" min="1" max="6" required>
+        <input type="number" name="grade" placeholder="Grade" min="1" max="6" required>
         <select name="category" required>
-          <option value="" selected disabled hidden>Kategoria (waga)</option>
+          <option value="" selected disabled hidden>Category (weight)</option>
           <?php
           foreach ($_SESSION['categories'] as $category) {
             echo "<option value='{$category['id']}'>{$category['name']} ({$category['weight']})</option>";
           }
           ?>
         </select>
-        <input type="text" name="description" placeholder="Opis">
-        <button class="form__submit form__submit--insert form__submit--gradesInsertOne" type="submit">Dodaj ocenę</button>
+        <input type="text" name="description" placeholder="Description">
+        <button class="form__submit form__submit--insert form__submit--gradesInsertOne" type="submit">Insert grade</button>
       </form>
     </div>
     <div class="grades__insertMany">
       <form class="form form--gradesInsertMany" action="../functions/insertManyGrades.php" method="POST">
         <div class="insertMany__topInputs">
           <select name="category" required>
-            <option value="" selected disabled hidden>Kategoria (waga)</option>
+            <option value="" selected disabled hidden>Category (weight)</option>
             <?php
             foreach ($_SESSION['categories'] as $category) {
               echo "<option value='{$category['id']}'>{$category['name']} ({$category['weight']})</option>";
@@ -130,7 +129,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
             ?>
           </select>
           <input type="text" name="description" placeholder="Opis">
-          <button class="form__submit form__submit--insert form__submit--gradesInsertOne" type="submit">Dodaj oceny</button>
+          <button class="form__submit form__submit--insert form__submit--gradesInsertOne" type="submit">Insert many grades</button>
         </div>
         <div class="insertMany__list">
           <?php
@@ -138,7 +137,7 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
             echo <<<HTML
           <div class="insertMany__item">
             <h2>{$student['last_name']} {$student['first_name']}</h2> 
-            <input type="number" name="grade[]" placeholder="Ocena" min="1" max="6">
+            <input type="number" name="grade[]" placeholder="Grade" min="1" max="6">
             <input type="hidden" name="student_id[]" value={$student['id']}>
           </div>
           HTML;
@@ -150,25 +149,25 @@ while (($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) !== null) {
   </div>
   <div class="overlay">
     <div class="overlay__content">
-      <h1 class="overlay__header">Edycja oceny</h1>
+      <h1 class="overlay__header">Edit grade</h1>
       <form class="form form--overlay" action="../functions/editGrade.php" method="POST">
-        <input type="number" name="grade" placeholder="Ocena" min="1" max="6">
+        <input type="number" name="grade" placeholder="Grade" min="1" max="6">
         <select name="category">
-          <option value="" selected disabled hidden>Kategoria (waga)</option>
+          <option value="" selected disabled hidden>Category (weight)</option>
           <?php
           foreach ($_SESSION['categories'] as $category) {
             echo "<option value='{$category['id']}'>{$category['name']} ({$category['weight']})</option>";
           }
           ?>
         </select>
-        <input type="text" name="description" placeholder="Opis">
+        <input type="text" name="description" placeholder="Description">
         <input type="hidden" name="student_id" value="">
         <input type="hidden" name="grade_id" value="">
-        <button class="form__submit form__submit--edit" type="submit">Edytuj</button>
+        <button class="form__submit form__submit--edit" type="submit">Edit</button>
         <button class="form__submit form__submit--delete" type="submit">
-          <h4>Usuń</h4>
+          <h4>Delete</h4>
         </button>
-        <button class="form__button form__button--close">Anuluj</button>
+        <button class="form__button form__button--close">Cancel</button>
       </form>
     </div>
   </div>
