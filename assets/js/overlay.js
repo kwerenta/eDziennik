@@ -1,7 +1,9 @@
 const form = document.querySelector(".form--overlay");
 const overlay = document.querySelector(".overlay");
 
-const usersItems = document.querySelectorAll(".users__list:not(.users__list--admins) > .users__item:not(:first-child)");
+const usersItems = document.querySelectorAll(
+  ".users__list:not(.users__list--admins) > .users__item:not(:first-child)"
+);
 const isActivated = overlay.querySelector("input[name='isActivated']");
 const email = overlay.querySelector("input[name='email']");
 const firstName = overlay.querySelector("input[name='first_name']");
@@ -39,9 +41,12 @@ const tl = gsap
 notesItems?.forEach(item => {
   item.addEventListener("click", e => {
     tl.play();
-    const descriptionText = e.currentTarget.querySelector(".notes__description").innerText;
+    const descriptionText = e.currentTarget.querySelector(
+      ".notes__description"
+    ).innerText;
     points.value = e.currentTarget.dataset.points;
-    noteDescription.value = descriptionText === "Brak opisu" ? "" : descriptionText;
+    noteDescription.value =
+      descriptionText === "No description" ? "" : descriptionText;
     studentId.value = e.currentTarget.dataset.studentid;
     noteId.value = e.currentTarget.dataset.noteid;
   });
@@ -50,11 +55,16 @@ notesItems?.forEach(item => {
 gradesItems?.forEach(item => {
   item.addEventListener("click", e => {
     tl.play();
-    const descriptionText = e.currentTarget.querySelector(".grades__text--description").innerText;
-    const gradeText = e.currentTarget.querySelector(".grades__text--grade").innerText;
+    const descriptionText = e.currentTarget.querySelector(
+      ".grades__text--description"
+    ).innerText;
+    const gradeText = e.currentTarget.querySelector(
+      ".grades__text--grade"
+    ).innerText;
     grade.value = gradeText;
     category.value = e.currentTarget.dataset.category;
-    description.value = descriptionText === "Brak opisu" ? "" : descriptionText;
+    description.value =
+      descriptionText === "No description" ? "" : descriptionText;
     studentId.value = e.currentTarget.dataset.student;
     gradeId.value = e.currentTarget.dataset.gradeid;
   });
@@ -67,41 +77,56 @@ usersItems?.forEach(item => {
     typeidInput.value = e.currentTarget.dataset.typeid;
     isActivated.value = e.currentTarget.dataset.isactivated;
 
-    deleteText.innerText = isActivated.value === "0" ? "Odblokuj" : "Zablokuj";
+    deleteText.innerText =
+      isActivated.value === "0" ? "Activate" : "Deactivate";
 
     if (e.currentTarget.classList.contains("users__item--students")) {
       phone.style.display = "none";
       studentClass.style.display = "block";
-      studentClass.value = e.currentTarget.querySelector(`.users__data--class`).innerText;
+      studentClass.value =
+        e.currentTarget.querySelector(`.users__data--class`).innerText;
     } else {
       phone.style.display = "block";
       studentClass.style.display = "none";
-      phone.value = e.currentTarget.querySelector(`.users__data--phone`).innerText;
+      phone.value =
+        e.currentTarget.querySelector(`.users__data--phone`).innerText;
     }
 
-    email.value = e.currentTarget.querySelector(".users__data--email").innerText;
-    firstName.value = e.currentTarget.querySelector(".users__data--firstName").innerText;
-    lastName.value = e.currentTarget.querySelector(".users__data--lastName").innerText;
+    email.value = e.currentTarget.querySelector(
+      ".users__data--email"
+    ).innerText;
+    firstName.value = e.currentTarget.querySelector(
+      ".users__data--firstName"
+    ).innerText;
+    lastName.value = e.currentTarget.querySelector(
+      ".users__data--lastName"
+    ).innerText;
   });
 });
 
 const deleteAnimation = gsap.timeline({ paused: true });
-deleteAnimation.to(deleteText, 0.5, { clipPath: "inset(100% 100%)" }).to(deleteText, 0.5, { clipPath: "inset(0% 0%)" });
+deleteAnimation
+  .to(deleteText, 0.5, { clipPath: "inset(100% 100%)" })
+  .to(deleteText, 0.5, { clipPath: "inset(0% 0%)" });
 
 const changeText = () => {
   if (deleteAnimation.reversed()) {
     deleteBtn.classList.remove("form__submit--confirm");
-    deleteText.innerText = !isActivated ? "Usuń" : isActivated.value === "0" ? "Odblokuj" : "Zablokuj";
+    deleteText.innerText = !isActivated
+      ? "Delete"
+      : isActivated.value === "0"
+      ? "Activate"
+      : "Deactivate";
   } else {
     deleteBtn.classList.add("form__submit--confirm");
-    deleteText.innerText = "Naciśnij, aby potwierdzić";
+    deleteText.innerText = "Click to confirm";
   }
 };
 
 deleteBtn.addEventListener("click", e => {
   e.preventDefault();
 
-  if (["Zablokuj", "Odblokuj", "Usuń"].includes(deleteText.innerText)) {
+  if (["Deactivate", "Activate", "Delete"].includes(deleteText.innerText)) {
     deleteAnimation.play();
     setTimeout(() => {
       changeText();
@@ -122,7 +147,12 @@ deleteBtn.addEventListener("click", e => {
 
 editBtn.addEventListener("click", e => {
   const inputs = email
-    ? [email, firstName, lastName, phone.style.display === "none" ? studentClass : null]
+    ? [
+        email,
+        firstName,
+        lastName,
+        phone.style.display === "none" ? studentClass : null,
+      ]
     : grade
     ? [grade, category]
     : [points];
