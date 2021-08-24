@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Kamil Wenta">
-  <meta name="description" content="Prosty eDziennik do zastosowań lokalnych">
+  <meta name="description" content="Simple Gradebook for amateur use">
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="icon" href="/assets/icons/mortarboard.svg" type="image/svg+xml">
   <!-- Favicon made by Freepik from https://www.flaticon.com/ -->
@@ -28,7 +28,7 @@
     }
   }
   ?>
-  <title>eDziennik</title>
+  <title>Gradebook</title>
 
 </head>
 

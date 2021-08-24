@@ -8,7 +8,7 @@ class View
   {
     $this->file = __DIR__ . '/includes/' . strtolower($name) . '.php';
     if (!file_exists($this->file)) {
-      die("Plik " . $this->file . " nie istnieje!:(");
+      die("File " . $this->file . " does not exist!");
     }
   }
 
