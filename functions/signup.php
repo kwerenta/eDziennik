@@ -31,7 +31,7 @@ if (
   $emailExist = mysqli_query($conn, $sql);
 
   if ($emailExist->num_rows !== 0) {
-    $_SESSION['formInfos']['error'] = "Podany E-Mail jest już zajęty!";
+    $_SESSION['formInfos']['error'] = "The given e-mail address is already in use!";
     header("Location: http://{$_SERVER['HTTP_HOST']}/");
     exit();
   }
@@ -57,15 +57,15 @@ if (
       $sql = "INSERT INTO ranks VALUES ({$id},2)";
       mysqli_query($conn, $sql);
     }
-    $_SESSION['formInfos']['success'] = "Twoje konto zostało utworzone,<br>czekaj na aktywację!";
+    $_SESSION['formInfos']['success'] = "Your account has been created,<br>wait for activation!";
     mysqli_commit($conn);
   } catch (mysqli_sql_exception $e) {
-    $_SESSION['formInfos']['error'] = "Formularz został błędnie wypełniony!";
+    $_SESSION['formInfos']['error'] = "The form was filled incorrectly!";
     mysqli_rollback($conn);
     throw $e;
   }
 } else {
-  $_SESSION['formInfos']['error'] = "Formularz został błędnie wypełniony!";
+  $_SESSION['formInfos']['error'] = "The form was filled incorrectly!";
 }
 
 header("Location: http://{$_SERVER['HTTP_HOST']}/");

@@ -26,15 +26,15 @@ if (!isEmpty('email') && isLenghtCorrect($_POST['newPassword'], 8, 32)) {
     );
     mysqli_query($conn, $sql);
     if (mysqli_affected_rows($conn) > 0) {
-      $_SESSION['snackalert'] = ["type" => "success", "text" => "Hasło zostało zmienione!"];
+      $_SESSION['snackalert'] = ["type" => "success", "text" => "The password has been changed!"];
     } else {
-      $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się zmienić hasła!"];
+      $_SESSION['snackalert'] = ["type" => "error", "text" => "The password could not be changed!"];
     }
   } else {
-    $_SESSION['snackalert'] = ["type" => "error", "text" => "Błędne hasło!"];
+    $_SESSION['snackalert'] = ["type" => "error", "text" => "Incorrect password!"];
   }
 } else {
-  $_SESSION['snackalert'] = ["type" => "error", "text" => "Formularz został błędnie wypełniony!"];
+  $_SESSION['snackalert'] = ["type" => "error", "text" => "The form was filled incorrectly!"];
 }
 
 header("Location: http://{$_SERVER['HTTP_HOST']}/{$_SESSION['user']['rank']}/settings.php");

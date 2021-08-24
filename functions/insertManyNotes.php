@@ -43,11 +43,11 @@ SQL;
   mysqli_query($conn, $sql);
 
   if (mysqli_affected_rows($conn) > 0) {
-    $_SESSION['snackalert'] = ["type" => "success", "text" => "Uwagi zostały dodane"];
+    $_SESSION['snackalert'] = ["type" => "success", "text" => "Notes have been inserted"];
   } else {
-    $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się dodać uwag"];
+    $_SESSION['snackalert'] = ["type" => "error", "text" => "Notes could not be inserted"];
   }
 } else {
-  $_SESSION['snackalert'] = ["type" => "error", "text" => "Formularz został błędnie wypełniony"];
+  $_SESSION['snackalert'] = ["type" => "error", "text" => "The form was filled incorrectly"];
 }
 header("Location: http://{$_SERVER['HTTP_HOST']}/teacher/notes.php");

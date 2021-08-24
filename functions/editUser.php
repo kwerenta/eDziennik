@@ -54,15 +54,15 @@ if (!isEmpty('phone class') && $isLastInputCorrect) {
     );
     mysqli_query($conn, $sql);
 
-    $_SESSION['snackalert'] = ["type" => "success", "text" => "Użytkownik został zedytowany"];
+    $_SESSION['snackalert'] = ["type" => "success", "text" => "The user has been edited"];
     mysqli_commit($conn);
   } catch (mysqli_sql_exception $e) {
-    $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się zedytować użytkownia"];
+    $_SESSION['snackalert'] = ["type" => "error", "text" => "The user could not be edited"];
     mysqli_rollback($conn);
     throw $e;
   }
 } else {
-  $_SESSION['snackalert'] = ["type" => "error", "text" => "Formularz został błędnie wypełniony"];
+  $_SESSION['snackalert'] = ["type" => "error", "text" => "The form was filled incorrectly"];
 }
 $get = "";
 if ($_SESSION['deactivatedOnly'] === -1) $get = "?deactivatedOnly=true";

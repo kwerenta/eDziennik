@@ -17,14 +17,14 @@ $isActivated = mysqli_query($conn, $sql);
 
 if ($isActivated->num_rows !== 0) {
   $newValue = $_POST['isActivated'] === "0" ? 1 : 0;
-  $snackText = $newValue === 1 ? "odblokowa" : "zablokowa";
+  $snackText = $newValue === 1 ? "activated" : "deactivated";
   $sql = "UPDATE users SET `isActivated` = {$newValue} WHERE `id`={$_POST['id']} AND `email`='{$_POST['email']}'";
   mysqli_query($conn, $sql);
 
   if (mysqli_affected_rows($conn) > 0) {
-    $_SESSION['snackalert'] = ["type" => "success", "text" => "Użytkownik został {$snackText}ny"];
+    $_SESSION['snackalert'] = ["type" => "success", "text" => "The user has been {$snackText}"];
   } else {
-    $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się {$snackText}ć użytkownia"];
+    $_SESSION['snackalert'] = ["type" => "error", "text" => "The user could not be {$snackText}"];
   };
 }
 $get = "";

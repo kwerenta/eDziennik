@@ -3,6 +3,8 @@ session_start();
 require '../db.php';
 require 'validate.php';
 
+$countryCode = "US";
+
 $conn = connectToDB();
 
 if (isEmailCorrect()) {
@@ -15,7 +17,7 @@ if (isEmailCorrect()) {
 }
 if (isset($user) && password_verify($_POST['password'], $user['password'])) {
   if ($user['isActivated'] === "0") {
-    $_SESSION['formInfos']['error'] = 'Twoje konto nie jest aktywne!';
+    $_SESSION['formInfos']['error'] = 'Your account is deactivated!';
     header("Location: http://{$_SERVER['HTTP_HOST']}/");
     exit();
   }
@@ -55,11 +57,11 @@ if (isset($user) && password_verify($_POST['password'], $user['password'])) {
         $_SESSION['categories'][$row['id']] = $row;
       }
 
-      $holidays = file_get_contents("https://date.nager.at/Api/v2/NextPublicHolidays/PL");
+      $holidays = file_get_contents("https://date.nager.at/Api/v2/NextPublicHolidays/{$countryCode}");
       $_SESSION['holiday'] = json_decode($holidays, true)[0];
     }
   }
 } else {
-  $_SESSION['formInfos']['error'] = 'Błędny login lub hasło!';
+  $_SESSION['formInfos']['error'] = 'Incorrect e-mail or password!';
 }
 header("Location: http://{$_SERVER['HTTP_HOST']}/");

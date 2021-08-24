@@ -48,11 +48,11 @@ SQL;
 
   mysqli_query($conn, $sql);
   if (mysqli_affected_rows($conn) > 0) {
-    $_SESSION['snackalert'] = ["type" => "success", "text" => "Oceny zostały dodane"];
+    $_SESSION['snackalert'] = ["type" => "success", "text" => "Grades have been inserted"];
   } else {
-    $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się dodać ocen"];
+    $_SESSION['snackalert'] = ["type" => "error", "text" => "Grades could not be inserted"];
   }
 } else {
-  $_SESSION['snackalert'] = ["type" => "error", "text" => "Formularz został błędnie wypełniony"];
+  $_SESSION['snackalert'] = ["type" => "error", "text" => "The form was filled incorrectly"];
 }
 header("Location: http://{$_SERVER['HTTP_HOST']}/teacher/grades.php");

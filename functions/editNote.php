@@ -28,12 +28,12 @@ if (!isEmpty('description') && isValueCorrect($_POST['points'], -150, 150) && $i
   mysqli_query($conn, $sql);
 
   if (mysqli_affected_rows($conn) > 0) {
-    $_SESSION['snackalert'] = ["type" => "success", "text" => "Uwaga została zedytowana"];
+    $_SESSION['snackalert'] = ["type" => "success", "text" => "The note has been edited"];
   } else {
-    $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się zedytować uwagi"];
+    $_SESSION['snackalert'] = ["type" => "error", "text" => "The note could not be edited"];
   };
 } else {
-  $_SESSION['snackalert'] = ["type" => "error", "text" => "Formularz został błędnie wypełniony"];
+  $_SESSION['snackalert'] = ["type" => "error", "text" => "The form was filled incorrectly"];
 }
 
 header("Location: http://{$_SERVER['HTTP_HOST']}/teacher/notes.php");

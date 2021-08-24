@@ -14,7 +14,7 @@ function getUsers($amount = 0)
   }
 
   foreach (["admins", "teachers", "students"] as $rank) {
-    $displayRank = $rank === "admins" ? "Administrator" : ($rank === "teachers" ? "Nauczyciel" : "Uczeń");
+    $displayRank = $rank === "admins" ? "Admin" : ($rank === "teachers" ? "Teacher" : "Student");
     $lastField = $rank === "students" ? "class" : "phone";
 
     $sql = "SELECT `first_name`, `last_name`, `id`,`user_id`, `{$lastField}` FROM {$rank} {$limit}";
@@ -30,9 +30,9 @@ function getUsers($amount = 0)
     }
   }
   if ($amount <= 0) {
-    $filter['students'] = array_filter($users, fn ($user) => $user['rank'] === "Uczeń");
-    $filter['teachers'] = array_filter($users, fn ($user) => $user['rank'] === "Nauczyciel");
-    $filter['admins'] = array_filter($users, fn ($user) => $user['rank'] === "Administrator");
+    $filter['students'] = array_filter($users, fn ($user) => $user['rank'] === "Student");
+    $filter['teachers'] = array_filter($users, fn ($user) => $user['rank'] === "Teacher");
+    $filter['admins'] = array_filter($users, fn ($user) => $user['rank'] === "Admin");
     return $filter;
   }
   return $users;

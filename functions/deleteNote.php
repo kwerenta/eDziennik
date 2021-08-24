@@ -15,9 +15,9 @@ $sql = sprintf(
 );
 mysqli_query($conn, $sql);
 if (mysqli_affected_rows($conn) > 0) {
-  $_SESSION['snackalert'] = ["type" => "success", "text" => "Uwaga została usunięta"];
+  $_SESSION['snackalert'] = ["type" => "success", "text" => "The note has been deleted"];
 } else {
-  $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się usunąć uwagi"];
+  $_SESSION['snackalert'] = ["type" => "error", "text" => "The note could not be deleted"];
 };
 
 header("Location: http://{$_SERVER['HTTP_HOST']}/teacher/notes.php");

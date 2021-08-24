@@ -12,7 +12,7 @@ if (!isEmpty() && isEmailCorrect()) {
     $query = mysqli_query($conn, $sql);
 
     if ($query->num_rows === 0) {
-      $_SESSION['formInfos']['error'] = "Nie istnieje taki użytkownik";
+      $_SESSION['formInfos']['error'] = "There is no such user";
       header("Location: http://{$_SERVER['HTTP_HOST']}/");
       exit();
     };
@@ -35,7 +35,7 @@ if (!isEmpty() && isEmailCorrect()) {
     $query = mysqli_query($conn, $sql);
 
     if ($query->num_rows === 0) {
-      $_SESSION['formInfos']['error'] = "Nie istnieje taki użytkownik";
+      $_SESSION['formInfos']['error'] = "There is no such user";
       header("Location: http://{$_SERVER['HTTP_HOST']}/");
       exit();
     };
@@ -48,15 +48,15 @@ if (!isEmpty() && isEmailCorrect()) {
     mysqli_query($conn, $sql);
 
     if (mysqli_affected_rows($conn) > 0) {
-      $_SESSION['formInfos']['success'] = "Twoje nowe hasło to:<br><span title='Naciśnij, aby skopiować' class='form__newPassword'>{$hex}</span>";
+      $_SESSION['formInfos']['success'] = "Your new password is:<br><span title='Click to copy' class='form__newPassword'>{$hex}</span>";
     } else {
-      $_SESSION['formInfos']['error'] = "Nie udało się zmienić hasła!";
+      $_SESSION['formInfos']['error'] = "The password could not be changed!";
     }
   } else {
-    $_SESSION['formInfos']['error'] = "Wstąpił błąd! Spróbuj ponownie";
+    $_SESSION['formInfos']['error'] = "Error occured! Try again";
   }
 } else {
-  $_SESSION['formInfos']['error'] = "Niepoprawnie wypełniony formularz";
+  $_SESSION['formInfos']['error'] = "The form was filled incorrectly";
 }
 
 header("Location: http://{$_SERVER['HTTP_HOST']}/");

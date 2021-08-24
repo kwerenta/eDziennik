@@ -21,12 +21,12 @@ if (!isEmpty() && isEmailCorrect()) {
   mysqli_query($conn, $sql);
   if (mysqli_affected_rows($conn) > 0) {
     $_SESSION['user']['email'] = $_POST['email'];
-    $_SESSION['snackalert'] = ["type" => "success", "text" => "E-Mail został zmieniony!"];
+    $_SESSION['snackalert'] = ["type" => "success", "text" => "The e-mail address has been changed!"];
   } else {
-    $_SESSION['snackalert'] = ["type" => "error", "text" => "Nie udało się zmienić E-Maila!"];
+    $_SESSION['snackalert'] = ["type" => "error", "text" => "The e-mail address could not be changed!"];
   }
 } else {
-  $_SESSION['snackalert'] = ["type" => "error", "text" => "Formularz został błędnie wypełniony!"];
+  $_SESSION['snackalert'] = ["type" => "error", "text" => "The form was filled incorrectly!"];
 }
 
 header("Location: http://{$_SERVER['HTTP_HOST']}/{$_SESSION['user']['rank']}/settings.php");
