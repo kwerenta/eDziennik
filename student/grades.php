@@ -36,15 +36,15 @@ while (($row = mysqli_fetch_array($query)) !== null) {
 <main>
   <div class="studentContainer studentContainer--grades">
     <div class="menu__tabs">
-      <h2 class="menu__tabHeader menu__tabHeader--active">Oceny częściowe</h2>
-      <h2 class="menu__tabHeader">Oceny szeczgółowo</h2>
-      <h2 class="menu__tabHeader">Podsumowanie Ocen</h2>
+      <h2 class="menu__tabHeader menu__tabHeader--active">Grades</h2>
+      <h2 class="menu__tabHeader">Detailed grades</h2>
+      <h2 class="menu__tabHeader">Grades summary</h2>
       <div class="menu__activeBar"></div>
     </div>
     <div class="grades__gradesList">
       <div class="grades__item grades__item--subject">
-        <h2 class="grades__header">Przedmiot</h2>
-        <h2 class="grades__header">Oceny</h2>
+        <h2 class="grades__header">Subject</h2>
+        <h2 class="grades__header">Grades</h2>
       </div>
       <?php
       if (!empty($grades)) {
@@ -55,7 +55,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
           echo "</p></div>";
         }
       } else {
-        echo "<h2>Brak ocen</h2>";
+        echo "<h2>No grades</h2>";
       }
       ?>
     </div>
@@ -73,19 +73,19 @@ while (($row = mysqli_fetch_array($query)) !== null) {
             echo <<<HTML
           <div class="grades__item--detailedGrade">
             <div>
-              <h4>Ocena</h4>
+              <h4>Grade</h4>
               <p>{$grade['grade']}</p>
             </div>
             <div>
-              <h4>Opis</h4>
+              <h4>Description</h4>
               <p>{$description}</p>
             </div>
             <div>
-              <h4>Kategoria (waga)</h4>
+              <h4>Category (weight)</h4>
               <p>{$category['name']} ({$category['weight']})</p>
             </div>
             <div>
-              <h4>Wystawiona</h4>
+              <h4>Teacher & Date</h4>
               <p>{$teacher['first_name']} {$teacher['last_name']}, {$grade['date']}</p>
             </div>
           </div>
@@ -94,14 +94,14 @@ while (($row = mysqli_fetch_array($query)) !== null) {
           echo "</div>";
         }
       } else {
-        echo "<h2>Brak ocen</h2>";
+        echo "<h2>No grades</h2>";
       }
       ?>
     </div>
     <div class="grades__gradesSummary">
       <div class="grades__item--summary">
-        <h2>Przedmiot</h2>
-        <h2>Średnia</h2>
+        <h2>Subject</h2>
+        <h2>Average grade</h2>
       </div>
       <?php
       if (!empty($grades)) {
@@ -112,7 +112,7 @@ while (($row = mysqli_fetch_array($query)) !== null) {
           }
         }
       } else {
-        echo "<h2>Brak ocen</h2>";
+        echo "<h2>No grades</h2>";
       }
       ?>
     </div>

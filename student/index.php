@@ -41,26 +41,26 @@ $luckyNumber = mysqli_fetch_array($query, MYSQLI_NUM)[0];
   <div class="studentDashboard__panel studentDashboard__panel--left">
     <div class="studentDashboard__basicInfo">
       <div class="studentDashboard__tile">
-        <h2>Witaj, <?php echo "{$_SESSION['user']['first_name']} {$_SESSION['user']['last_name']}!" ?></h2>
-        <p>Jesteś w klasie <?php echo $_SESSION["user"]["class"] ?>.</p>
+        <h2>Hi, <?php echo "{$_SESSION['user']['first_name']} {$_SESSION['user']['last_name']}!" ?></h2>
+        <p>Your class is <?php echo $_SESSION["user"]["class"] ?>.</p>
       </div>
       <div class="studentDashboard__tile">
-        <h2>Najbliższe święto</h2>
+        <h2>Next holiday</h2>
         <p><?php echo "{$_SESSION['holiday']['localName']}, {$_SESSION['holiday']['date']}" ?></p>
       </div>
       <div class="studentDashboard__tile">
-        <h2>Szczęśliwy numer</h2>
+        <h2>Lucky number</h2>
         <p><?php echo $luckyNumber ?></p>
       </div>
     </div>
 
     <div class="studentDashboard__latestGrades">
-      <h2>Ostatnie oceny</h2>
+      <h2>Latest grades</h2>
       <div class="studentDashboard__latestGradesItem">
-        <h2>Przedmiot</h2>
-        <h2>Ocena</h2>
-        <h2>Kategoria</h2>
-        <h2>Data</h2>
+        <h2>Subject</h2>
+        <h2>Grade</h2>
+        <h2>Category</h2>
+        <h2>Date</h2>
       </div>
       <?php
       if (!empty($latestGrades)) {
@@ -78,7 +78,7 @@ $luckyNumber = mysqli_fetch_array($query, MYSQLI_NUM)[0];
           HTML;
         }
       } else {
-        echo "<h2>Brak ocen</h2>";
+        echo "<h2>No grades</h2>";
       }
       ?>
     </div>
@@ -95,7 +95,7 @@ $luckyNumber = mysqli_fetch_array($query, MYSQLI_NUM)[0];
 
         echo <<<HTML
         <div class="studentDashboard__latestNoteRow">
-          <h2>Ostatnia uwaga</h2>
+          <h2>Latest note</h2>
           <p>{$date}</p>
         </div>
         <div class="studentDashboard__latestNoteRow">
@@ -107,14 +107,14 @@ $luckyNumber = mysqli_fetch_array($query, MYSQLI_NUM)[0];
       } else {
         echo <<<HTML
         <div class="studentDashboard__latestNoteRow">
-          <h2>Brak uwag</h2>
+          <h2>No notes</h2>
         </div>
         HTML;
       }
       ?>
     </div>
     <div class="studentDashboard__shortTimetable">
-      <h2>Plan lekcji</h2>
+      <h2>Timetable</h2>
       <ol class="studentDashboard__shortTimetableList">
         <?php
         if (isset($timetable)) {
@@ -123,7 +123,7 @@ $luckyNumber = mysqli_fetch_array($query, MYSQLI_NUM)[0];
             echo "<li>{$text}</li>";
           }
         } else {
-          echo "Brak wprowadzonego planu lekcji";
+          echo "No timetable entered";
         }
         ?>
       </ol>

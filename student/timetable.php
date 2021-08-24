@@ -23,15 +23,15 @@ while (($row = mysqli_fetch_array($query)) !== null) {
 
 <main>
   <div class="studentContainer studentContainer--timetable">
-    <h1 class="timetable__title">Plan lekcji klasy <?php echo $_SESSION['user']['class'] ?></h1>
+    <h1 class="timetable__title">Class <?php echo $_SESSION['user']['class'] ?> Timetable</h1>
     <table class="timetable__table">
       <tr class="timetable__row">
-        <th>Nr.</th>
-        <th>Poniedziałek</th>
-        <th>Wtorek</th>
-        <th>Środa</th>
-        <th>Czwartek</th>
-        <th>Piątek</th>
+        <th>No.</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Saturday</th>
+        <th>Friday</th>
       </tr>
       <?php
       foreach ($timetable as $index => $lessons) {
