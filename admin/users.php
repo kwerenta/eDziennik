@@ -64,9 +64,9 @@ $users = getUsers($_SESSION['deactivatedOnly']);
       <h1 class="overlay__header">Edit user</h1>
       <form class="form form--overlay" action="../functions/editUser.php" method="POST">
         <input type="email" name="email" placeholder="E-Mail" required>
-        <input type="text" name="first_name" placeholder="Imię" maxlength="100" required>
-        <input type="text" name="last_name" placeholder="Nazwisko" maxlength="100" required>
-        <input type="text" name="phone" placeholder="Numer telefonu" pattern="^[0-9]{9}$">
+        <input type="text" name="first_name" placeholder="First Name" maxlength="100" required>
+        <input type="text" name="last_name" placeholder="Last Name" maxlength="100" required>
+        <input type="text" name="phone" placeholder="Phone" pattern="^[0-9]{9}$">
         <select name="class">
           <option value="" selected disabled hidden>Class</option>
           <?php
