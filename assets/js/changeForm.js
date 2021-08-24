@@ -2,29 +2,45 @@ const nextTab = document.querySelector(".form__button--next");
 const prevTab = document.querySelector(".form__button--prev");
 
 const personalTab = document.querySelector(".form__tab--personal");
-const personalInputs = document.querySelectorAll(".form__tab--personal > input:not([name='phone'])");
-const accountType = document.querySelector(".form__tab--personal > select[name='type']");
-const phoneInput = document.querySelector(".form__tab--personal > input[name='phone']");
-const classInput = document.querySelector(".form__tab--personal > select[name='class']");
+const personalInputs = document.querySelectorAll(
+  ".form__tab--personal > input:not([name='phone'])"
+);
+const accountType = document.querySelector(
+  ".form__tab--personal > select[name='type']"
+);
+const phoneInput = document.querySelector(
+  ".form__tab--personal > input[name='phone']"
+);
+const classInput = document.querySelector(
+  ".form__tab--personal > select[name='class']"
+);
 const loginInputs = document.querySelectorAll(".form__tab--login > input");
 
 const signupButton = document.querySelector(".form__submit--signup");
 const changeFormText = document.querySelector(".form__changeForm > p");
-const changeFormButton = document.querySelector(".form__textButton--changeForm");
-const resetPasswordButton = document.querySelector(".form__textButton--resetPassword");
-const resetPasswordSubmit = document.querySelector(".form__submit--resetPassword");
+const changeFormButton = document.querySelector(
+  ".form__textButton--changeForm"
+);
+const resetPasswordButton = document.querySelector(
+  ".form__textButton--resetPassword"
+);
+const resetPasswordSubmit = document.querySelector(
+  ".form__submit--resetPassword"
+);
 const newPassword = document.querySelector(".form__newPassword");
 
 const cssVariables = document.documentElement;
 let resetPassword = false;
 
 const changeText = () => {
-  if (changeFormText.innerText == "Nie masz konta?") {
-    changeFormText.innerText = resetPassword ? "Pamiętasz hasło?" : "Masz już konto?";
-    changeFormButton.innerText = "Zaloguj się!";
+  if (changeFormText.innerText == "You do not have an account?") {
+    changeFormText.innerText = resetPassword
+      ? "You remember your password?"
+      : "Already have an account?";
+    changeFormButton.innerText = "Sign in!";
   } else {
-    changeFormText.innerText = "Nie masz konta?";
-    changeFormButton.innerText = "Zarejestruj się!";
+    changeFormText.innerText = "You do not have an account?";
+    changeFormButton.innerText = "Sign up!";
   }
 };
 
@@ -52,10 +68,16 @@ const changeRequired = (prev, next) => {
 
 const signInUp = gsap
   .timeline({ paused: true })
-  .to([".form--signin", ".form__changeForm"], { clipPath: "inset(0% 100%)", duration: 0.25 })
+  .to([".form--signin", ".form__changeForm"], {
+    clipPath: "inset(0% 100%)",
+    duration: 0.25,
+  })
   .set(".form--signin", { display: "none" }, ">")
   .set(".form--signup", { display: "flex" })
-  .to([".form--signup", ".form__changeForm"], { clipPath: "inset(0% 0%)", duration: 0.25 });
+  .to([".form--signup", ".form__changeForm"], {
+    clipPath: "inset(0% 0%)",
+    duration: 0.25,
+  });
 
 changeFormButton.addEventListener("click", () => {
   let color = "";
@@ -65,7 +87,10 @@ changeFormButton.addEventListener("click", () => {
     resetPasswordLogin.reverse();
     resetPassword = false;
   } else {
-    if (cssVariables.style.getPropertyValue("--bg-color") == "var(--secondary-bg-color)") {
+    if (
+      cssVariables.style.getPropertyValue("--bg-color") ==
+      "var(--secondary-bg-color)"
+    ) {
       color = "--primary-bg-color";
       signInUp.reverse();
     } else {
@@ -94,7 +119,8 @@ nextTab.addEventListener("click", e => {
   const isPhoneCorrect = phoneInput.value.match("^[0-9]{9}$");
   if (!isEmpty(inputsArray)) {
     if (
-      (accountType.value === "teacher" && (phoneInput.value === "" || isPhoneCorrect)) ||
+      (accountType.value === "teacher" &&
+        (phoneInput.value === "" || isPhoneCorrect)) ||
       accountType.value === "student"
     ) {
       changeRequired(inputsArray, loginInputs);
@@ -133,10 +159,16 @@ accountType.addEventListener("change", e => {
 
 const resetPasswordLogin = gsap
   .timeline({ paused: true })
-  .to([".form--signin", ".form__changeForm"], { clipPath: "inset(0% 100%)", duration: 0.25 })
+  .to([".form--signin", ".form__changeForm"], {
+    clipPath: "inset(0% 100%)",
+    duration: 0.25,
+  })
   .set(".form--signin", { display: "none" }, ">")
   .set(".form--resetPassword", { display: "flex" })
-  .to([".form--resetPassword", ".form__changeForm"], { clipPath: "inset(0% 0%)", duration: 0.25 });
+  .to([".form--resetPassword", ".form__changeForm"], {
+    clipPath: "inset(0% 0%)",
+    duration: 0.25,
+  });
 
 resetPasswordButton.addEventListener("click", e => {
   resetPasswordLogin.play();
