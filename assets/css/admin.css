@@ -1,0 +1,128 @@
+.adminDashboard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: calc(100% - 5rem);
+}
+
+.adminDashboard__panel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  min-width: 850px;
+}
+
+.adminDashboard__panel--bottom {
+  height: 100%;
+  margin-top: 2rem;
+  background: var(--tile-color);
+  padding: 1rem;
+  border-radius: 1rem;
+  -webkit-box-shadow: var(--shadow);
+          box-shadow: var(--shadow);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.adminDashboard__panel--bottom > div:nth-child(2) {
+  margin: 1rem 0;
+  border-bottom: 3px solid #ccc;
+}
+
+.adminDashboard__tile {
+  background: var(--tile-color);
+  padding: 1rem;
+  border-radius: 1rem;
+  -webkit-box-shadow: var(--shadow);
+          box-shadow: var(--shadow);
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 12rem;
+}
+
+.adminDashboard__tile > h1 {
+  font-size: 4rem;
+}
+
+.adminDashboard__tile:nth-child(2) {
+  margin: 0 2rem;
+}
+
+.adminDashboard__latestUsersItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  text-align: center;
+  padding: .75rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.adminDashboard__latestUsersItem > * {
+  width: 25%;
+}
+
+.adminContainer .users__list {
+  width: 100%;
+  overflow-y: auto;
+}
+
+.adminContainer .users__list--teachers, .adminContainer .users__list--admins {
+  display: none;
+}
+
+.adminContainer .users__list--students .users__item:not(:first-child):hover, .adminContainer .users__list--teachers .users__item:not(:first-child):hover {
+  cursor: pointer;
+  background: #ccc;
+}
+
+.adminContainer .users__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  text-align: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #ccc;
+  -webkit-transition: background 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  transition: background 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.adminContainer .users__item > * {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+.adminContainer .users__item > *:last-child, .adminContainer .users__item > *:nth-last-child(2) {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.adminContainer .users__item:first-child {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: var(--tile-color);
+  z-index: 22;
+}
+/*# sourceMappingURL=admin.css.map */

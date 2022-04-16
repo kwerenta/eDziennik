@@ -1,0 +1,65 @@
+.notes__insertOne, .notes__insertMany {
+  display: none;
+  overflow-y: auto;
+}
+
+.notes__insertMany {
+  width: 100%;
+  padding: 2rem;
+}
+
+.notes__list {
+  width: 100%;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.notes__item {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  -webkit-transition: background 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  transition: background 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  border-bottom: 1px solid #ccc;
+}
+
+.notes__item:hover {
+  background: #ccc;
+}
+
+.notes__item--student {
+  margin-top: 2.5rem;
+}
+
+.notes__item--student .notes__item:last-child {
+  border-bottom: 3px solid #ccc;
+}
+
+.notes__title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.notes__data > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem;
+}
+
+.notes__data > div > h4 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.notes__data > div > p {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+/*# sourceMappingURL=notes.css.map */

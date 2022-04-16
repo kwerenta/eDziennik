@@ -1,0 +1,317 @@
+.studentDashboard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: calc(100% - 5rem);
+}
+
+.studentDashboard__panel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+}
+
+.studentDashboard__panel--left {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  margin-right: 2rem;
+  min-width: 650px;
+}
+
+.studentDashboard__panel--right {
+  min-width: 325px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.studentDashboard__tile, .studentDashboard__shortTimetable, .studentDashboard__latestGrades, .studentDashboard__latestNote {
+  background: var(--tile-color);
+  padding: 1rem;
+  border-radius: 1rem;
+  -webkit-box-shadow: var(--shadow);
+          box-shadow: var(--shadow);
+}
+
+.studentDashboard__basicInfo {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.studentDashboard__tile {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 8rem;
+}
+
+.studentDashboard__tile:first-child {
+  -webkit-box-flex: 100%;
+      -ms-flex: 100%;
+          flex: 100%;
+  margin-bottom: 2rem;
+}
+
+.studentDashboard__tile:last-child {
+  margin-left: 2rem;
+}
+
+.studentDashboard__latestGrades {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+.studentDashboard__latestGrades > h2 {
+  margin-bottom: 0.5rem;
+}
+
+.studentDashboard__latestGradesItem {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  text-align: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.studentDashboard__latestGradesItem:nth-child(2) {
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid #ccc;
+}
+
+.studentDashboard__latestGradesItem > * {
+  width: 25%;
+}
+
+.studentDashboard__latestNote {
+  height: 50%;
+  margin-bottom: 2rem;
+}
+
+.studentDashboard__latestNoteRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.studentDashboard__shortTimetable {
+  height: 50%;
+}
+
+.studentDashboard__shortTimetableList {
+  margin-left: 2rem;
+}
+
+.studentContainer .grades__gradesList {
+  width: 100%;
+  overflow-y: auto;
+}
+
+.studentContainer .grades__detailedGradesList, .studentContainer .grades__gradesSummary {
+  display: none;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.studentContainer .grades__item--subject:not(:first-child) {
+  padding-left: 1rem;
+}
+
+.studentContainer .grades__item--subject > h2,
+.studentContainer .grades__item--subject > .grades__header:first-child {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding-right: 2rem;
+}
+
+.studentContainer .grades__item--subject > p,
+.studentContainer .grades__item--subject > .grades__header:last-child {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+.studentContainer .grades__item--detailedSubject {
+  margin: 0.5rem 0 3rem 0;
+  width: 100%;
+}
+
+.studentContainer .grades__item--detailedGrade {
+  margin: 0 1rem 1rem;
+}
+
+.studentContainer .grades__item--detailedGrade > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.studentContainer .grades__item--detailedGrade > div:last-child {
+  border-bottom: 3px solid #ccc;
+}
+
+.studentContainer .grades__item--detailedGrade > div > h4 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.studentContainer .grades__item--detailedGrade > div > p {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+.studentContainer .grades__item--subject, .studentContainer .grades__item--summary {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.5rem 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.studentContainer .grades__item--subject:first-child, .studentContainer .grades__item--summary:first-child {
+  border-bottom: 3px solid #ccc;
+  margin-bottom: 2rem;
+}
+
+.studentContainer .grades__item--subject:not(:first-child), .studentContainer .grades__item--summary:not(:first-child) {
+  padding-left: 1rem;
+}
+
+.studentContainer .grades__item--summary > *:first-child {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+.studentContainer .grades__item--summary > * {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.studentContainer .notes__list {
+  width: 100%;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.studentContainer .notes__item {
+  margin: 0 1rem 2rem;
+}
+
+.studentContainer .notes__item:first-child {
+  padding-top: 2rem;
+  border-top: 3px solid #ccc;
+}
+
+.studentContainer .notes__title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.studentContainer .notes__data > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.studentContainer .notes__data > div:last-child {
+  border-bottom: 3px solid #ccc;
+}
+
+.studentContainer .notes__data > div > h4 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.studentContainer .notes__data > div > p {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+.studentContainer .timetable__title {
+  border-bottom: 3px solid #ccc;
+  text-align: center;
+  width: 100%;
+  margin: 0 1rem;
+}
+
+.studentContainer .timetable__table {
+  width: 100%;
+  padding: 2rem;
+  border-spacing: 0;
+}
+
+.studentContainer .timetable__row {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.studentContainer .timetable__row:not(:first-child) > * {
+  padding: 0.625rem 0;
+  border-right: 2px solid #ccc;
+}
+
+.studentContainer .timetable__row:not(:first-child) > *:first-child {
+  background: #eee;
+}
+
+.studentContainer .timetable__row:first-child {
+  margin-bottom: 1rem;
+  background: #eee;
+}
+
+.studentContainer .timetable__row:first-child > * {
+  padding: 0.875rem 0;
+}
+
+.studentContainer .timetable__row > *:first-child {
+  width: 10%;
+}
+
+.studentContainer .timetable__row > *:not(:first-child) {
+  width: 18%;
+  border-bottom: 2px solid #ccc;
+}
+/*# sourceMappingURL=student.css.map */

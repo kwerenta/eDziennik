@@ -1,0 +1,114 @@
+.grades__insertOne, .grades__insertMany {
+  display: none;
+  overflow-y: auto;
+}
+
+.grades__gradesList {
+  width: 100%;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.grades__insertMany {
+  padding: 2rem;
+}
+
+.grades__item--student {
+  font-size: 1.125rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.5rem 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.grades__item--student:first-child {
+  border-bottom: 3px solid #ccc;
+  margin-bottom: 2rem;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: var(--tile-color);
+  z-index: 22;
+}
+
+.grades__item--student > h2,
+.grades__item--student > .grades__header:first-child {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+.grades__item--student > p:last-of-type,
+.grades__item--student > .grades__header:last-child {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.grades__item--student .item__row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding-right: 1rem;
+}
+
+.grades__item--student .item__row .item__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.grades__item--student .item__row .item__container .item__details {
+  position: absolute;
+  top: 50%;
+  left: 2.5rem;
+  background: var(--tile-color);
+  -webkit-box-shadow: var(--shadow);
+          box-shadow: var(--shadow);
+  border-radius: 1rem;
+  min-width: 300px;
+  max-width: 450px;
+  min-height: 200px;
+  z-index: 50;
+  padding: 1rem;
+  -webkit-clip-path: inset(0% 100% 100% 0%);
+          clip-path: inset(0% 100% 100% 0%);
+  -webkit-transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.grades__item--student .item__row .item__container .item__details > h4:not(:first-child) {
+  margin-top: 0.25rem;
+}
+
+.grades__item--student .item__row .item__container .item__details > h4:last-child {
+  margin-top: 0.75rem;
+}
+
+.grades__item--student .item__row .item__container > p {
+  cursor: pointer;
+  padding: 0.125rem 0.125rem;
+}
+
+.grades__item--student .item__row .item__container > p:hover + .item__details {
+  -webkit-clip-path: inset(-10%);
+          clip-path: inset(-10%);
+}
+
+.grades__item--student > div,
+.grades__item--student > .grades__header:nth-child(2) {
+  -webkit-box-flex: 4;
+      -ms-flex: 4;
+          flex: 4;
+}
+/*# sourceMappingURL=grades.css.map */

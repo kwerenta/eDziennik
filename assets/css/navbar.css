@@ -1,0 +1,109 @@
+.navbar {
+  width: 5rem;
+  height: 100vh;
+  position: fixed;
+  background-color: #57add7;
+  -webkit-transition: width 0.2s;
+  transition: width 0.2s;
+  z-index: 99;
+}
+
+.navbar__list {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+}
+
+.navbar__item {
+  width: 100%;
+}
+
+.navbar__item:nth-last-child(2) {
+  margin-top: auto;
+}
+
+.navbar__link {
+  color: var(--font-color);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 5rem;
+  text-decoration: none;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+
+.navbar__link:hover {
+  background: var(--secondary-bg-color);
+  -webkit-box-shadow: var(--shadow);
+          box-shadow: var(--shadow);
+}
+
+.navbar__link svg {
+  width: 2rem;
+  min-width: 2rem;
+  margin: 0 1.5rem;
+}
+
+.navbar__text {
+  display: none;
+  margin-left: 1rem;
+}
+
+.navbar:hover {
+  width: 16rem;
+}
+
+.navbar:hover .navbar__text {
+  display: block;
+}
+
+.navbar:hover .navbar__logo svg {
+  -webkit-transform: rotate(-360deg);
+          transform: rotate(-360deg);
+}
+
+.navbar__logo {
+  font-weight: 900;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--font-color);
+  background: #1b8acd;
+  font-size: 1.75rem;
+  width: 100%;
+}
+
+.navbar__logo svg {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transition: -webkit-transform 0.6s;
+  transition: -webkit-transform 0.6s;
+  transition: transform 0.6s;
+  transition: transform 0.6s, -webkit-transform 0.6s;
+}
+
+.navbar__topbar {
+  padding: 1rem;
+  margin-left: 5rem;
+  background: #1b8acd;
+  height: 5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+/*# sourceMappingURL=navbar.css.map */

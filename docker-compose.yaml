@@ -1,0 +1,26 @@
+version: '3.5'
+
+services:
+  app:
+    build: .
+    environment:
+      DB_HOST: database
+      DB_USER: root
+      DB_PASSWORD: s3kret
+      DB_SCHEMA: projekcik
+    volumes: [ .:/app:rw ]
+    ports: [ 0.0.0.0:3000:80/tcp ]
+  database:
+    image: mariadb:10.5
+    environment:
+      MYSQL_ROOT_PASSWORD: s3kret
+      MYSQL_DATABASE: projekcik
+    volumes: [ ./schema:/docker-entrypoint-initdb.d:ro ]
+  pma:
+    image: phpmyadmin
+    environment:
+      PMA_HOST: database
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: s3kret
+    ports: [ 127.0.0.1:3001:80/tcp ]

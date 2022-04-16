@@ -1,0 +1,131 @@
+.teacherDashboard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: calc(100% - 5rem);
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.teacherDashboard .selection__content {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.teacherDashboard .selection__list {
+  width: 100%;
+  max-width: 750px;
+  height: calc(100% - 5rem);
+  padding: 1rem 0;
+  border: 1px solid var(--font-color);
+  border-radius: 1rem;
+}
+
+.teacherDashboard .selection__back {
+  width: 2rem;
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+  -webkit-transition: -webkit-transform 0.6s;
+  transition: -webkit-transform 0.6s;
+  transition: transform 0.6s;
+  transition: transform 0.6s, -webkit-transform 0.6s;
+  cursor: pointer;
+}
+
+.teacherDashboard .selection__back:hover {
+  -webkit-transform: rotate(0deg) scale(1.1);
+          transform: rotate(0deg) scale(1.1);
+}
+
+.teacherDashboard .selection__item {
+  text-align: center;
+  font-size: 2rem;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+  -webkit-transition: all 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  transition: all 0.3s cubic-bezier(0.39, 0.575, 0.565, 1);
+  color: var(--font-color);
+  text-decoration: none;
+}
+
+.teacherDashboard .selection__item--class:nth-child(4n) {
+  border-bottom: 3px solid #ccc;
+}
+
+.teacherDashboard .selection__item:hover {
+  background: #ddd;
+}
+
+.teacherDashboard__panel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  min-width: 850px;
+}
+
+.teacherDashboard__panel--bottom {
+  height: 100%;
+  overflow: hidden;
+  margin-top: 2rem;
+  background: var(--tile-color);
+  padding: 1rem;
+  border-radius: 1rem;
+  -webkit-box-shadow: var(--shadow);
+          box-shadow: var(--shadow);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.teacherDashboard__panel--bottom > div:nth-child(2) {
+  margin: 1rem 0;
+  border-bottom: 3px solid #ccc;
+}
+
+.teacherDashboard__tile {
+  background: var(--tile-color);
+  padding: 1rem;
+  border-radius: 1rem;
+  -webkit-box-shadow: var(--shadow);
+          box-shadow: var(--shadow);
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 12rem;
+}
+
+.teacherDashboard__tile > h1 {
+  font-size: 4rem;
+}
+
+.teacherDashboard__tile:nth-child(2) {
+  margin: 0 2rem;
+}
+
+.teacherDashboard__latestGradesItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  text-align: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.teacherDashboard__latestGradesItem > * {
+  width: 25%;
+}
+/*# sourceMappingURL=index.css.map */
